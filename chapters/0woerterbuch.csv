@@ -1,33 +1,32 @@
 x/o,EN,DE
 x,aftermath,Nachwirkungen -> Nachspiel 
-x,Ancient House,Uraltes Hause
-x,Noble and Most Ancient House,Edle und Uralte Haus
-x,Noble and Most Ancient House,Edlen und Uralten Hauses
+x,Ancient House,Altes Geschlecht
+x,Noble and Most Ancient House,Altehrwürdiges Geschlecht
 ,betrayed,hintergangen (Kaptiel 100++)
-x,Boy-Who-Lived,Junge-der-lebte
+x,Boy-Who-Lived,Junge-der-überlebte
 ,broomstick team,Besenteam
 ,Chaos Legion,Chaoslegion
 ,Chaos Legionnaires,Chaoslegionäre
-,Chief Warlock,?Oberste Hexenmeister/Großmeister
-,Cloak of Invisibility,Unsichtbarkeitsumhang
-,invisibility cloak,Unsichtbarkeitsumhang
-x,comed-tea,Comed-Tea(/Seltsaft/Poin-Tee)
+,Chief Warlock,Großmeister
+,Cloak of Invisibility,Tarnumhang
+,invisibility cloak,Tarnumhang
+x,comed-tea,Seltsaft
 x,dad,Dad (Papa)
-,Daily Prophet,Tagespropheten
+,Daily Prophet,Tagesprophet
 ,Death Eater,Todesser
 ,Defence Professor,Verteidigungsprofessor
 ,Professor der Verteidigung,Verteidigungsprofessor
 ,Dragon General,Drachengeneral
 ,England,Britannien
-,Floo,Floh?
-,first-aid kit, Erste-Hilfe-Kasten/Notfall-Heilpack Plus 
+,Floo,Floh
+,first-aid kit, Erste-Hilfe-Kasten
 ,foolishness, Torheit
 x,führnehmen,Edlen
-x,He-Who-Must-Not-Be-Named,Er-dessen-Name-nicht-genannt-werden-darf (Du-weißt-schon-wem)
+x,He-Who-Must-Not-Be-Named,Er-dessen-Name-nicht-genannt-werden-darf (Du-weißt-schon-wer)
 ,Herr Potter,Mr Potter
-x,headmaster,Direktor -> Schulleiter
+x,headmaster,Schulleiter
 ,life-eater,Lebensfresser
-,Mary’s Place, ? Marys Platz
+,Mary’s Place, Marys
 x,Macmillian,Macmillan
 ,Most Ancient, Uralt
 ,Most Ancient Hall,Ältestenhalle
@@ -43,11 +42,11 @@ x,mum, Mum(Mama/Mutter)
 x,plaque,Plakette(NICHT Schallplatte)
 ,pop(s),? (Apperation)
 ,Potions Master, Zaubertränkemeister
-,robe, ? Robe / Umgang
+,robe, ? Robe / Umhang
 ,sense of doom,Unheilsgefühl (nicht: Gefühl der Verdammnis? Gefühl des Untergangs? Gefühl des Unheils)
 x,S.P.H.E.W.,\SPHEW
-,Sunshine General,Sonnenschein-Generalin
-,Time-Turner,?Zeitumkehrer
+,Sunshine General,Sonnenschein-General
+,Time-Turner,Zeitumkehrer
 ,Forbidden Forest,Verbotener Wald
 ,wand,Zauberstab
 x,You-Know-Who,Du-weißt-schon-wer
@@ -61,7 +60,7 @@ x,You-Know-Who,Du-weißt-schon-wer
 ,Horcrux,Horkrux
 ,Imperius,Imperius
 ,Innervate,Rennervate
-,Killing Curse,Tötungsfluch
+,Killing Curse,Todesfluch
 ,Legilimency,Legilimentik
 ,Luminos,Luminos
 ,Memory Charm,Gedächtniszauber
@@ -72,9 +71,9 @@ x,You-Know-Who,Du-weißt-schon-wer
 ,Polyfluis Reverso,Polyfluis Reverso
 ,Polyjuice,Vielsafttrank
 ,Obliviation/Obliviating,Vergessenszauber
-,Obliviate,Oblivieren
+,Obliviate,Obliviieren
 ,Quieting Charm,Stillezauber
-,Severing Charm,Durchtrennungszauber
+,Severing Charm,Trennungszauber
 ,Shield Charm, Schildzauber
 ,Stupefy,Stupor
 ,Stunning Hex,Betäubungszauber
