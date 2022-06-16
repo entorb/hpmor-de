@@ -1,0 +1,79 @@
+name: build eBooks
+
+# controls when the action will run.
+# workflow_dispatch: manual triggering
+# push: triggers the workflow on push request events but only for the master branch
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+
+# a workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  job1:
+    # runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    # runs-on: ubuntu-latest
+    steps:
+
+    - name: print start date
+      run: date +%Y-%m-%d_%H:%M
+
+    - name: checkout repository
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+    - name: python setup
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: test ls before
+      run: |
+        pwd
+        ls -l
+        
+    - name: quality check of chapters for known issues
+      run: python3 scripts/check-chapters.py
+
+    - name: install requirements
+      run: sh scripts/install_requirements.sh > /dev/null
+
+    - name: print versions
+      run: |
+        cat /etc/os-release
+        xelatex -v
+        latexmk -v
+        pandoc -v
+        python3 --version        
+
+    - name: download latest PDF
+      run:
+        wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf  -O hpmor.pdf
+    #   run: sh scripts/make_pdfs.sh > /dev/null
+
+    - name: make eBooks
+      run: |
+        sh scripts/make_ebooks.sh > /dev/null
+
+    - name: test ls after
+      run: |
+        pwd
+        ls -l
+
+    - name: publish eBooks to release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: WorkInProgress
+        prerelease: true
+        files: |
+          ./hpmor.docx
+          ./hpmor.html
+          ./hpmor.epub
+          ./hpmor.mobi
+
+    - name: print end date
+      run: date +%Y-%m-%d_%H:%M

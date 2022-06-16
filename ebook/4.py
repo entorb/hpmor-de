@@ -19,7 +19,7 @@ def convert_parsel(s: str) -> str:
     # small ss + ß -> sss ; s->ss
     s = s.replace("ss", "ß").replace("s", "ss").replace("ß", "sss")
     # capital S -> Ss ; capital SS -> SSS ; S->SS
-    s = s.replace("SS", "ẞ").replace("S", "SS").replace("ẞ", "SSS")
+    s = s.replace("SS", "ẞ").replace("S", "Ss").replace("ẞ", "SSS")
     # small zz -> zzz ; z->zz
     s = s.replace("zz", "ß").replace("z", "zz").replace("ß", "zzz")
     # capital Z -> Zz ; ZZ->ZZZ

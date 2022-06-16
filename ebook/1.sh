@@ -19,9 +19,6 @@ cp $source_file $target_file
 sed -i '3i\\\usepackage{polyglossia}\n\\setdefaultlanguage[variant = german, spelling = new, babelshorthands = true, script = latin]{german}\n\\enablehyphenation' $target_file
 sed -i '8i\\\input{layout/hp-format}\n\\input{layout/hp-markup}' $target_file
 
-
-
-
 # remove loading of hp-contents file
 sed -i '/\\\input{layout\/hp-contents}/d' $target_file
 

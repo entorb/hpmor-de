@@ -9,7 +9,7 @@ use File::Spec::Functions;
   'layout/hpmor-dust-jacket-1', 'layout/hpmor-dust-jacket-2',
   'layout/hpmor-dust-jacket-3', 'layout/hpmor-dust-jacket-4', 
   'layout/hpmor-dust-jacket-5', 'layout/hpmor-dust-jacket-6',
-  'layout/test', 'test2',
+  'layout/test',
  );
 
 # Install git hooks for gitinfo2 if not already installed

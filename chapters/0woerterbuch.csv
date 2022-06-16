@@ -1,13 +1,13 @@
 x/o,EN,DE
 x,aftermath,Nachwirkungen -> Nachspiel 
-,Ancient House,Altes Geschlecht
+x,Ancient House,Altes Geschlecht
 ,Noble and Most Ancient House,Altehrwürdiges Geschlecht
 ,betrayed,hintergangen (Kaptiel 100++)
-,Boy-Who-Lived,Junge-der-überlebte
+x,Boy-Who-Lived,Junge-der-überlebte
 ,broomstick team,Besenteam
 ,Chaos Legion,Chaoslegion
 ,Chaos Legionnaires,Chaoslegionäre
-,Chief Warlock,Großmeister
+x,Chief Warlock,Großmeister
 ,Cloak of Invisibility,Tarnumhang
 ,invisibility cloak,Tarnumhang
 ,comed-tea,Seltsaft
@@ -15,6 +15,7 @@ x,dad,Dad (Papa)
 ,Daily Prophet,Tagesprophet
 ,Death Eater,Todesser
 ,Defence Professor,Verteidigungsprofessor
+,doom,Unheil
 ,Professor der Verteidigung,Verteidigungsprofessor
 ,Dragon General,Drachengeneral
 ,England,Britannien
@@ -53,42 +54,82 @@ x,You-Know-Who,Du-weißt-schon-wer
 ,,
 ,DE-alt,DE-neu
 ,Comed-Tea,Seltsaft
-,Junge-der-lebte,Junge-der-überlebte
+x,Junge-der-lebte,Junge-der-überlebte
+x,Jungen-der-lebte,Jungen-der-überlebte
 x,Mama/Mutter,Mum
-,Oberste(r) Hexenmeister/Großmeister
+,Lehrer,Professor
+x,Oberste(r) Hexenmeister/Großmeister
 x,Papa,Dad
 ,Tagespropheten,Tagesprophet
+x,Uralte Haus,Uralte Geschlecht
+x,Uralte Häuser,Uralte Geschlechter
+x,Uralten Hauses,Uralten Geschlechtes
+x,Uraltes Haus,Uraltes Geschlecht
 ,,
 ,Spells,Zauber
-,Cruciatus Curse,Cruciatus-Fluch
+s,Accio,
+s,Alohomora,
+s,Avada Kedavra,
+s,Cluthe,
+s,Colloportus,
+s,Contego,
 ,Confundus Charm,Confundus-Zauber
-,Diffindo,Diffindo
+,Cruciatus Curse,Cruciatus-Fluch
+s,Crystferrium,
+s,Diffindo,
+s,Deligitor prodeas,
 ,Drill Hex,Schildbrecher/Schlagbohrfluch/Brechenden Bohrzauber
+s,Dulak,
+s,Elmekia,
+s,Expelliarmus,
+s,Finite Incantatem,
+s,Flipendo,
 ,Fiendfyre,verfluchtes Feuer?
+s,Frigideiro,
+s,Glisseo,
+s,Gom jabbar,
 ,Horcrux,Horkrux
-,Imperius,Imperius
+s,Impedimenta,
+s,Imperius,
+s,Inflammare,
 ,Innervate,Rennervate
+s,Jellify,
 ,Killing Curse,Todesfluch
+s,Lagann,
 ,Legilimency,Legilimentik
-,Luminos,Luminos
+s,Lucis Gladius,
+s,Luminos,
+s,Lumos,
+s,Mahasu,
 ,Memory Charm,Gedächtniszauber
 ,False Memory Charm,Falsche-Erinnerung-Zauber
 ,Most Ancient Blade, Uralte Klinge
 ,Charn of the Most Ancient Blade, Zauber der Uralten Klinge
-,Prismatis,Prismatis
-,Polyfluis Reverso,Polyfluis Reverso
+s,Prismatis,
+s,Polyfluis Reverso,
 ,Polyjuice,Vielsafttrank
+s,Protego,
 ,Obliviation/Obliviating,Vergessenszauber
 ,Obliviate,Obliviieren
+s,Quietus,
 ,Quieting Charm,Stillezauber
+s,Ravum Calvaria,
+Schulleiter,Rennervate,
 ,Severing Charm,Trennungszauber
+s,Scourgify,
 ,Shield Charm, Schildzauber
-,Stupefy,Stupor
+s,Silencio,
+s,Somnium,
+s,Stupefy,Stupor
 ,Stunning Hex,Betäubungszauber
-,Tonare,Tonare
+s,Thermos,
+s,Tonare,
 ,Transfiguration,Verwandlung
 ,Unbreakable Vow,Unbrechbaren Schwur
-,Veritaserum,Veritaserum
+s,Ventriliquo,
+s,Ventus,
+,Veritaserum,
+s,Wingardium Leviosa,
 ,,
 ,Überbleibsel,
 ,*,

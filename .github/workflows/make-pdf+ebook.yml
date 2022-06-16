@@ -5,8 +5,8 @@ name: build PDF and eBooks
 # push: triggers the workflow on push request events but only for the master branch
 on:
   workflow_dispatch:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
 
 # a workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,10 +42,10 @@ jobs:
         ls -l
         
     - name: quality check of chapters for known issues
-      run: python3 check-chapters.py
+      run: python3 scripts/check-chapters.py
 
     - name: install requirements
-      run: sh install_requirements.sh > /dev/null
+      run: sh scripts/install_requirements.sh > /dev/null
 
     - name: print versions
       run: |
@@ -56,7 +56,7 @@ jobs:
         python3 --version        
 
     - name: make PDFs
-      run: sh make_pdfs.sh > /dev/null
+      run: sh scripts/make_pdfs.sh > /dev/null
 
     - name: publish PDFs to release
       uses: softprops/action-gh-release@v1
@@ -68,7 +68,7 @@ jobs:
 
     - name: make eBooks
       run: |
-        sh make_ebooks.sh > /dev/null
+        sh scripts/make_ebooks.sh > /dev/null
 
     - name: test ls after
       run: |

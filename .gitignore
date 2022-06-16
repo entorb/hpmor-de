@@ -32,10 +32,16 @@
 *.vrb
 *.xdy
 *.tdo
+
+.vscode/
+__pycache__/
+.DS_Store
+
 hp-*.pdf
 hpmor-*.pdf
 hpmor.pdf
 hpmor*.zip
+chapters/*-autofix.tex
 hpmor_flatten.tex
 hpmor_epub.tex
 hpmor-epub*
@@ -46,6 +52,3 @@ hpmor.docx
 ~$hpmor.docx
 test*.pdf
 
-.vscode/
-__pycache__/
-chapters/*-autofix.tex

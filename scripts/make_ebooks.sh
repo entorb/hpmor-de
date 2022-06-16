@@ -1,7 +1,11 @@
 #!/bin/sh
 
+# ensure we are in the hpmor root dir
+script_dir=$(cd `dirname $0` && pwd)
+cd $script_dir/..
+
 # TODO:
-# image of last page
+# image on last page
 
 sh ebook/0.sh
 sh ebook/1.sh
