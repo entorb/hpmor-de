@@ -26,7 +26,7 @@ def download_file(url: str, filepath: str):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",
     }
-    cont = requests.get(url, headers=headers, verify=True).content
+    cont = requests.get(url, headers=headers, verify=True, timeout=3).content
     # verify=False -> skip SSL cert verification: CERTIFICATE_VERIFY_FAILED
     with open(filepath, mode="bw") as fh:
         fh.write(cont)
