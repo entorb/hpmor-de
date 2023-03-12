@@ -70,8 +70,6 @@ def multiline_check(s: str) -> str:
     """Check regarding linebreaks."""
     # end of line: LF only
     s = re.sub(r"\r\n?", r"\n", s)
-    # invisible strange spaces
-    s = re.sub(r" +", r" ", s)
 
     # more than 1 empty line
     s = re.sub(r"\n\n\n+", r"\n\n", s)
@@ -168,6 +166,8 @@ def fix_line(s: str) -> str:
 
 
 def fix_spaces(s: str) -> str:
+    # invisible strange spaces
+    s = re.sub(r" +", " ", s)
     # tabs to space
     s = re.sub(r"\t+", " ", s)
     # trailing spaces
@@ -179,6 +179,7 @@ def fix_spaces(s: str) -> str:
     return s
 
 
+assert fix_spaces("Hallo  Harry") == "Hallo Harry"
 assert fix_spaces("tabs\tto\t\tspace") == "tabs to space"
 assert fix_spaces("trailing spaces  ") == "trailing spaces"
 assert fix_spaces("  ") == ""
