@@ -131,7 +131,7 @@ def process_file(file_in: Path) -> bool:
                 encoding="utf-8",
             ) as file2:
                 diff = difflib.ndiff(file1.readlines(), file2.readlines())
-            delta = "".join(l for l in diff if l.startswith("+ ") or l.startswith("- "))
+            delta = "".join(x for x in diff if x.startswith("+ ") or x.startswith("- "))
             print(file_in.name + "\n" + delta)
 
     return issues_found

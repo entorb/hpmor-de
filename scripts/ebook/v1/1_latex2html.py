@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
+# flake8: noqa
 """
 Converter script.
 

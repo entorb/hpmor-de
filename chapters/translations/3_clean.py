@@ -37,11 +37,6 @@ def html_modify():
     for translator in translators:
         print("===" + translator + "===")
 
-        # fhAll = open(
-        #     f"4-join/hpmor-{translator}.html", mode="w", encoding="utf-8", newline="\n"
-        # )
-        # fhAll.write(html_start)
-
         for fileIn in sorted(glob.glob(f"2-extract/{translator}/*.html")):
             (filePath, fileName) = os.path.split(fileIn)
             fileOut = f"3-clean/{translator}/{fileName}"
@@ -74,10 +69,6 @@ def html_modify():
                 fh.write(html_start)
                 fh.write(out)
                 fh.write(html_end)
-            # fhAll.write(out)
-            # break
-        # fhAll.write(html_end)
-        # fhAll.close()
 
 
 def html_tuning(s: str) -> str:

@@ -59,7 +59,7 @@ def download_file(url: str, filepath: str):
     Download file from url to filepath.
     """
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",  # noqa: E501
     }
     cont = requests.get(url, headers=headers, verify=True, timeout=3).content
     # verify=False -> skip SSL cert verification: CERTIFICATE_VERIFY_FAILED
@@ -69,7 +69,7 @@ def download_file(url: str, filepath: str):
 
 # TODO: FR uses master as branch name
 def download_all_chapters():
-    baseurl = "https://raw.githubusercontent.com/<<repo>>/main/chapters/hpmor-chapter-<<chapter-no>>.tex"
+    baseurl = "https://raw.githubusercontent.com/<<repo>>/main/chapters/hpmor-chapter-<<chapter-no>>.tex"  # noqa: E501
 
     # for lang in translations.keys():
     lang = other_lang

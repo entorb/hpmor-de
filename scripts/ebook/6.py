@@ -38,7 +38,7 @@ cont = re.sub(
 
 # remove duplication of author name
 cont = re.sub(
-    r"""<p>Fanfiction.*?<p>Basierend auf der Harry Potter Reihe von J. K. Rowling.*?</p>""",
+    r"""<p>Fanfiction.*?<p>Basierend auf der Harry Potter Reihe von J. K. Rowling.*?</p>""",  # noqa: E501
     "<p>Fanfiction basierend auf der Harry Potter Reihe von J. K. Rowling</p>",
     cont,
     flags=re.DOTALL | re.IGNORECASE,
