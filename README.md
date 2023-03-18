@@ -1,6 +1,5 @@
 <!--
 
-
 skip-checks:true
 in commit body prevents autobuilding! (=2 empty lines)
 -->
@@ -19,11 +18,13 @@ Großer Dank gebührt den initialen Übersetzern: [Jost (Kapitel 1-21)](https://
 Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entorb/hpmor-de/releases/tag/WorkInProgress)
 
 ## Mitmachen
+
 * Über Feedback, [Vorschläge](https://github.com/entorb/hpmor-de/issues) und [Mitarbeit](https://github.com/entorb/hpmor-de/wiki/Mitmachen) freue ich mich sehr.
 * Siehe die [Mitmach-Anleitung](https://github.com/entorb/hpmor-de/wiki/Mitmachen)
 * Bei Fragen und Verbesserungsvorschlägen einfach ein [Ticket](https://github.com/entorb/hpmor-de/issues) öffnen oder mich direkt [kontaktieren](https://entorb.net/contact.php?origin=HPMOR)
 
 ## Fortschritte dieses Projekts
+
 * [x] [englisches Repo](https://github.com/rrthomas/hpmor) als Vorlange verwendet
 * [x] Layout des [französischen Repos](https://github.com/yeKcim/hpmor) adaptiert
 * [x] Auto Build via GitHub Actions
@@ -33,7 +34,9 @@ Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entor
 * [x] [eBook-Erstellskripte](https://github.com/entorb/hpmor-de/blob/main/ebook/) komplett neu geschrieben (inspiriert vom [FR Repo](https://github.com/yeKcim/hpmor))
 
 ## Links / Navigation
+
 ### Navigation
+
 * [Aktuelle Version (PDFs und eBooks)](https://github.com/entorb/hpmor-de/releases/tag/WorkInProgress) (automatisch aktualisiert bei Änderungen)
 * [Mitmach-Anleitung](https://github.com/entorb/hpmor-de/wiki/Mitmachen)
 * [Liste der Issues und Ideen](https://github.com/entorb/hpmor-de/issues)
@@ -42,18 +45,21 @@ Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entor
 * Weitere Links und Quellen, siehe [Links](https://github.com/entorb/hpmor-de/wiki/Mitmachen#links) in der [Mitmach-Anleitung](https://github.com/entorb/hpmor-de/wiki/Mitmachen)
 
 ### Weitere Links
+
 * [EN Originaltext auf hpmor.com](https://www.hpmor.com/)
 * [Überarbeitetes EN PDF und eBook](https://github.com/rrthomas/hpmor/releases/tag/WorkInProgress)
 * [Subreddit r/HPMOR](https://www.reddit.com/r/HPMOR/)
 * Liste der internationalen Übersetzungen, siehe [hpmor.com](https://www.hpmor.com/info/) und [Wikipedia](https://en.wikipedia.org/wiki/Harry_Potter_and_the_Methods_of_Rationality#Translations)
 
 ### Audio Versionen
+
 * [EN Audiobook/Podcast by Eneasz Brodski](https://hpmorpodcast.com/) - [at Apple](https://podcasts.apple.com/de/podcast/podcast-the-methods-of-rationality-podcast/id431784580?i=1000473946812) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5mZWVkYnVybmVyLmNvbS9IYXJyeVBvdHRlckFuZFRoZU1ldGhvZHNPZlJhdGlvbmFsaXR5VGhlUG9kY2FzdA/episode/aHR0cHM6Ly9ocG1vcnBvZGNhc3QuY29tLz9wPTYw?sa=X&ved=0CAUQkfYCahcKEwjA44jfuO34AhUAAAAAHQAAAAAQAQ) - [at Spotify](https://open.spotify.com/episode/3up7VkwoJUTNMwaM6j6qvs?si=Gx3LsHH9SY-v5TOYJHrUxw&dl_branch=1) (complete)
 * [EN Audiobook by Jack Voraces](https://voraces.podbean.com/) - [at Apple](https://podcasts.apple.com/gb/podcast/harry-potter-and-the-methods-of-rationality-audiobook/id1465181848) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkLnBvZGJlYW4uY29tL3ZvcmFjZXMvZmVlZC54bWw) - [at Spotify](https://open.spotify.com/show/4MCs8UYpoBlNp4aRfzB3a5) - [at Audible](https://www.amazon.com/Harry-Potter-Methods-Rationality/dp/B08JJSF4B3) (in progress)
 * [DE Audiobook/Podcast by Tilmann Glücks](https://hpmoraudio.de) - [at Apple](https://podcasts.apple.com/us/podcast/harry-potter-und-die-methoden-des-rationalismus-der-podcast/id1630675041) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9ocG1vcmF1ZGlvLmRlLz9mZWVkPXBvZGNhc3Q) - [at Spotify](https://open.spotify.com/show/4XmiF2dq0DMVxLyVwQJOam)  (in progress)
 * [DE Audiobook by Tralex HPMOR - at YouTube](https://www.youtube.com/watch?v=h32Ht-HUbL0&list=PLfgJSXz3-j3aYhWyR3Q5JzcI3h_eibPls) (in progress)
 
 ### DE Übersetzungen
+
 * [Jost](https://www.fanfiktion.de/s/4cb8beb50000203e067007d0/) Kapitel 1-21
 * [Patneu](https://www.fanfiktion.de/s/55610c610004dede273a3811/) Kapitel 1-38
 * [TralexHPMOR](https://www.fanfiktion.de/s/59a29b7f000813c22ec1454b/) Kapitel 22-26
@@ -61,26 +67,25 @@ Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entor
 * [Schneefl0cke](https://www.fanfiktion.de/s/60044849000ccc541aef297e/) komplett
 
 ### Andere HPMOR Latex/PDF Repositories
+
 * [EN LaTeX/PDF Repo von rrthomas (Übernommen von rjl20)](https://github.com/rrthomas/hpmor) origin dieses Forks
 * [EN LaTeX/PDF Repo von xenohedron](https://github.com/xenohedron/hpmor-xetex) Fork von rrthomas' Repo, u.a. mit Kapitel 1-4 in der "Daystar" Version
 * [FR LaTeX/PDF Repo von yeKcim](https://github.com/yeKcim/hpmor) mit vielen guten Layout Ideen
 * [DE LaTeX/PDF Repo von elkablo](https://github.com/elkablo/hpmor) für Kapitel 1-21, basierend auf der Übersetzung von [Jost](https://www.fanfiktion.de/s/4cb8beb50000203e067007d0/)
 
 ### Follow-up stuff
+
 Only proceed **after** reading/listening to the story, as these contain spoilers
+
 * [Beautiful 10min video summary/fan tribute](https://youtube.com/watch?v=aT_q646lJVo)
 * [Epiloque: A Crack Slash Epilogue by Alexander Wales](https://www.fanfiction.net/s/11293489/1/A-Crack-Slash-Epilogue)
 * [Sequel: Significant Digits by Alexander Davis](http://www.anarchyishyperbole.com/p/significant-digits.html)
 
-
-<hr>
-
-
-# Readme des EN Quell-Repos:
+# Readme des EN Quell-Repos
 
 # Harry Potter and the Methods Of Rationality
 
-https://github.com/rrthomas/hpmor
+<https://github.com/rrthomas/hpmor>
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
 A LaTeX version of [the popular didactic fan-fiction](https://www.hpmor.com)
@@ -113,7 +118,6 @@ of the chapters.
   does the same as `latexmk` (see below), which may be useful for editor
   integration (e.g. Emacs).
 * `ebook/` - e-book generation scripts
-
 
 ## Building the book(s)
 
@@ -162,7 +166,6 @@ top directory use the command:
 
 `latexmk -norc -e '$chapterfile="FILENAME"' -r latexmkrc -g FILENAME`
 
-
 ## Contributing
 
 Contributions are most welcome. These fall into the following categories:
@@ -177,7 +180,7 @@ Contributions are most welcome. These fall into the following categories:
    also, search the sources for “FIXME”.
 4. Translations. Translations are of course most welcome! A list of known
    translations and one or two hints are given below in the
-   [next section](#Translations).
+   [next section](#translations).
 
 For textual changes other than simple typo or language fixes, please
 familiarise yourself with the style guide (below).
@@ -187,7 +190,6 @@ Textual corrections can also be submitted as issues in the issue tracker, or
 by email to the maintainer.
 
 For the GitHub URL, and email address of the maintainer, see above.
-
 
 ## Style guide
 
@@ -205,7 +207,6 @@ one-off references to various real and fictional people.)
 
 Emacs users benefit from a `.dir-locals.el` that automatically sets up
 `spelling-list.txt` as the personal dictionary for all HPMOR files.
-
 
 ### Chapter headings
 
@@ -225,7 +226,6 @@ which part it is.
 The second looks like the title of the chapter, then the abbreviation for
 the title of the chapter, then the part, then the title of the part.
 
-
 ### First sentences
 
 Normally, a chapter starts like this:
@@ -241,24 +241,20 @@ this:
     [...]
     blazing green spirals brought down their foe’s Shield Charm.\par\end{em}
 
-
 ### Sections
 
 `\section{Final Aftermath:}`
-
 
 ### Miscellaneous
 
 There are some other things relating to newspaper headlines and such; check
 the chapters they appear in for the appropriate markup.
 
-
 ### Markup
 
 These are macros defined in `layout/hp-markup.tex`. You should glance
 through that file to see what commands are available, and use them instead
 of direct markup; for example `\shout` rather than `\textsc`.
-
 
 ## Translations
 
@@ -268,7 +264,6 @@ this file to add the translation!
 
 It is recommended to use `polyglossia` (not `babel`).
 
-
 ### Known translations
 
 Note: there are other translations of HPMOR; here are listed only
@@ -276,7 +271,6 @@ translations of this edition.
 
 * [French](https://github.com/yeKcim/hpmor) (complete)
 * [German](https://github.com/entorb/hpmor-de) (complete)
-
 
 <!--  LocalWords:  hpmor tex hp txt latexmkrc latexmk GNUMakefile 80gsm '
  -->
