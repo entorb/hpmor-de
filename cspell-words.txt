@@ -3,6 +3,7 @@ Aberforth
 abgeluchst
 Abott
 Abstreitbarkeit
+abzuhüpfen
 abzuklappern
 Accio
 Aconitum
@@ -12,6 +13,8 @@ Adamantium
 Affodillwurzel
 Aguamenti
 Ähem
+ähnlichsah
+ähnlichsieht
 Alastor
 Alastors
 Albtraumschmetterlingen
@@ -142,11 +145,18 @@ Beatson
 Beauxbatons
 beeindruckbaren
 begeisterungsloser
+beisammenhatte
 beisammenstehenden
+beisammenzufühlen
+beiseitegelassen
 beiseitegeschoben
 beiseitegetreten
+beiseitelässt
 beiseiteließ
 beiseitetreten
+beiseitezufegen
+beiseitezuschieben
+beiseitezuwerfen
 Belka
 Belkas
 Bellas
@@ -161,6 +171,7 @@ Besters
 Bestfall
 Bestrafungsfantasie
 Betäuber
+Betäubungszaubern
 Bettenreihen
 Beutlin
 bewusstseinsbeeinflussenden
@@ -249,12 +260,14 @@ Cthulhu
 Cuciatus
 Cuskers
 Cyanacrylat
+dabeihätten
 Dadgeien
 dagegenspricht
 Dämmerungshimmel
 Dämmerungsluft
 Dankbarkeitstagebuchs
 Daphnes
+darauffolgte
 Darkandus
 Darley
 Darth
@@ -298,6 +311,7 @@ Draco
 Dracos
 Dramiones
 dranzukriegen
+draufhast
 dreieinhalbten
 dreihundertdreiundzwanzig
 Dreihundertundsechzig
@@ -538,8 +552,8 @@ grüngekleideten
 gruseligste
 gruseligsten
 Gryffindor
-Gryffindormäßiges
 gryffindormäßige
+Gryffindormäßiges
 gryffindormäßigste
 Gryffindors
 Gryffindortisch
@@ -581,13 +595,16 @@ Heraushol
 herausposaunt
 herausriss
 heraussprühte
+herauszudiskutieren
+herauszuposaunen
+herauszuröcheln
 herauszustoßen
 hereinpirschte
 hereinwuseln
 herfliegenden
 Hermi
 herübergeschafft
-herumflitzen
+Herumflitzen
 herumfloss
 herumgerechnet
 herumgezupft
@@ -603,6 +620,7 @@ heut’
 Hexismus
 hierhergebeten
 hierhergebracht
+hierherkämst
 hin gespritzt
 hinaufgeflogen
 hinaufzuschauen
@@ -614,6 +632,7 @@ hindurchfloss
 hindurchgesteckt
 hindurchkommen
 hindurchtrat
+hindurchtraten
 hineinbeißt
 hineingewandert
 hineinstreckte
@@ -651,6 +670,8 @@ hochsahen
 hochschnappte
 hochschweben
 hochzudrücken
+hochzuschweben
+hochzustemmen
 Hogsmeade
 Hogwarts
 Hogwartsmitarbeiter
@@ -683,7 +704,6 @@ Illuminaten
 Imperio
 Imperius
 imperviuste
-Impulsirgendwo
 Incantatem
 Incendio
 Incendium
@@ -703,7 +723,6 @@ Isildur
 Isildurs
 Isolationskammer
 Jaffe
-Jahrgangschaffen
 Jahrgangskameraden
 japste
 Jawolls
@@ -852,7 +871,6 @@ Malfoy
 Malfoys
 Malkin
 Malkins
-Malsweg
 Mantikor
 Maos
 Marionettenfäden
@@ -863,6 +881,7 @@ Maximus
 McGonagall
 McGonagalls
 Meervolk
+meistgefürchteten
 Metamorphmagi
 Metamorphmagus
 Meteoritenschauer
@@ -1126,6 +1145,7 @@ Rabastan
 Rabastans
 Rabenpatronus
 Rabi
+räch
 raketengestützten
 raketengestützter
 Randle
@@ -1148,6 +1168,7 @@ rausgerissen
 rausgeschlichen
 rausgestürmt
 raushalten
+raushatte
 rauskämen
 rauslaufen
 rauspicken
@@ -1156,6 +1177,7 @@ rausreden
 rausrennen
 rauswerfen
 rauszufinden
+rauszuhaben
 rauszuhalten
 rauszukommen
 Rava
@@ -1216,6 +1238,7 @@ rübergehen
 rüberhole
 rüberkommen
 rüberzugehen
+rüberzukommen
 Rubeus
 Rückholung
 Rückholzauber
@@ -1226,7 +1249,6 @@ Ruferklang
 Rührgerät
 Rührmuster
 Rührstäbchen
-rührtestviermal
 Rülpser
 Rülpslaut
 rumgesessen
@@ -1282,7 +1304,6 @@ Schlafzaubern
 Schlägerin
 Schlägertypen
 Schlammblüter
-Schlammblutgeholfen
 schlampigerer
 Schlangenanimagus
 schlangenköpfigen
@@ -1310,10 +1331,8 @@ schokoladig
 Schokomilch
 schreckensverzerrt
 Schreiberhirn
-Schreilos
 Schrumpfungszauber
 Schu
-Schubsprangen
 Schulangelegeheiten
 Schuldnertreffen
 Schurkin
@@ -1338,8 +1357,9 @@ Scrimgeour
 se
 Seamus
 sechshunderttausend
-sehn
+seh’n
 Seheraugen
+sehn
 selbsterfüllende
 selbsterfüllenden
 selbsterfüllender
@@ -1394,7 +1414,6 @@ Soldatenstürmten
 Somnium
 Sonnchen
 sonnenhelle
-Sonnenwussten
 Sonorus
 Sorgenkreis
 sowas
@@ -1506,7 +1525,6 @@ Transfigurieren
 Trelawney
 Trelawneys
 Tresorgegenstände
-Tribünenwurde
 Trichobezoar
 Triumphgefühl
 Trollbekämpfung
@@ -1680,7 +1698,6 @@ wegzukratzen
 wegzukriechen
 weißgoldener
 weißmähnige
-weiterdurcheinandergeriet
 weiterstammeln
 weiterzuflüstern
 Weitwinkelzauber
@@ -1809,8 +1826,10 @@ zurückstapfte
 zurückwürgen
 zuschwebte
 zuteilwürde
+zuzupreschen
 zuzurennen
 zuzuschweben
+zuzutrampeln
 zwanzigprozentige
 zwanzigprozentiges
 Zweidrittelsekunde

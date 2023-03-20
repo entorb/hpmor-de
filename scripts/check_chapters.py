@@ -39,7 +39,6 @@ assert Path("./chapters").is_dir()
 
 # TODO:
 # \latersection must be at newline
-# add \spell macro
 
 # chars manually find and replace
 # *, ", ', », «, ”,
@@ -629,6 +628,7 @@ def fix_spell(s: str) -> str:
         "Glisseo",
         "Gom jabbar",
         "Hyakuju montauk",
+        "Homenum Revelio",
         "Impedimenta",
         # "Imperius", not as spell, as often used in text
         "Incendium",
@@ -647,10 +647,12 @@ def fix_spell(s: str) -> str:
         "Polyfluis Reverso",
         "Protego",
         "Protego Maximus",
+        "Quiescus",
         "Quietus",
         "Ravum Calvaria",
         "Rennervate",
         "Scourgify",
+        "Steleus",
         "Ratzeputz",
         "Silencio",
         "Somnium",
@@ -659,6 +661,7 @@ def fix_spell(s: str) -> str:
         "Thermos",
         "Tonare",
         "Ventriliquo",
+        "Veritas Oculum",
         "Ventus",
         "Wingardium Leviosa",
     }
