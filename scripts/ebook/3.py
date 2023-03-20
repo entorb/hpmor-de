@@ -80,5 +80,8 @@ cont = cont.replace("\\begin{align*}", "")
 cont = cont.replace("\\end{align*}", "")
 cont = cont.replace("}&\\hbox{", "}\\hbox{")
 
+# for spellcheck doc version -> not working, make_ebook-sh runs forever...
+# cont = re.sub(r"\\spell\{.*?\}+", "spell", cont)
+
 with open(target_file, mode="w", encoding="utf-8", newline="\n") as fhOut:
     fhOut.write(cont)

@@ -16,6 +16,8 @@ print("=== 4. parselify flattened file in python ===")
 
 
 def convert_parsel(s: str) -> str:
+    # TODO: for spellcheck doc version
+    # return s
     # small ss + ß -> sss ; s->ss
     s = s.replace("ss", "ß").replace("s", "ss").replace("ß", "sss")
     # capital S -> Ss ; capital SS -> SSS ; S->SS
