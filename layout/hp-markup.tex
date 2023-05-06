@@ -111,16 +111,18 @@
 
 \newenvironment{writtenNote}{%
 \fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize%
-%\vskip .1\baselineskip plus .1\baselineskip minus .1\baselineskip%
+\renewcommand{\emph}{\uline}%
+\vskip .1\baselineskip plus .1\baselineskip minus .1\baselineskip%
 \begin{adjustwidth}{\parindent}{\parindent}%
-%\par\noindent%
+\par\setlength{\parindent}{0pt}\setlength{\parskip}{\baselineskip}%
 \itshape%
 \setlength{\parindent}{0pt}%
 \setlength{\parskip}{.5\baselineskip}%
 }
 {%
+\par
 \end{adjustwidth}%
-% \vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip
+\vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip%
 }
 
 % \letterAddress
