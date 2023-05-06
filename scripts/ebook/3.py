@@ -41,7 +41,7 @@ cont = cont.replace("\\\\\n\n", "\n\n")
 cont = re.sub(r"\\clearpage(\{\}|)\n?", "", cont)
 
 # \vskip 1\baselineskip plus .5\textheight minus 1\baselineskip
-cont = re.sub(r"\\vskip .*\\baselineskip", "", cont)
+cont = re.sub(r"\\vskip .*?\\baselineskip", "", cont)
 
 # remove \settowidth{\versewidth}... \begin{verse}[\versewidth]
 cont = re.sub(
@@ -49,21 +49,13 @@ cont = re.sub(
     r"\n\\begin{verse}",
     cont,
 )
+
 # remove \settowidth
 cont = re.sub(
     r"\\settowidth\{[^\}]*\}\{([^\}]*)\}",
     r"\1",
     cont,
     flags=re.DOTALL,
-)
-
-# remove \multicolumn
-# \multicolumn{2}{c}{\scshape \uppercase{Schöne Unterwäsche}}\\
-cont = re.sub(
-    r"\\multicolumn\{[^\}]*\}\{[^\}]*\}\{(.*?)\}(\\\\|\n)",
-    r"\1\2",
-    cont,
-    # flags=re.DOTALL,
 )
 
 # fix „ at start of chapter
@@ -75,10 +67,6 @@ cont = re.sub(
     cont,
 )
 
-# align*
-cont = cont.replace("\\begin{align*}", "")
-cont = cont.replace("\\end{align*}", "")
-cont = cont.replace("}&\\hbox{", "}\\hbox{")
 
 # for spellcheck doc version -> not working, make_ebook-sh runs forever...
 # cont = re.sub(r"\\spell\{.*?\}+", "spell", cont)
