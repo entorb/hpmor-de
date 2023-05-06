@@ -8,14 +8,14 @@ in commit body prevents autobuilding! (=2 empty lines)
 
 Dies ist ein OpenSource Projekt, gestartet von [Torben Menke](https://entorb.net/hpmor/contact.php?origin=HPMOR), zum Zusammenfügen und Überarbeiten der deutschen Fan-Übersetzungen der großartigen Fanfiction "[Harry Potter and the Methods of Rationality](https://www.hpmor.com/)" von Eliezer Yudkowsky, basierend auf der Harry Potter Reihe von J. K. Rowling.
 
-J. K. Rowling owns Harry Potter, and no one owns the methods of rationality.
+*J. K. Rowling owns Harry Potter, and no one owns the methods of rationality.*
 
 Großer Dank gebührt den initialen Übersetzern: [Jost (Kapitel 1-21)](https://www.fanfiktion.de/s/4cb8beb50000203e067007d0/),
 [Patneu (Kapitel 22-38)](https://www.fanfiktion.de/s/55610c610004dede273a3811/),
 [DieFuechsin (Kapitel 39-78)](https://www.fanfiktion.de/s/5c793dfe000a402030774dc7/) und
 [Schneefl0cke (Kapitel 79-122)](https://www.fanfiktion.de/s/60044849000ccc541aef297e/)
 
-Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entorb/hpmor-de/releases/tag/WorkInProgress)
+Hier gibt es [das Resultat als druckbares Hochglanz-PDFs und eBook](https://github.com/entorb/hpmor-de/releases/tag/WorkInProgress)
 
 ## Mitmachen
 
@@ -27,11 +27,13 @@ Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entor
 
 * [x] [englisches Repo](https://github.com/rrthomas/hpmor) als Vorlange verwendet
 * [x] Layout des [französischen Repos](https://github.com/yeKcim/hpmor) adaptiert
-* [x] Auto Build via GitHub Actions
-* [x] Alle [Kapitel](https://github.com/entorb/hpmor-de/tree/main/chapters) aus 4 verschiedenen [Übersetzungen](https://github.com/entorb/hpmor-de/wiki/Mitmachen#%C3%9Cbersetzungen) zusammengetragen
-* [x] Im Quellcode den englischen Originaltext vor jedem Absatz auskommentiert aufgehoben
+* [x] Alle [Kapitel](https://github.com/entorb/hpmor-de/tree/main/chapters) aus 4 verschiedenen Übersetzungen zusammengetragen
+* [x] Im Quellcode den englischen Originaltext vor jedem Absatz auskommentiert aufgehoben, um spätere Verbesserungen zu erleichtern
+* [x] Auto Build via [GitHub Actions](https://github.com/entorb/hpmor-de/tree/main/.github/workflows)
 * [x] [Skript zum Qualitätssicherung häufiger bekannter Fehler](https://github.com/entorb/hpmor-de/blob/main/scripts/check_chapters.py) der Build-Pipeline vorgeschaltet
 * [x] [eBook-Erstellskripte](https://github.com/entorb/hpmor-de/blob/main/ebook/) komplett neu geschrieben (inspiriert vom [FR Repo](https://github.com/yeKcim/hpmor))
+* [x] Rechtschreibung mit CSpell geprüft und ein [Wörterbuch](https://github.com/entorb/hpmor-de/blob/main/cspell-words.txt) angelegt
+* [x] Rechtschreibung und Grammatik mit MS Word geprüft
 
 ## Links / Navigation
 
@@ -78,8 +80,9 @@ Hier gibt es die [aktuelle Version von PDFs und eBooks](https://github.com/entor
 Only proceed **after** reading/listening to the story, as these contain spoilers
 
 * [Beautiful 10min video summary/fan tribute](https://youtube.com/watch?v=aT_q646lJVo)
-* [Epiloque: A Crack Slash Epilogue by Alexander Wales](https://www.fanfiction.net/s/11293489/1/A-Crack-Slash-Epilogue)
-* [Sequel: Significant Digits by Alexander Davis](http://www.anarchyishyperbole.com/p/significant-digits.html)
+* Epiloque: [A Crack Slash Epilogue by Alexander Wales](https://www.fanfiction.net/s/11293489/1/A-Crack-Slash-Epilogue)
+* Alternative end: [Following the Phoenix by hezzel, spinning off at chapter 81](https://m.fanfiction.net/s/10636246/1/Following-the-Phoenix)
+* Sequel: [Significant Digits by Alexander Davis](http://www.anarchyishyperbole.com/p/significant-digits.html)
 
 # Readme des EN Quell-Repos
 
@@ -88,10 +91,13 @@ Only proceed **after** reading/listening to the story, as these contain spoilers
 <https://github.com/rrthomas/hpmor>
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
-A LaTeX version of [the popular didactic fan-fiction](https://www.hpmor.com)
+A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
 by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
 and six PDF volumes that can be printed and bound. There are also dust
 jackets for the printable volumes.
+
+See [latest release](https://github.com/rrthomas/hpmor/releases/latest)
+for PDF and e-book downloads.
 
 TeXLive 2015 or later and git are required to build the book. (Note: the
 book must be built from a git checkout.)
@@ -117,7 +123,7 @@ of the chapters.
   them to GitHub. (Mostly of interest to project maintainers.) `make all`
   does the same as `latexmk` (see below), which may be useful for editor
   integration (e.g. Emacs).
-* `ebook/` - e-book generation scripts
+* `scripts/ebook/` - e-book generation scripts
 
 ## Building the book(s)
 
