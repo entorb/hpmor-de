@@ -84,6 +84,34 @@ Only proceed **after** reading/listening to the story, as these contain spoilers
 * Alternative end: [Following the Phoenix by hezzel, spinning off at chapter 81](https://m.fanfiction.net/s/10636246/1/Following-the-Phoenix)
 * Sequel: [Significant Digits by Alexander Davis](http://www.anarchyishyperbole.com/p/significant-digits.html)
 
+## Compile via Docker
+
+create or update container
+
+```sh
+docker build -t hpmor-de .
+```
+
+run container and mount current (hpmor-de) directory
+
+```sh
+# Linux/MacOS:
+docker run -it --mount type=bind,src="$(pwd)",target=/src hpmor-de bash
+# Windows:
+docker run -it --mount type=bind,src="%cd%",target=/src hpmor-de bash
+```
+
+compile
+
+```sh
+# chdir to hpmor sources
+cd /src
+# compile PDF
+latexmk hpmor
+# compile eBook
+sh ./scripts/make_ebooks.sh
+```
+
 # Readme des EN Quell-Repos
 
 # Harry Potter and the Methods Of Rationality
