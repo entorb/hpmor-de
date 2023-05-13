@@ -86,30 +86,25 @@ Only proceed **after** reading/listening to the story, as these contain spoilers
 
 ## Compile via Docker
 
-create or update container
+build or update image
 
 ```sh
-docker build -t hpmor-de .
+docker build -t hpmor .
 ```
 
-run container and mount current (hpmor-de) directory
+run default action (compile 1 complete pdf volume and all ebook formats) via
+
+```sh
+docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor
+```
+
+login via
 
 ```sh
 # Linux/MacOS:
-docker run -it --mount type=bind,src="$(pwd)",target=/src hpmor-de bash
+docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor bash
 # Windows:
-docker run -it --mount type=bind,src="%cd%",target=/src hpmor-de bash
-```
-
-compile
-
-```sh
-# chdir to hpmor sources
-cd /src
-# compile PDF
-latexmk hpmor
-# compile eBook
-sh ./scripts/make_ebooks.sh
+docker run -it --mount type=bind,src="%cd%",dst=/app hpmor bash
 ```
 
 # Readme des EN Quell-Repos
