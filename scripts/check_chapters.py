@@ -59,7 +59,7 @@ def get_list_of_chapter_files() -> list[Path]:
             my_match = re.search(r"^.*include\{(chapters/.+?)\}.*$", line)
             if my_match:
                 include_path = my_match.group(1)
-                p = Path(include_path + ".tex")
+                p = Path(f"{include_path}.tex")
                 assert p.is_file()
                 list_of_files.append(p)
     return list_of_files
@@ -634,7 +634,6 @@ def fix_spell(s: str) -> str:
         "Incendium",
         "Inflammare",
         "Innervate",
-        "Rennervate",
         "Jellify",
         "Lagann",
         "Lucis Gladius",

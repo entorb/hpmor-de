@@ -7,6 +7,10 @@
 # update hooks to latest version
 #  pre-commit autoupdate
 
+exclude: |
+  (?x)^(
+    scripts/ebook/v1.*|
+  )$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -52,7 +56,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.33.0
+    rev: v0.35.0
     hooks:
       - id: markdownlint
         args: ["--disable", "MD013"]
@@ -63,18 +67,18 @@ repos:
   #     - id: markdownlint
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.257"
+    rev: "v0.0.275"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
 
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.4.0
+    rev: v2.5.1
     hooks:
       - id: add-trailing-comma
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
 
@@ -111,7 +115,7 @@ repos:
   #     - id: reorder-python-imports
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.7.0
     hooks:
       - id: pyupgrade
         args: ["--py310-plus"]
