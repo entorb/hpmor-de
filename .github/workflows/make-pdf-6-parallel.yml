@@ -6,7 +6,7 @@ on:
 
 jobs:
   hpmor-1:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
           files: hpmor-1.pdf
 
   hpmor-2:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -44,7 +44,7 @@ jobs:
           files: hpmor-2.pdf
 
   hpmor-3:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -63,7 +63,7 @@ jobs:
           files: hpmor-3.pdf
 
   hpmor-4:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -82,7 +82,7 @@ jobs:
           files: hpmor-4.pdf
 
   hpmor-5:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -101,7 +101,7 @@ jobs:
           files: hpmor-5.pdf
 
   hpmor-6:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

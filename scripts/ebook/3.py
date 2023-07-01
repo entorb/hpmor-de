@@ -32,7 +32,10 @@ cont = re.sub(
 )
 
 # some cleanup
-cont = cont.replace("\\hplettrineextrapara", "")
+# TODO: removed when switching to Ubuntu >= 23.04,
+#   since it let to a problem
+#  in line 31 of tmp/hpmor-epub-3-flatten-mod.tex
+# cont = cont.replace("\\hplettrineextrapara", "")
 
 # additional linebreaks in verses of chapter 64
 cont = cont.replace("\\\\\n\n", "\n\n")
