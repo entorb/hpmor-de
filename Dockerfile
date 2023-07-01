@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # base image
-FROM ubuntu:latest
+FROM ubuntu:23.04
 
 # set timezone
 ENV TZ=Europe/Berlin
@@ -29,6 +29,8 @@ CMD latexmk hpmor ; ./scripts/make_ebooks.sh
 
 # build/update image via
 # docker build -t hpmor .
+
+# in Windows you need to replace "$(pwd)" by "%cd%" for the following commands
 
 # run default commands (see above) via
 # docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor
