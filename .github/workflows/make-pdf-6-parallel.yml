@@ -8,113 +8,113 @@ jobs:
   hpmor-1:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install requirements
-      run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Make PDF
-      run: latexmk hpmor-1
+      - name: Make PDF
+        run: latexmk hpmor-1
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor-1.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor-1.pdf
 
   hpmor-2:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install requirements
-      run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Make PDF
-      run: latexmk hpmor-2
+      - name: Make PDF
+        run: latexmk hpmor-2
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor-2.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor-2.pdf
 
   hpmor-3:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install requirements
-      run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Make PDF
-      run: latexmk hpmor-3
+      - name: Make PDF
+        run: latexmk hpmor-3
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor-3.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor-3.pdf
 
   hpmor-4:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install requirements
-      run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Make PDF
-      run: latexmk hpmor-4
+      - name: Make PDF
+        run: latexmk hpmor-4
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor-4.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor-4.pdf
 
   hpmor-5:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install requirements
-      run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Make PDF
-      run: latexmk hpmor-5
+      - name: Make PDF
+        run: latexmk hpmor-5
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor-5.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor-5.pdf
 
   hpmor-6:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install requirements
-      run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Make PDF
-      run: latexmk hpmor-6
+      - name: Make PDF
+        run: latexmk hpmor-6
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor-6.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor-6.pdf

@@ -5,68 +5,67 @@ on:
   workflow_dispatch:
     inputs:
       pdf_target:
-        description: 'Which PDF? (hpmor, hpmor-1, ..., hpmor-6)'
+        description: "Which PDF? (hpmor, hpmor-1, ..., hpmor-6)"
         required: true
-        default: 'hpmor'
+        default: "hpmor"
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
+      - name: print selection
+        run: |
+          echo "selected PDF: ${{ github.event.inputs.pdf_target }}"
 
-    - name: print selection
-      run: |
-        echo "selected PDF: ${{ github.event.inputs.pdf_target }}"
+      - name: Print start date
+        run: date +%Y-%m-%d_%H:%M
 
-    - name: Print start date
-      run: date +%Y-%m-%d_%H:%M
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1 # 0 if you want to push to repo
 
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1 # 0 if you want to push to repo
+      - name: Python set up
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Python set up
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Test ls before
+        run: |
+          pwd
+          ls -l
 
-    - name: Test ls before
-      run: |
-        pwd
-        ls -l
+      - name: Check chapters for known issues
+        run: python3 -O scripts/check_chapters.py
 
-    - name: Check chapters for known issues
-      run: python3 -O scripts/check_chapters.py
+      - name: Install requirements
+        run: |
+          # sudo apt update > /dev/null
+          sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Install requirements
-      run: |
-        # sudo apt update > /dev/null
-        sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Print versions
+        run: |
+          cat /etc/os-release
+          xelatex -v
+          latexmk -v
+          # pandoc -v
+          python3 --version
 
-    - name: Print versions
-      run: |
-        cat /etc/os-release
-        xelatex -v
-        latexmk -v
-        # pandoc -v
-        python3 --version
+      - name: Make PDF
+        run: |
+          latexmk "${{ github.event.inputs.pdf_target }}"
 
-    - name: Make PDF
-      run: |
-        latexmk "${{ github.event.inputs.pdf_target }}"
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: |
+            ./hpmor*.pdf
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: |
-          ./hpmor*.pdf
+      - name: Test ls after
+        run: |
+          ls -l
 
-    - name: Test ls after
-      run: |
-        ls -l
-
-    - name: Print end date
-      run: date +%Y-%m-%d_%H:%M
+      - name: Print end date
+        run: date +%Y-%m-%d_%H:%M

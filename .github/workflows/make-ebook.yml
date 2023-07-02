@@ -3,85 +3,84 @@ name: Build eBooks
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     # runs-on: ubuntu-latest
     runs-on: ubuntu-22.04
     steps:
+      - name: Print start date
+        run: date +%Y-%m-%d_%H:%M
 
-    - name: Print start date
-      run: date +%Y-%m-%d_%H:%M
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1 # 0 if you want to push to repo
 
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1 # 0 if you want to push to repo
+      - name: Python set up
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Python set up
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      #  - name: setup environment to DE lang
+      #    run: |
+      #      cd /usr/share/locales
+      #      sudo ./install-language-pack de_DE.UTF-8
 
-  #  - name: setup environment to DE lang
-  #    run: |
-  #      cd /usr/share/locales
-  #      sudo ./install-language-pack de_DE.UTF-8
+      - name: Test ls before
+        run: |
+          pwd
+          ls -l
 
-    - name: Test ls before
-      run: |
-        pwd
-        ls -l
+      - name: Check chapters for known issues
+        run: python3 -O scripts/check_chapters.py
 
-    - name: Check chapters for known issues
-      run: python3 -O scripts/check_chapters.py
+      # - name: Install requirements
+      #   run: |
+      #     # sudo apt update > /dev/null
+      #     sh scripts/install_requirements_ebook.sh > /dev/null
 
-    # - name: Install requirements
-    #   run: |
-    #     # sudo apt update > /dev/null
-    #     sh scripts/install_requirements_ebook.sh > /dev/null
+      - name: Install packages using cache
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
+          version: 1.0
+          # execute_install_scripts: true
 
-    - name: Install packages using cache
-      uses: awalsh128/cache-apt-pkgs-action@latest
-      with:
-        packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
-        version: 1.0
-        # execute_install_scripts: true
+      - name: Print versions
+        run: |
+          cat /etc/os-release
+          # xelatex -v
+          # latexmk -v
+          calibre --version
+          pandoc --version
+          python3 --version
 
-    - name: Print versions
-      run: |
-        cat /etc/os-release
-        # xelatex -v
-        # latexmk -v
-        calibre --version
-        pandoc --version
-        python3 --version
+      # - name: Check pre-commit tests
+      #   uses: pre-commit/action@v3.0.0
 
-    # - name: Check pre-commit tests
-    #   uses: pre-commit/action@v3.0.0
+      - name: Make eBooks
+        run: |
+          wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf  -O hpmor.pdf
+          sh scripts/make_ebooks.sh > /dev/null
 
-    - name: Make eBooks
-      run: |
-        wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf  -O hpmor.pdf
-        sh scripts/make_ebooks.sh > /dev/null
+      - name: Test ls after
+        run: |
+          pwd
+          ls -l
 
-    - name: Test ls after
-      run: |
-        pwd
-        ls -l
+      - name: Publish eBooks to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: |
+            ./hpmor.docx
+            ./hpmor.html
+            ./hpmor.epub
+            ./hpmor.mobi
+            ./hpmor.fb2
 
-    - name: Publish eBooks to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: |
-          ./hpmor.docx
-          ./hpmor.html
-          ./hpmor.epub
-          ./hpmor.mobi
-          ./hpmor.fb2
-
-    - name: Print end date
-      run: date +%Y-%m-%d_%H:%M
+      - name: Print end date
+        run: date +%Y-%m-%d_%H:%M

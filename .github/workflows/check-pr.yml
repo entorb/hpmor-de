@@ -7,9 +7,9 @@ name: Check new commits and PRs
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -19,22 +19,22 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Python set up
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
+      - name: Python set up
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Python cache set up
-      uses: actions/cache@v3
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-py-cache
+      - name: Python cache set up
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-py-cache
 
-    - name: Check chapters for known issues
-      run: python3 -O scripts/check_chapters.py
+      - name: Check chapters for known issues
+        run: python3 -O scripts/check_chapters.py
 
-    - name: Check pre-commit tests
-      uses: pre-commit/action@v3.0.0
+      - name: Check pre-commit tests
+        uses: pre-commit/action@v3.0.0

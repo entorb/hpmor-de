@@ -8,30 +8,30 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        persist-credentials: false
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
-    - name: Install requirements
-      run: |
-        sudo apt update > /dev/null
-        sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: Install requirements
+        run: |
+          sudo apt update > /dev/null
+          sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Print versions
-      run: |
-        cat /etc/os-release
-        xelatex -v
-        latexmk -v
-        # pandoc -v
-        python3 --version
+      - name: Print versions
+        run: |
+          cat /etc/os-release
+          xelatex -v
+          latexmk -v
+          # pandoc -v
+          python3 --version
 
-    - name: Make PDF
-      run: latexmk hpmor hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 > /dev/null
+      - name: Make PDF
+        run: latexmk hpmor hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 > /dev/null
 
-    - name: Publish PDF to release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: WorkInProgress
-        prerelease: true
-        files: hpmor*.pdf
+      - name: Publish PDF to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: hpmor*.pdf

@@ -10,59 +10,57 @@ jobs:
     runs-on: ubuntu-22.04
     # runs-on: ubuntu-latest
     steps:
+      - name: Print start date
+        run: date +%Y-%m-%d_%H:%M
 
-    - name: Print start date
-      run: date +%Y-%m-%d_%H:%M
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 1 # 0 if you want to push to repo
 
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 1 # 0 if you want to push to repo
+      - name: Python set up
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Python set up
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Test ls before
+        run: |
+          pwd
+          ls -al
 
-    - name: Test ls before
-      run: |
-        pwd
-        ls -al
+      - name: Install requirements
+        run: |
+          sudo apt update > /dev/null
+          sh scripts/install_requirements_pdf.sh > /dev/null
 
-    - name: Install requirements
-      run: |
-        sudo apt update > /dev/null
-        sh scripts/install_requirements_pdf.sh > /dev/null
+      # unfortunately not working
+      # - name: cache packages
+      #   uses: awalsh128/cache-apt-pkgs-action@latest
+      #   with:
+      #     packages: texlive-xetex texlive-lang-german latexmk
+      #     version: 1.0
+      #     execute_install_scripts: true
 
-    # unfortunately not working
-    # - name: cache packages
-    #   uses: awalsh128/cache-apt-pkgs-action@latest
-    #   with:
-    #     packages: texlive-xetex texlive-lang-german latexmk
-    #     version: 1.0
-    #     execute_install_scripts: true
+      - name: Print versions
+        run: |
+          cat /etc/os-release
+          xelatex -v
+          latexmk -v
+          # pandoc -v
+          python3 --version
 
-    - name: Print versions
-      run: |
-        cat /etc/os-release
-        xelatex -v
-        latexmk -v
-        # pandoc -v
-        python3 --version
+      - name: Make PDF
+        #      run: sh scripts/make_pdf.sh > /dev/null
+        run: latexmk layout/test -f
 
-    - name: Make PDF
-#      run: sh scripts/make_pdf.sh > /dev/null
-      run: latexmk layout/test -f
+      # - name: publish log to release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: WorkInProgress
+      #     prerelease: true
+      #     files: |
+      #       ./test.log
 
-    # - name: publish log to release
-    #   uses: softprops/action-gh-release@v1
-    #   with:
-    #     tag_name: WorkInProgress
-    #     prerelease: true
-    #     files: |
-    #       ./test.log
-
-
-    - name: Print end date
-      run: date +%Y-%m-%d_%H:%M
+      - name: Print end date
+        run: date +%Y-%m-%d_%H:%M
