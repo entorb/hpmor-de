@@ -92,6 +92,12 @@ build or update image
 docker build -t hpmor .
 ```
 
+or for volume 1 only
+
+```sh
+docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor latexmk hpmor-1
+```
+
 run default action (compile 1 complete pdf volume and all ebook formats) via
 
 ```sh
