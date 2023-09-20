@@ -70,6 +70,12 @@ cont = re.sub(
     cont,
 )
 
+# \censor
+cont = re.sub(
+    r"\\censor\{.*?\}",
+    r"xxxxxx",
+    cont,
+)
 
 # for spellcheck doc version -> not working, make_ebook-sh runs forever...
 # cont = re.sub(r"\\spell\{.*?\}+", "spell", cont)
