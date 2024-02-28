@@ -86,31 +86,37 @@ Only proceed **after** reading/listening to the story, as these contain spoilers
 
 ## Compile via Docker
 
-build or update image
+1. preparation
+1.1 build/update image from [Dockerfile](Dockerfile)
 
 ```sh
-docker build -t hpmor .
+docker build -t hpmor
 ```
 
-or for volume 1 only
+1.2 create container that mounts current working dir to /app
 
 ```sh
-docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor latexmk hpmor-1
+docker run --name hpmor-de -it --mount type=bind,src="$(pwd)",dst=/app hpmor bash
+exit
 ```
 
-run default action (compile 1 complete pdf volume and all ebook formats) via
+note: in Windows you need to replace "$(pwd)" by "%cd%" for the following commands
+
+2. use container
 
 ```sh
-docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor
+docker start -ai hpmor-de
+latexmk hpmor ; ./scripts/make_ebooks.sh
+exit
 ```
 
-login via
+3. optionally: cleanup/delete hpmor from docker
 
 ```sh
-# Linux/MacOS:
-docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor bash
-# Windows:
-docker run -it --mount type=bind,src="%cd%",dst=/app hpmor bash
+# delete container
+docker rm hpmor-de
+# delete image
+docker rmi hpmor
 ```
 
 # Readme des EN Quell-Repos
