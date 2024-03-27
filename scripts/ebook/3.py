@@ -3,6 +3,7 @@
 """
 Modify flattened .tex file.
 """
+
 import datetime as dt
 import os
 import re
@@ -70,15 +71,46 @@ cont = re.sub(
     cont,
 )
 
+# OMakeIV sections
+# not used in DE version
+
 # \censor
+cont = re.sub(r"\\censor\{.*?\}", r"xxxxxx", cont)
+
+
+# # remove Deathly_Hallows_Sign.pdf and other pdf images
+# # \includegraphics[scale=0.125]{images/Deathly_Hallows_Sign.pdf}
+# cont = re.sub(
+#     # r"\\includegraphics.*?\{images/Deathly_Hallows_Sign.*?\}",
+#     r"\\includegraphics.*?\.pdf\}",
+#     "",
+#     cont,
+# )
+
+# remove all images
 cont = re.sub(
-    r"\\censor\{.*?\}",
-    r"xxxxxx",
+    r"\\includegraphics\[.*?\]\{.*?\}",
+    "",
     cont,
+    flags=re.DOTALL,
 )
 
-# for spellcheck doc version -> not working, make_ebook-sh runs forever...
-# cont = re.sub(r"\\spell\{.*?\}+", "spell", cont)
+# remove empty envs
+cont = re.sub(
+    r"\\begin\{([^\}]*)\}\s*\\end\{\1}",
+    "",
+    cont,
+    flags=re.DOTALL,
+)
+
+# remove end stuff
+cont = re.sub(
+    r"(.*)\\end\{chapterOpeningAuthorNote\}.*?\\end\{document\}",
+    r"\1\\end{chapterOpeningAuthorNote}\n\\end{document}",
+    cont,
+    flags=re.DOTALL,
+    count=1,
+)
 
 with open(target_file, mode="w", encoding="utf-8", newline="\n") as fhOut:
     fhOut.write(cont)

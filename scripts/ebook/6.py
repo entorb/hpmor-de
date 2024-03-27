@@ -3,6 +3,7 @@
 """
 HTML modifications.
 """
+
 import os
 import re
 import sys
@@ -18,22 +19,13 @@ print("=== 6. HTML modifications ===")
 with open(source_file, encoding="utf-8", newline="\n") as fhIn:
     cont = fhIn.read()
 
-# done via pandoc paramter -V lang=de in 5.sh
-# # set html lang to de
-# cont = re.sub(
-#     r'(<html .*?) lang="")',
-#     r'\1 lang="de"',
-#     cont,
-#     flags=re.IGNORECASE,
-#     count=1,
-# )
-
 # remove strange leftovers from tex -> html conversion
 cont = re.sub(
     r"(</header>).*?(<p>Fanfiction von)",
     r"\1\n\2",
     cont,
     flags=re.DOTALL | re.IGNORECASE,
+    count=1,
 )
 
 # remove duplication of author name
@@ -44,6 +36,28 @@ cont = re.sub(
     flags=re.DOTALL | re.IGNORECASE,
     count=1,
 )
+
+# now done via pandoc -V lang=de in 5.sh
+# # set language
+# cont = re.sub(
+#     r'(<html [^>]*) lang="" xml:lang=""',
+#     r'\1 lang="de" xml:lang="de"',
+#     cont,
+#     count=1,
+# )
+
+# remove training slashes to satisfy https://validator.w3.org
+cont = cont.replace("<br />", "<br>")
+cont = cont.replace("<hr />", "<hr>")
+
+cont = re.sub(
+    r"(<meta [^>]*) />",
+    r"\1>",
+    cont,
+)
+
+# remove bad span ids (containing spaces) from newspaper spans
+cont = re.sub(r'<span id="[^"]+" label="[^"]+">', r"<span>", cont, count=5)
 
 # doc structure (not needed any more, using calibi --level1-toc flag instead)
 # sed -i 's/<h1 /<h1 class="part"/g' $target_file
