@@ -2,6 +2,7 @@
 """
 Extract text from downloaded HTML files.
 """
+
 import glob
 import os
 import re

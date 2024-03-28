@@ -2,6 +2,7 @@
 """
 Convert HTML to LaTeX.
 """
+
 import glob
 import os
 import subprocess  # noqa: S404

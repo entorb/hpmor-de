@@ -2,6 +2,7 @@
 """
 Cleanup LaTeX Code.
 """
+
 import glob
 import os
 import re

@@ -8,6 +8,7 @@ ignores all lines starting with '%'
 improvements are proposed via chapters/*-autofix.tex files
 configuration in check_chapters_settings.py
 """
+
 import difflib
 import re
 from multiprocessing import Pool, cpu_count

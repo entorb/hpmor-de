@@ -2,6 +2,7 @@
 """
 Clean text.
 """
+
 import glob
 import os
 import re
