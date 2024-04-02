@@ -1,9 +1,12 @@
 done,EN,DE
-x,“...”,„...“
+,doom,Unheil
+,first-aid kit,Erste-Hilfe-Tasche
+,healer’s kit,Heiler-Set
+,pop(s),Plop (Apperation)
 x,‘...’,‚...‘
+x,“...”,„...“
 x,aftermath,Nachwirkungen -> Nachspiel
 x,Ancient House,Altes Geschlecht
-x,Noble and Most Ancient House,Altehrwürdiges Geschlecht
 x,betrayed,hintergangen (Kaptiel 100++)
 x,Boy-Who-Lived,Junge-der-überlebte
 x,broomstick team,Besenteam
@@ -11,59 +14,56 @@ x,Chaos Legion,Chaos-Legion
 x,Chaos Legionnaires,Chaos-Legionäre
 x,Chief Warlock,Großmeister
 x,Cloak of Invisibility,Tarnumhang
-x,curfew,Zapfenstreich
-x,invisibility cloak,Tarnumhang
 x,comed-tea,Comed-Tea
+x,curfew,Zapfenstreich
 x,dad,Dad (Papa)
 x,Daily Prophet,Tagesprophet
 x,Death Eater,Todesser
 x,Defence Professor,Verteidigungsprofessor
-,doom,Unheil
-x,Professor der Verteidigung,Verteidigungsprofessor
 x,Dragon General,Drachen-General
 x,England,Britannien
 x,Floo,Floh
-,first-aid kit,Erste-Hilfe-Tasche
 x,foolishness,Torheit
+x,Forbidden Forest,Verbotener Wald
 x,führnehmen,Edlen
 x,He-Who-Must-Not-Be-Named,Er-dessen-Name-nicht-genannt-werden-darf (Du-weißt-schon-wer)
 x,Headmaster,Schulleiter
-,healer’s kit,Heiler-Set
+x,invisibility cloak,Tarnumhang
 x,life-eater,Lebensfresser
-x,Mary’s Place,Marys Stube
 x,Macmillian,Macmillan
-x,Most Ancient,Altehrwürdig
+x,Mary’s Place,Marys Stube
 x,Most Ancient Hall,Ältestenhalle
+x,Most Ancient,Altehrwürdig
 x,mum, Mum(Mama/Mutter)
 x,N.E.W.T,U.T.Z.
+x,Noble and Most Ancient House,Altehrwürdiges Geschlecht
+x,NPC,Nicht-Spielercharakter
 x,O.W.L.,Z.A.G.
 x,Occlumens,Okklumentiker
-x,Patronus Charm,Patronus-Zauber
 x,Parseltongue,Parsel
-,PC,Spielercharakter
-,NPC,Nicht-Spielercharakter
-,phœnix,Phönix
-,phœnixes,Phönixe
+x,Patronus Charm,Patronus-Zauber
+x,PC,Spielercharakter
+x,phœnix,Phönix
+x,phœnixes,Phönixe
 x,plaque,Plakette(NICHT Schallplatte)
-,pop(s),Plop (Apperation)
 x,Potions Master,Meister der Zaubertränke
+x,Professor der Verteidigung,Verteidigungsprofessor
 x,Quibbler,Klitterer
 x,robe,Umhang / Zaubererumhang
-x,sense of doom,Unheilsgefühl
 x,S.P.H.E.W.,\SPHEW
+x,sense of doom,Unheilsgefühl
 x,Silvery Slytherins,Silbernen Slytherins
 x,St. Mungo’s,St.~Mungo’s
 x,student,Schüler
 x,Sunshine General,Sonnenschein-General
 x,Supreme Mugwump of the International Confederation of Wizards,Oberster Mugwump der Internationalen Konföderation der Zauberer
+x,Thief’s Downfall,Untergang des Diebes
 x,Time-Turner,Zeitumkehrer
 x,Transfiguration,Verwandlung
 x,transfigured,verwandelt
-x,Forbidden Forest,Verbotener Wald
 x,wand,Zauberstab
-x,You-Know-Who,Du-weißt-schon-wer
-x,Thief’s Downfall,Untergang des Diebes
 x,wandless magic,stablose Magie
+x,You-Know-Who,Du-weißt-schon-wer
 ,,
 done,DE-alt,DE-neu
 x,Junge-der-lebte,Junge-der-überlebte
@@ -78,20 +78,38 @@ x,Uralte Häuser,Uralte Geschlechter
 x,Uralten Hauses,Uralten Geschlechtes
 x,Uraltes Haus,Uraltes Geschlecht
 x,Verschwörung von Bayes,Bayes’sche Verschwörung
+,,
 ,Spells,Zauber
+,Charm of the Most Ancient Blade,Zauber der Alterwürdigen Klinge
+,Confundus Charm,Confundus-Zauber
+,Cruciatus Curse,Cruciatus-Fluch
+,Drill Hex,Schildbrecher/Schlagbohrfluch/Brechenden Bohrzauber
+,False Memory Charm,Falsche-Erinnerung-Zauber
+,Fiendfyre,Dämonenfeuer
+,Killing Curse,Todesfluch
+,Legilimency,Legilimentik
+,Memory Charm,Gedächtniszauber
+,Most Ancient Blade,Altehrwürdige Klinge
+,Obliviate,Obliviate
+,Obliviation/Obliviating,Vergessenszauber
+,Polyjuice,Vielsafttrank
+,Quieting Charm,Stillezauber
+,Severing Charm,Durchtrennungszauber
+,Shield Charm, Schildzauber
+,Stunning Hex,Betäubungszauber
+,Transfiguration,Verwandlung
+,Unbreakable Vow,Unbrechbaren Schwur
+,Veritaserum,
 s,Accio,
-s,Alohomora,
 s,Aguamenti,
+s,Alohomora,
 s,Avada Kedavra,
 s,Cluthe,
 s,Colloportus,
 s,Contego,
-,Confundus Charm,Confundus-Zauber
-,Cruciatus Curse,Cruciatus-Fluch
 s,Crystferrium,
-s,Diffindo,
 s,Deligitor prodeas,
-,Drill Hex,Schildbrecher/Schlagbohrfluch/Brechenden Bohrzauber
+s,Diffindo,
 s,Dulak,
 s,Elmekia,
 s,Episkey,
@@ -100,54 +118,37 @@ s,Expelliarmus,
 s,Finite Incantatem,
 s,Finite,
 s,Flipendo,
-x,Fiendfyre,Dämonenfeuer
 s,Frigideiro,
 s,Glisseo,
 s,Gom jabbar,
-,Horcrux,Horkrux
 s,Hyakuju montauk,
 s,Impedimenta,
 s,Imperius,
 s,Inflammare,
-x,Innervate,Rennervate
+s,Innervate,Rennervate
 s,Jellify,
-,Killing Curse,Todesfluch
 s,Lagann,
-,Legilimency,Legilimentik
 s,Lucis Gladius,
 s,Luminos,
 s,Lumos,
 s,Mahasu,
-,Memory Charm,Gedächtniszauber
-,False Memory Charm,Falsche-Erinnerung-Zauber
-,Most Ancient Blade,Altehrwürdige Klinge
-,Charn of the Most Ancient Blade,Zauber der Alterwürdigen Klinge
-,Obliviation/Obliviating,Vergessenszauber
-,Obliviate,Obliviate
 s,Oogely boogely,
-s,Prismatis,
 s,Polyfluis Reverso,
-,Polyjuice,Vielsafttrank
-s,Protego,
+s,Prismatis,
 s,Protego Maximus,
+s,Protego,
 s,Quietus,Geräuschdämpfer
-,Quieting Charm,Stillezauber
 s,Ravum Calvaria,
-,Severing Charm,Durchtrennungszauber
 s,Scourgify,Ratzeputz
-,Shield Charm, Schildzauber
 s,Silencio,
 s,Somnium,
 s,Stupefy,Stupor
-,Stunning Hex,Betäubungszauber
 s,Thermos,
 s,Tonare,
-,Transfiguration,Verwandlung
-,Unbreakable Vow,Unbrechbaren Schwur
 s,Ventriliquo,
 s,Ventus,
-,Veritaserum,
 s,Wingardium Leviosa,
+x,Horcrux,Horkrux
 ,,
 ,Überbleibsel,
 ,*,
