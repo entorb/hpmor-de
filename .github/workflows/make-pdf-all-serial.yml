@@ -27,7 +27,8 @@ jobs:
           python3 --version
 
       - name: Make PDF
-        run: latexmk hpmor hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 > /dev/null
+        run: latexmk > /dev/null
+        # run: latexmk hpmor hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 > /dev/null
 
       - name: Publish PDF to release
         uses: softprops/action-gh-release@v1
