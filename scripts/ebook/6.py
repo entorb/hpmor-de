@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
+
+# TODO: fix ruff findings
+# ruff: noqa
+
 """
 HTML modifications.
 """

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+
+# ruff: noqa: S101 RUF001 RUF003
+# TODO: fix these
+# ruff: noqa: PTH123 PT006 C901 D103 PLR0912 PLR0915 TRY002
+
 # by Torben Menke https://entorb.net
 """
 Check chapter .tex files for known issues and propose fixes.
@@ -38,8 +43,7 @@ assert Path("./chapters").is_dir()
 # Apostroph: ’
 
 
-# TODO:
-# \latersection must be at newline
+# TODO: \latersection must be at newline
 
 # chars manually find and replace
 # *, ", ', », «, ”,
@@ -108,7 +112,7 @@ def process_file(file_in: Path) -> bool:
             cont_lines_new.append(line)
         else:
             # check not commented-out lines
-            line = fix_line(s=line)
+            line = fix_line(s=line)  # noqa: PLW2901
             cont_lines_new.append(line)
             if issues_found is False and line_orig != line:
                 issues_found = True
@@ -126,12 +130,15 @@ def process_file(file_in: Path) -> bool:
             fh.write("\n".join(cont_lines_new))
 
         if settings["print_diff"]:
-            with open(file_in, encoding="utf-8") as file1, open(
-                file_out,
-                encoding="utf-8",
-            ) as file2:
+            with (
+                open(file_in, encoding="utf-8") as file1,
+                open(
+                    file_out,
+                    encoding="utf-8",
+                ) as file2,
+            ):
                 diff = difflib.ndiff(file1.readlines(), file2.readlines())
-            delta = "".join(x for x in diff if x.startswith("+ ") or x.startswith("- "))
+            delta = "".join(x for x in diff if x.startswith(("+ ", "- ")))
             print(file_in.name + "\n" + delta)
 
     return issues_found
@@ -167,6 +174,9 @@ def fix_line(s: str) -> str:
 
 
 def fix_spaces(s: str) -> str:
+    """
+    Fix spaces.
+    """
     # invisible strange spaces
     s = re.sub(r" +", " ", s)
     # tabs to space
@@ -191,12 +201,12 @@ if __debug__:
 
     @pytest.mark.parametrize(
         "text, expected_output",
-        (
+        [
             ("tabs\tto\t\tspace", "tabs to space"),
             ("trailing spaces  ", "trailing spaces"),
             ("  ", ""),
             ("multiple  spaces", "multiple spaces"),
-        ),
+        ],
     )
     def test_fix_spaces(text: str, expected_output: str) -> None:
         assert fix_spaces(s=text) == expected_output, fix_spaces(s=text)
@@ -281,7 +291,7 @@ if settings["lang"] == "DE":
     assert fix_dots("bad… „dots") == "bad… „dots"
 
 
-def fix_MrMrs(s: str) -> str:
+def fix_MrMrs(s: str) -> str:  # noqa: N802
     # Mr / Mrs
     s = s.replace("Mr. H. Potter", "Mr~H.~Potter")
     # s = s.replace("Mr. Potter", "Mr~Potter")
@@ -745,4 +755,5 @@ if __name__ == "__main__":
     #         any_issue_found = True
 
     if settings["raise_error"] and any_issue_found:
-        raise Exception("Issues found, please fix!")
+        msg = "Issues found, please fix!"
+        raise Exception(msg)

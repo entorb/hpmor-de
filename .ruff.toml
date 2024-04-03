@@ -1,0 +1,32 @@
+fix = true               # auto-fix findings
+line-length = 88         # same as Black
+target-version = "py310" # Python 3.10
+
+[lint]
+# comment this out to use only default rules (["E4", "E7", "E9", "F"])
+select = ["ALL"] # activate all rules
+
+# add some more rules to include
+# extend-select = ["B", "Q", "E", "W"]
+
+# rule not to apply
+extend-ignore = [
+    "COM812", # missing-trailing-comma,
+    "D200",   # fits-on-one-line"
+    "D211",   # blank-line-before-class
+    "D212",   # multi-line-summary-second-line
+    "ERA",    # commented-out code
+    "FIX002", # line-contains-todo
+    "ISC001", # implicit-str-concat
+    "PD901",  # df name
+    "PGH003", # blanket-type-ignore
+    "RET504", # unnecessary-assign
+    "T201",   # print
+    "TD002",  # missing-todo-author
+    "TD003",  # missing-todo-link
+]
+
+
+[format]
+line-ending = "lf" # force lf
+preview = false    # enable unstable preview style formatting

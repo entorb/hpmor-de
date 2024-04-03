@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# TODO: fix ruff findings
+# ruff: noqa
+
 """
 Download chapter files from the web.
 """
