@@ -13,3 +13,6 @@ latexmk hpmor-3 &
 latexmk hpmor-4 &
 latexmk hpmor-5 &
 latexmk hpmor-6 &
+
+# # make all
+# latexmk
