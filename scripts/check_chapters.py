@@ -155,6 +155,7 @@ def fix_line(s: str) -> str:
     s = fix_quotations(s)
     s = fix_emph(s)
     s = fix_hyphens(s)
+    s = fix_linebreaks_speach(s)
 
     # add spell macro
     if settings["lang"] == "DE":
@@ -707,6 +708,18 @@ if settings["lang"] == "DE":
     assert fix_spell(r"\emph{Lumos!}") == r"\spell{Lumos}"
     assert fix_spell(r"„\spell{Lumos}“") == r"\spell{Lumos}"
 
+
+def fix_linebreaks_speach(s: str) -> str:
+    """
+    Add linebreaks before speach marks.
+    """
+    s = re.sub(r" „([A-Z])", r"\n„\1", s)
+    return s
+
+
+assert fix_linebreaks_speach(" „Hello") == "\n„Hello"
+assert fix_linebreaks_speach(" „hello") == " „hello"
+assert fix_linebreaks_speach("„hello") == "„hello"
 
 if __name__ == "__main__":
     # cleanup first
