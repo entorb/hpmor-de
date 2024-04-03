@@ -1,138 +1,44 @@
-name: Build PDF 6 in parallel (with log output)
-# no apt update included
+name: Build PDF in parallel (with log output)
 
 on:
   workflow_dispatch:
 
 jobs:
-  hpmor-1:
+  build-and-release:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        part: [1, 2, 3, 4, 5, 6] # Define the parts to be processed in parallel
     steps:
-      - name: Checkout repository
+      - name: checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: Install requirements
+      - name: cache LaTeX files
+        uses: actions/cache@v4
+        with:
+          path: |
+            chapters/*.aux
+            hpmor*.aux
+            hpmor*.fdb_latexmk
+            hpmor*.fls
+            hpmor*.out
+            hpmor*.pdf
+            hpmor*.toc
+            hpmor*.xdv
+          key: tex-cache
+
+      - name: install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
 
-      - name: Make PDF
-        run: latexmk hpmor-1
+      - name: make PDF
+        run: latexmk hpmor-${{ matrix.part }}
 
-      - name: Publish PDF to release
+      - name: publish PDF to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
-          files: hpmor-1.pdf
-
-  hpmor-2:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
-
-      - name: Install requirements
-        run: sh scripts/install_requirements_pdf.sh > /dev/null
-
-      - name: Make PDF
-        run: latexmk hpmor-2
-
-      - name: Publish PDF to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: WorkInProgress
-          prerelease: true
-          files: hpmor-2.pdf
-
-  hpmor-3:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
-
-      - name: Install requirements
-        run: sh scripts/install_requirements_pdf.sh > /dev/null
-
-      - name: Make PDF
-        run: latexmk hpmor-3
-
-      - name: Publish PDF to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: WorkInProgress
-          prerelease: true
-          files: hpmor-3.pdf
-
-  hpmor-4:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
-
-      - name: Install requirements
-        run: sh scripts/install_requirements_pdf.sh > /dev/null
-
-      - name: Make PDF
-        run: latexmk hpmor-4
-
-      - name: Publish PDF to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: WorkInProgress
-          prerelease: true
-          files: hpmor-4.pdf
-
-  hpmor-5:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
-
-      - name: Install requirements
-        run: sh scripts/install_requirements_pdf.sh > /dev/null
-
-      - name: Make PDF
-        run: latexmk hpmor-5
-
-      - name: Publish PDF to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: WorkInProgress
-          prerelease: true
-          files: hpmor-5.pdf
-
-  hpmor-6:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
-
-      - name: Install requirements
-        run: sh scripts/install_requirements_pdf.sh > /dev/null
-
-      - name: Make PDF
-        run: latexmk hpmor-6
-
-      - name: Publish PDF to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: WorkInProgress
-          prerelease: true
-          files: hpmor-6.pdf
+          files: hpmor-${{ matrix.part }}.pdf
