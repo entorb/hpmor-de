@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
@@ -18,7 +21,7 @@ jobs:
         run: latexmk hpmor-1
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
@@ -28,7 +31,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
@@ -37,7 +43,7 @@ jobs:
         run: latexmk hpmor-2
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
@@ -47,7 +53,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
@@ -56,7 +65,7 @@ jobs:
         run: latexmk hpmor-3
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
@@ -66,7 +75,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
@@ -75,7 +87,7 @@ jobs:
         run: latexmk hpmor-4
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
@@ -85,7 +97,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
@@ -94,7 +109,7 @@ jobs:
         run: latexmk hpmor-5
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
@@ -104,7 +119,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
@@ -113,7 +131,7 @@ jobs:
         run: latexmk hpmor-6
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true

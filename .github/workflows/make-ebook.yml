@@ -13,14 +13,16 @@ jobs:
         run: date +%Y-%m-%d_%H:%M
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
+          persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Python set up
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+          # cache: "pip"
 
       #  - name: setup environment to DE lang
       #    run: |
@@ -57,7 +59,7 @@ jobs:
           python3 --version
 
       # - name: Check pre-commit tests
-      #   uses: pre-commit/action@v3.0.0
+      #   uses: pre-commit/action@v3.0.1
 
       - name: Make eBooks
         run: |
@@ -70,7 +72,7 @@ jobs:
           ls -l
 
       - name: Publish eBooks to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
