@@ -17,35 +17,52 @@ jobs:
         run: |
           echo "selected PDF: ${{ github.event.inputs.pdf_target }}"
 
-      - name: Print start date
+      - name: print start date
         run: date +%Y-%m-%d_%H:%M
 
-      - name: Checkout repository
+      - name: checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: Python set up
+      - name: caching LaTeX files
+        uses: actions/cache@v4
+        with:
+          path: |
+            chapters/*.aux
+            hpmor*.aux
+            hpmor*.fdb_latexmk
+            hpmor*.fls
+            hpmor*.out
+            hpmor*.pdf
+            hpmor*.toc
+            hpmor*.xdv
+          key: tex-cache
+
+      - name: ls chapters
+        run: ls -l chapters/
+
+      - name: python set up
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
           # cache: "pip"
 
-      - name: Test ls before
+      - name: ls before
         run: |
           pwd
           ls -l
 
-      - name: Check chapters for known issues
+      - name: check chapters for known issues
         run: python3 -O scripts/check_chapters.py
 
-      - name: Install requirements
+      - name: install PDF requirements
         run: |
           # sudo apt update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null
 
-      - name: Print versions
+      - name: print versions
         run: |
           cat /etc/os-release
           xelatex -v
@@ -53,11 +70,11 @@ jobs:
           # pandoc -v
           python3 --version
 
-      - name: Make PDF
+      - name: make PDF
         run: |
           latexmk "${{ github.event.inputs.pdf_target }}"
 
-      - name: Publish PDF to release
+      - name: publish PDF to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: WorkInProgress
@@ -65,9 +82,9 @@ jobs:
           files: |
             ./hpmor*.pdf
 
-      - name: Test ls after
+      - name: ls after
         run: |
           ls -l
 
-      - name: Print end date
+      - name: print end date
         run: date +%Y-%m-%d_%H:%M
