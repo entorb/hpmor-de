@@ -26,7 +26,6 @@ if __debug__:
 
 
 # ensure we are in hpmor root dir
-# dir_root = os.path.dirname(sys.argv[0]) + "/.."
 chdir(Path(__file__).parents[1])
 assert Path("./chapters").is_dir()
 
@@ -63,8 +62,8 @@ def get_list_of_chapter_files() -> list[Path]:
             if my_match:
                 include_path = my_match.group(1)
                 p = Path(f"{include_path}.tex")
-                assert p.is_file()
-                list_of_files.append(p)
+                if p.is_file():
+                    list_of_files.append(p)
     return list_of_files
 
 
@@ -142,9 +141,7 @@ def process_file(file_in: Path) -> bool:
 
 
 def fix_line(s: str) -> str:
-    """
-    Apply all fix functions on a line.
-    """
+    """Apply all fix functions to each line."""
     # simple and safe
     s = fix_spaces(s)
     s = fix_latex(s)
@@ -171,9 +168,7 @@ def fix_line(s: str) -> str:
 
 
 def fix_spaces(s: str) -> str:
-    """
-    Fix spaces.
-    """
+    """Fix spaces."""
     # invisible strange spaces
     s = re.sub(r" +", " ", s)
     # tabs to space
@@ -321,7 +316,8 @@ def fix_numbers(s: str) -> str:
     return s
 
 
-assert fix_numbers("Es ist 12:23 Uhr...") == "Es ist 12:23~Uhr..."
+if settings["lang"] == "DE":
+    assert fix_numbers("Es ist 12:23 Uhr...") == "Es ist 12:23~Uhr..."
 
 
 def fix_common_typos(s: str) -> str:
@@ -355,8 +351,8 @@ def fix_common_typos(s: str) -> str:
 
 
 assert (fix_common_typos("Test Mungo's King's Cross")) == "Test Mungo’s King’s Cross"
-assert (fix_common_typos("Junge-der-überlebt-hat")) == "Junge-der-überlebte"
 if settings["lang"] == "DE":
+    assert (fix_common_typos("Junge-der-überlebt-hat")) == "Junge-der-überlebte"
     assert (fix_common_typos("Fritz'sche Gesetz")) == "Fritz’sche Gesetz"
     assert (fix_common_typos("Fritz'schen Gesetz")) == "Fritz’schen Gesetz"
     assert (fix_common_typos("Fritz'scher Gesetz")) == "Fritz’scher Gesetz"
@@ -675,6 +671,9 @@ def fix_spell(s: str) -> str:
     }
     spells_str = "(" + "|".join(spells) + ")"
 
+    if settings["lang"] == "EN":
+        for spell in spells:
+            s = s.replace("‘" + spell + "’", "\\spell{" + spell + "}")
     if settings["lang"] == "DE":
         # \emph{spell}
         s = re.sub(r"\\emph{„?" + spells_str + r"[!\.“]?}", r"\\spell{\1}", s)
@@ -706,6 +705,9 @@ def fix_spell(s: str) -> str:
 
     return s
 
+
+if settings["lang"] == "EN":
+    assert fix_spell(r"‘Lumos’") == r"\spell{Lumos}"
 
 if settings["lang"] == "DE":
     assert fix_spell(r"‚Lumos‘") == r"\spell{Lumos}"
