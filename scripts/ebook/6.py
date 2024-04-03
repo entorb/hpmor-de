@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
-
-# TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: RUF001
 
 """
 HTML modifications.
@@ -10,18 +8,18 @@ HTML modifications.
 
 import os
 import re
-import sys
+from pathlib import Path
 
-os.chdir(os.path.dirname(sys.argv[0]) + "/../..")
+os.chdir(Path(__file__).parent.parent.parent)
 
-source_file = "tmp/hpmor-epub-5-html-unmod.html"
-target_file = "hpmor.html"
+source_file = Path("tmp/hpmor-epub-5-html-unmod.html")
+target_file = Path("hpmor.html")
 
 print("=== 6. HTML modifications ===")
 
 
-with open(source_file, encoding="utf-8", newline="\n") as fhIn:
-    cont = fhIn.read()
+with source_file.open(encoding="utf-8", newline="\n") as fh_in:
+    cont = fh_in.read()
 
 # remove strange leftovers from tex -> html conversion
 cont = re.sub(
@@ -115,10 +113,10 @@ cont = re.sub(
 )
 
 # add css style file format for \emph in \emph
-with open("scripts/ebook/html.css", encoding="utf-8", newline="\n") as fhIn:
-    css = fhIn.read()
+with Path("scripts/ebook/html.css").open(encoding="utf-8", newline="\n") as fh_in:
+    css = fh_in.read()
 cont = cont.replace("</style>\n", css + "\n</style>\n")
 
 
-with open(target_file, mode="w", encoding="utf-8", newline="\n") as fhOut:
-    fhOut.write(cont)
+with target_file.open(mode="w", encoding="utf-8", newline="\n") as fh_out:
+    fh_out.write(cont)

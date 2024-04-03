@@ -227,6 +227,7 @@ Bumpf
 Butnaru
 Butnarus
 Cadmiumsulfid
+calibi
 Calvaria
 Carrow
 Chakra
@@ -687,6 +688,7 @@ Horkruxe
 horkruxen
 Horkruxen
 Hornschwanz
+hplettrineextrapara
 hpmor
 Hufflepuff
 Hufflepuffin
@@ -1018,7 +1020,10 @@ Papierchen
 Paradoxa
 parietalen
 Parkinsons
+parsel
 Parsel
+parselify
+Parselify
 Parselmund
 Parselmünder
 Parselmündern
@@ -1369,6 +1374,7 @@ selbstkonsistente
 selbstmitleidigen
 Seltsamkeiten
 Sensei
+settowidth
 Seufz
 Severus
 Shacklebolt
@@ -1580,6 +1586,7 @@ Uniformtasche
 Uniformtaschen
 Universalgebildeter
 Unkrautgewirr
+unmod
 unpoliert
 unprovoziert
 unprovozierten

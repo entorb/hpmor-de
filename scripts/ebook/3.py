@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
 
-# TODO: fix ruff findings
-# ruff: noqa
-
 """
 Modify flattened .tex file.
 """
@@ -11,21 +8,21 @@ Modify flattened .tex file.
 import datetime as dt
 import os
 import re
-import sys
+from pathlib import Path
 
-os.chdir(os.path.dirname(sys.argv[0]) + "/../..")
+os.chdir(Path(__file__).parent.parent.parent)
 
-source_file = "tmp/hpmor-epub-2-flatten.tex"
-target_file = "tmp/hpmor-epub-3-flatten-mod.tex"
+source_file = Path("tmp/hpmor-epub-2-flatten.tex")
+target_file = Path("tmp/hpmor-epub-3-flatten-mod.tex")
 
 print("=== 3. modify flattened file ===")
 
 
-with open(source_file, encoding="utf-8", newline="\n") as fhIn:
-    cont = fhIn.read()
+with source_file.open(encoding="utf-8", newline="\n") as fh_in:
+    cont = fh_in.read()
 
 # \today
-date_str = dt.date.today().strftime("%d.%m.%Y")
+date_str = dt.datetime.now(dt.timezone.utc).date().strftime("%d.%m.%Y")
 cont = cont.replace("\\today{}", date_str)
 
 # writtenNote env -> \writtenNoteA
@@ -116,5 +113,5 @@ cont = re.sub(
     count=1,
 )
 
-with open(target_file, mode="w", encoding="utf-8", newline="\n") as fhOut:
-    fhOut.write(cont)
+with target_file.open(mode="w", encoding="utf-8", newline="\n") as fh_out:
+    fh_out.write(cont)

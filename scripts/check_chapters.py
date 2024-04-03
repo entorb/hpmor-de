@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-
-# ruff: noqa: S101 RUF001 RUF003
-# TODO: fix these
-# ruff: noqa: PTH123 PT006 C901 D103 PLR0912 PLR0915 TRY002
-
 # by Torben Menke https://entorb.net
+
+# ruff: noqa: S101 RUF001 RUF003 D103
+
 """
 Check chapter .tex files for known issues and propose fixes.
 
@@ -59,7 +57,7 @@ def get_list_of_chapter_files() -> list[Path]:
     returns list of filesnames
     """
     list_of_files: list[Path] = []
-    with open("hpmor.tex", encoding="utf-8") as fh:
+    with Path("hpmor.tex").open(encoding="utf-8") as fh:
         for line in fh.readlines():
             my_match = re.search(r"^.*include\{(chapters/.+?)\}.*$", line)
             if my_match:
@@ -126,14 +124,13 @@ def process_file(file_in: Path) -> bool:
             file_out = file_in
             issues_found = False
 
-        with open(file_out, mode="w", encoding="utf-8", newline="\n") as fh:
+        with file_out.open(mode="w", encoding="utf-8", newline="\n") as fh:
             fh.write("\n".join(cont_lines_new))
 
         if settings["print_diff"]:
             with (
-                open(file_in, encoding="utf-8") as file1,
-                open(
-                    file_out,
+                file_in.open(encoding="utf-8") as file1,
+                file_out.open(
                     encoding="utf-8",
                 ) as file2,
             ):
@@ -200,7 +197,7 @@ assert fix_spaces("multiple  spaces") == "multiple spaces"
 if __debug__:
 
     @pytest.mark.parametrize(
-        "text, expected_output",
+        ("text", "expected_output"),
         [
             ("tabs\tto\t\tspace", "tabs to space"),
             ("trailing spaces  ", "trailing spaces"),
@@ -368,7 +365,7 @@ if settings["lang"] == "EN":
     assert (fix_common_typos("can't be")) == "can’t be"
 
 
-def fix_quotations(s: str) -> str:
+def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     # in EN the quotations are “...” and ‘...’ (for quotations in quotations)
     # in DE the quotations are „...“ and ‚...‘ (for quotations in quotations)
 
@@ -756,4 +753,4 @@ if __name__ == "__main__":
 
     if settings["raise_error"] and any_issue_found:
         msg = "Issues found, please fix!"
-        raise Exception(msg)
+        raise Exception(msg)  # noqa: TRY002

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
-# flake8: noqa
+# ruff: noqa
 """
 Converter script.
 
@@ -12,6 +12,7 @@ output dir: output/
 run from within ebook dir via
 python3 1_latex2html.py
 """
+
 import glob
 import os
 import re

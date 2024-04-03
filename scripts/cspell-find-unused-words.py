@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
+
 """
 Remove unused words from cspell wordlist.
 
