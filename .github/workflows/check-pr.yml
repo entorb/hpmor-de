@@ -1,6 +1,6 @@
 # This workflow runs upon new commits and PRs
 # 1. chapter quality check for known issues
-# 2. code quality checks, configured in .pre-commit-config.yaml and setup.cfg
+# 2. code quality checks
 
 name: Check new commits and PRs
 
@@ -19,26 +19,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout repository
+      - name: checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: Python set up
+      - name: python set up
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
           # cache: "pip"
 
-      - name: Python cache set up
+      - name: python cache set up
         uses: actions/cache@v4
         with:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-py-cache
 
-      - name: Check chapters for known issues
+      - name: check chapters for known issues
         run: python3 -O scripts/check_chapters.py
 
-      - name: Check pre-commit tests
+      - name: check pre-commit hooks
         uses: pre-commit/action@v3.0.1
