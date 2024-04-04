@@ -12,11 +12,13 @@ on:
   pull_request:
     branches: ["main"]
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
 jobs:
+  #
   # check source code
+  #
   check:
     runs-on: ubuntu-22.04
 
@@ -45,7 +47,9 @@ jobs:
       - name: check pre-commit hooks
         uses: pre-commit/action@v3.0.1
 
+  #
   # make eBook
+  #
   make:
     needs: check
     if: github.event_name != 'pull_request'
