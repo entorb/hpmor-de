@@ -18,6 +18,8 @@ jobs:
   #
   check:
     runs-on: ubuntu-22.04
+    outputs:
+      cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
     steps:
       - name: checkout repository
@@ -25,6 +27,21 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
+
+      - name: calculate hash on chapters/*.tex
+        id: calculate-hash
+        run: |
+          current_date=$(date -u '+%Y-%m-%d')
+          hashed=${{ hashFiles('chapters/*.tex') }}
+          echo "hash=${current_date}-${hashed}" >> $GITHUB_OUTPUT
+          echo "${current_date}-${hashed}" > hash-chapters.txt
+
+      - name: cache lookup
+        id: cache-lookup
+        uses: actions/cache@v4
+        with:
+          path: hash-chapters.txt
+          key: chapter-hash-for-ebook-${{ steps.calculate-hash.outputs.hash }}
 
       - name: python set up
         uses: actions/setup-python@v5
@@ -49,8 +66,9 @@ jobs:
   #
   make:
     needs: check
-    # do not run make for pull_requests
-    if: github.event_name != 'pull_request'
+    # do not run make for pull_requests and not for unchanged tex files
+    if: github.event_name != 'pull_request' && needs.check.outputs.cache-hit != 'true'
+
     runs-on: ubuntu-22.04
 
     steps:
@@ -75,6 +93,7 @@ jobs:
         run: |
           pwd
           ls -l
+          echo ${{ needs.check.outputs.cache-hit }}
 
       - name: install apt packages using cache
         uses: awalsh128/cache-apt-pkgs-action@latest
