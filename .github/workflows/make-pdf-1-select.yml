@@ -38,7 +38,7 @@ jobs:
             hpmor*.pdf
             hpmor*.toc
             hpmor*.xdv
-          key: tex-cache
+          key: latex-build-files
 
       - name: ls chapters
         run: ls -l chapters/
@@ -59,6 +59,7 @@ jobs:
 
       - name: install PDF requirements
         run: |
+          # not: to save time
           # sudo apt update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null
 
@@ -72,15 +73,21 @@ jobs:
 
       - name: make PDF
         run: |
-          latexmk "${{ github.event.inputs.pdf_target }}"
+          latexmk "${{ github.event.inputs.pdf_target }}" > /dev/null
 
       - name: publish PDF to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
           files: |
             ./hpmor*.pdf
+
+      - name: upload log as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ github.event.inputs.pdf_target }}.log"
+          path: "${{ github.event.inputs.pdf_target }}.log"
 
       - name: ls after
         run: |

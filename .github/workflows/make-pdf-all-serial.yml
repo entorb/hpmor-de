@@ -26,9 +26,9 @@ jobs:
             hpmor*.pdf
             hpmor*.toc
             hpmor*.xdv
-          key: tex-cache
+          key: latex-build-files
 
-      - name: install requirements
+      - name: install PDF requirements
         run: |
           sudo apt update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null

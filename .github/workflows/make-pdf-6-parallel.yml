@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        part: [1, 2, 3, 4, 5, 6] # Define the parts to be processed in parallel
+        part: [hpmor-1, hpmor-2, hpmor-3, hpmor-4, hpmor-5, hpmor-6]
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -28,17 +28,26 @@ jobs:
             hpmor*.pdf
             hpmor*.toc
             hpmor*.xdv
-          key: tex-cache
+          key: latex-build-files
 
-      - name: install requirements
-        run: sh scripts/install_requirements_pdf.sh > /dev/null
+      - name: install PDF requirements
+        run: |
+          # not: to save time
+          # sudo apt update > /dev/null
+          sh scripts/install_requirements_pdf.sh > /dev/null
 
       - name: make PDF
-        run: latexmk hpmor-${{ matrix.part }}
+        run: latexmk ${{ matrix.part }} > /dev/null
 
       - name: publish PDF to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
-          files: hpmor-${{ matrix.part }}.pdf
+          files: ${{ matrix.part }}.pdf
+
+      - name: upload log as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ matrix.part }}.log"
+          path: "${{ matrix.part }}.log"
