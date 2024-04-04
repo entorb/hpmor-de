@@ -38,7 +38,7 @@ jobs:
             hpmor*.pdf
             hpmor*.toc
             hpmor*.xdv
-          key: tex-cache
+          key: latex
 
       - name: ls chapters
         run: ls -l chapters/

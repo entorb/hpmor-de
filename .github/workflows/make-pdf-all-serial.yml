@@ -26,7 +26,7 @@ jobs:
             hpmor*.pdf
             hpmor*.toc
             hpmor*.xdv
-          key: tex-cache
+          key: latex
 
       - name: install requirements
         run: |

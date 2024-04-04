@@ -28,7 +28,7 @@ jobs:
             hpmor*.pdf
             hpmor*.toc
             hpmor*.xdv
-          key: tex-cache
+          key: latex
 
       - name: install requirements
         run: sh scripts/install_requirements_pdf.sh > /dev/null
