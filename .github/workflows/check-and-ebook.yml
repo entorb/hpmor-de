@@ -1,24 +1,64 @@
-name: Build eBooks
+# This workflow runs upon new commits and PRs
+# 1. checks
+# 1.1 chapter quality check for known issues
+# 1.2 python code quality checks
+
+name: Check and Make eBook
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
 
 jobs:
-  build:
+  # check source code
+  check:
     runs-on: ubuntu-22.04
-    steps:
-      - name: Print start date
-        run: date +%Y-%m-%d_%H:%M
 
-      - name: Checkout repository
+    steps:
+      - name: checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: Python set up
+      - name: python set up
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          # cache: "pip"
+
+      - name: python cache set up
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.pythonLocation }}
+          key: python-${{ env.pythonLocation }}
+
+      - name: check chapters for known issues
+        run: python3 -O scripts/check_chapters.py
+
+      - name: check pre-commit hooks
+        uses: pre-commit/action@v3.0.1
+
+  # make eBook
+  make:
+    needs: check
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
+
+      - name: python set up
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -29,27 +69,24 @@ jobs:
       #      cd /usr/share/locales
       #      sudo ./install-language-pack de_DE.UTF-8
 
-      - name: Test ls before
+      - name: ls before
         run: |
           pwd
           ls -l
 
-      - name: Check chapters for known issues
-        run: python3 -O scripts/check_chapters.py
-
-      # - name: Install requirements
+      # - name: install packages
       #   run: |
       #     # sudo apt update > /dev/null
       #     sh scripts/install_requirements_ebook.sh > /dev/null
 
-      - name: Install packages using cache
+      - name: install packages using cache
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
           version: 1.0
           # execute_install_scripts: true
 
-      - name: Print versions
+      - name: print versions
         run: |
           cat /etc/os-release
           # xelatex -v
@@ -61,17 +98,17 @@ jobs:
       # - name: Check pre-commit tests
       #   uses: pre-commit/action@v3.0.1
 
-      - name: Make eBooks
+      - name: make eBooks
         run: |
           wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf  -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
 
-      - name: Test ls after
+      - name: ls after
         run: |
           pwd
           ls -l
 
-      - name: Publish eBooks to release
+      - name: publish eBooks to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
@@ -82,6 +119,3 @@ jobs:
             ./hpmor.epub
             ./hpmor.mobi
             ./hpmor.fb2
-
-      - name: Print end date
-        run: date +%Y-%m-%d_%H:%M
