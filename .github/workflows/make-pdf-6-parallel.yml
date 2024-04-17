@@ -1,4 +1,5 @@
-name: Build PDF in parallel (with log output)
+name: Build PDF all parallel
+# no apt update included
 
 on:
   workflow_dispatch:

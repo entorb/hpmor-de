@@ -50,3 +50,9 @@ jobs:
           tag_name: WorkInProgress
           prerelease: true
           files: hpmor*.pdf
+
+      - name: upload logs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "hpmor.log"
+          path: "hpmor*.log"

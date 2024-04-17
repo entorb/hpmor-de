@@ -1,4 +1,4 @@
-name: Build PDF 1 selected (with log output)
+name: Build PDF 1 selected
 # no apt update included
 
 on:
