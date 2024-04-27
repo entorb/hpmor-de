@@ -14,8 +14,6 @@ os.chdir(Path(__file__).parent.parent.parent)
 source_file = Path("tmp/hpmor-epub-3-flatten-mod.tex")
 target_file = Path("tmp/hpmor-epub-4-flatten-parsel.tex")
 
-print("=== 4. parselify flattened file in python ===")
-
 
 def convert_parsel(s: str) -> str:
     """Convert text to Parsel."""
@@ -34,16 +32,18 @@ def convert_parsel(s: str) -> str:
     return s
 
 
-with source_file.open(encoding="utf-8", newline="\n") as fh_in:
-    cont = fh_in.read()
+if __name__ == "__main__":
+    print("=== 4. parselify flattened file in python ===")
 
+    with source_file.open(encoding="utf-8", newline="\n") as fh_in:
+        cont = fh_in.read()
 
-# \parsel
-my_matches = re.finditer(r"(\\parsel\{([^\}\\]+)\})", cont)
-for my_match in my_matches:
-    was = my_match.group(1)
-    womit = convert_parsel(my_match.group(2))
-    cont = cont.replace(was, "\\parsel{" + womit + "}")
+    # \parsel
+    my_matches = re.finditer(r"(\\parsel\{([^\}\\]+)\})", cont)
+    for my_match in my_matches:
+        was = my_match.group(1)
+        womit = convert_parsel(my_match.group(2))
+        cont = cont.replace(was, "\\parsel{" + womit + "}")
 
-with target_file.open(mode="w", encoding="utf-8", newline="\n") as fh_out:
-    fh_out.write(cont)
+    with target_file.open(mode="w", encoding="utf-8", newline="\n") as fh_out:
+        fh_out.write(cont)
