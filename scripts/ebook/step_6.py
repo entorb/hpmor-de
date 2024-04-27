@@ -22,12 +22,19 @@ def fix_ellipsis(s: str) -> str:
     """
     # 1. remove all spaces around ellipsis
     s = re.sub(r" *… *", "…", s)
-    # 2. recreate spaces around ellipsis
+    # 2. recreate some spaces
+    # before punctuation : no space, so governed by 1.
     # between words
     s = re.sub(r"(?<=[\w])…(?=[\w])", "… ", s)
-    # after punctuation
-    s = re.sub(r"(?<=[\.\?!:])…(?=[\w])", " …", s)
-    # before punctuation : no space, so governed by 1.
+    # after punctuation: add space
+    s = re.sub(r"(?<=[\.\?!:,;])…", r" …", s)
+    # fine-tuning </em>… and …<em>
+    s = re.sub(r"(?<=</em>)…", "… ", s)
+    s = re.sub(r"…(?=<em>)", "… ", s)
+    # before opening EN-quotes: add space
+    # s = re.sub(r"…(?=[“])", "… ", s)
+    # before opening DE-quotes: add space
+    s = re.sub(r"…(?=[„])", "… ", s)
     return s
 
 

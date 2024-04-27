@@ -3,22 +3,30 @@
 
 from step_6 import fix_ellipsis
 
-# quotations
-assert fix_ellipsis("foo…”") == "foo…”"
-assert fix_ellipsis("“…foo") == "“…foo"
-# html
-assert fix_ellipsis("foo…</p>") == "foo…</p>"
-assert fix_ellipsis("<p>…foo") == "<p>…foo"
-# between 2 words
-assert fix_ellipsis("foo…bar") == "foo… bar"
-assert fix_ellipsis("foo …bar") == "foo… bar"
-assert fix_ellipsis("foo … bar") == "foo… bar"
-assert fix_ellipsis("foo… bar") == "foo… bar"
-# start of sentence
-assert fix_ellipsis("foo.…bar") == "foo. …bar"
-assert fix_ellipsis("foo!…bar") == "foo! …bar"
-assert fix_ellipsis("foo?…bar") == "foo? …bar"
-# end of sentence
-assert fix_ellipsis("foo…. bar") == "foo…. bar"
-assert fix_ellipsis("foo…! bar") == "foo…! bar"
-assert fix_ellipsis("foo…? bar") == "foo…? bar"
+test_cases = [
+    # quotations
+    ("foo…”", "foo…”"),
+    ("“…foo", "“…foo"),
+    # html
+    ("foo…</p>", "foo…</p>"),
+    ("<p>…foo", "<p>…foo"),
+    # between 2 words
+    ("foo…bar", "foo… bar"),
+    ("foo …bar", "foo… bar"),
+    ("foo … bar", "foo… bar"),
+    ("foo… bar", "foo… bar"),
+    # start of sentence
+    ("foo.…bar", "foo. …bar"),
+    ("foo!…bar", "foo! …bar"),
+    ("foo?…bar", "foo? …bar"),
+    # end of sentence
+    ("foo…. bar", "foo…. bar"),
+    ("foo…! bar", "foo…! bar"),
+    ("foo…? bar", "foo…? bar"),
+    # emph
+    ("foo</em>…bar", "foo</em>… bar"),
+    ("foo…<em>bar", "foo… <em>bar"),
+]
+
+for inp, exp in test_cases:
+    assert fix_ellipsis(inp) == exp, fix_ellipsis(inp)
