@@ -16,6 +16,21 @@ source_file = Path("tmp/hpmor-epub-5-html-unmod.html")
 target_file = Path("hpmor.html")
 
 
+def fix_ellipsis(s: str) -> str:
+    """
+    Fix ellipsis spacing for ebooks.
+    """
+    # 1. remove all spaces around ellipsis
+    s = re.sub(r" *… *", "…", s)
+    # 2. recreate spaces around ellipsis
+    # between words
+    s = re.sub(r"(?<=[\w])…(?=[\w])", "… ", s)
+    # after punctuation
+    s = re.sub(r"(?<=[\.\?!:])…(?=[\w])", " …", s)
+    # before punctuation : no space, so governed by 1.
+    return s
+
+
 if __name__ == "__main__":
     print("=== 6. HTML modifications ===")
 
@@ -52,12 +67,14 @@ if __name__ == "__main__":
     # remove training slashes to satisfy https://validator.w3.org
     cont = cont.replace("<br />", "<br>")
     cont = cont.replace("<hr />", "<hr>")
-
     cont = re.sub(
         r"(<meta [^>]*) />",
         r"\1>",
         cont,
     )
+
+    # fix spaces around ellipsis
+    cont = fix_ellipsis(cont)
 
     # remove bad span ids (containing spaces) from newspaper spans
     cont = re.sub(r'<span id="[^"]+" label="[^"]+">', r"<span>", cont, count=5)
