@@ -139,18 +139,20 @@ def fix_line(s: str) -> str:
     """Apply all fix functions to each line."""
     # simple and safe
     s = fix_spaces(s)
-    s = fix_latex(s)
+    s = fix_common_typos(s)
     s = fix_ellipsis(s)
+    s = fix_latex(s)
     s = fix_MrMrs(s)
     s = fix_numbers(s)
-    s = fix_common_typos(s)
-    s = fix_spaces(s)
     s = fix_punctuation(s)
+    s = fix_spaces(s)
 
     # advanced stuff
-    s = fix_quotations(s)
     s = fix_emph(s)
     s = fix_hyphens(s)
+    s = fix_quotations(s)
+
+    # force linebreaks before speach marks
     if settings["lang"] == "DE":
         s = fix_linebreaks_speach(s)
 
@@ -178,9 +180,15 @@ def fix_spaces(s: str) -> str:
     return s
 
 
-def fix_punctuation(s: str) -> str:
-    # 2x same punctuation: ,.!?
-    s = re.sub(r"([,\.!\?:;])\s*\1", r"\1", s)
+def fix_ellipsis(s: str) -> str:
+    """Fix spaces around ellipsis."""
+    # ... -> …
+    s = s.replace("...", "…")
+    # remove all spaces around ellipsis
+    s = re.sub(r" *… *", r"…", s)
+
+    # after punctuation: add space
+    s = re.sub(r"(?<=[\.\?!:,;])…", r" …", s)
     return s
 
 
@@ -195,15 +203,18 @@ def fix_latex(s: str) -> str:
     return s
 
 
-def fix_ellipsis(s: str) -> str:
-    """Fix spaces around ellipsis."""
-    # ... -> …
-    s = s.replace("...", "…")
-    # remove all spaces around ellipsis
-    s = re.sub(r" *… *", r"…", s)
+def fix_linebreaks_speach(s: str) -> str:
+    """
+    Add linebreaks before speach marks.
 
-    # after punctuation: add space
-    s = re.sub(r"(?<=[\.\?!:,;])…", r" …", s)
+    not in use in EN
+    """
+    if settings["lang"] == "EN":
+        return s
+
+    if settings["lang"] == "DE":
+        s = re.sub(r" „([A-Z])", r"\n„\1", s)
+
     return s
 
 
@@ -213,11 +224,8 @@ def fix_MrMrs(s: str) -> str:  # noqa: N802
     # s = s.replace("Mr. Potter", "Mr~Potter")
     if settings["lang"] == "DE":
         s = re.sub(r"\b(Mr|Mrs|Miss|Dr)\b\.?\s+(?!”)", r"\1~", s)
-    # Dr.~ -> Dr~Potter
+    # Dr.~ -> Dr~Potter etc.
     s = re.sub(r"\b(Mr|Mrs|Miss|Dr)\b\.~", r"\1~", s)
-    # "Dr. " -> "Dr~"
-    # s = re.sub(r"\b(Dr)\b\.?~?\s*", r"\1~", s)
-    # s = s.replace("Mr~and Mrs~", "Mr and Mrs~")
     return s
 
 
@@ -253,7 +261,6 @@ def fix_common_typos(s: str) -> str:
         s = re.sub(r"(\w)'(t)\b", r"\1’\2", s)
         # I'm
         s = re.sub(r"\bI'm\b", r"I’m", s)
-
     return s
 
 
@@ -467,6 +474,12 @@ def fix_hyphens(s: str) -> str:
     return s
 
 
+def fix_punctuation(s: str) -> str:
+    """Fix 2x same punctuation: ,.!?:;"""  # noqa: D400, D415
+    s = re.sub(r"([,\.!\?:;])\s*\1", r"\1", s)
+    return s
+
+
 def fix_spell(s: str) -> str:
     if settings["lang"] == "EN":
         # no spell macro in EN yet
@@ -563,21 +576,6 @@ def fix_spell(s: str) -> str:
     #     )
     # Imperius not as spell
     s = s.replace("\\spell{Imperius}", "Imperius")
-
-    return s
-
-
-def fix_linebreaks_speach(s: str) -> str:
-    """
-    Add linebreaks before speach marks.
-
-    not in use in EN
-    """
-    if settings["lang"] == "EN":
-        return s
-
-    if settings["lang"] == "DE":
-        s = re.sub(r" „([A-Z])", r"\n„\1", s)
 
     return s
 
