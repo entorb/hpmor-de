@@ -8,13 +8,13 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: caching LaTeX files
+      - name: Cache LaTeX files
         uses: actions/cache@v4
         with:
           path: |
@@ -28,12 +28,12 @@ jobs:
             hpmor*.xdv
           key: latex-build-files
 
-      - name: install PDF requirements
+      - name: Install PDF requirements
         run: |
-          sudo apt update > /dev/null
+          sudo apt-get update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null
 
-      - name: print versions
+      - name: Print versions
         run: |
           cat /etc/os-release
           xelatex -v
@@ -41,7 +41,7 @@ jobs:
           # pandoc -v
           python3 --version
 
-      - name: make PDFs
+      - name: Make PDFs
         run: latexmk hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 hpmor > /dev/null
 
       - name: Publish PDF to release
@@ -51,7 +51,7 @@ jobs:
           prerelease: true
           files: hpmor*.pdf
 
-      - name: upload logs as artifact
+      - name: Upload logs as artifact
         uses: actions/upload-artifact@v4
         with:
           name: "hpmor.log"

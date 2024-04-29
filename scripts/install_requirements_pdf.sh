@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo apt install texlive-xetex texlive-lang-german latexmk
+sudo apt-get install texlive-xetex texlive-lang-german latexmk

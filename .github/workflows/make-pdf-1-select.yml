@@ -13,14 +13,14 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - name: print selection
+      - name: Print selection
         run: |
           echo "selected PDF: ${{ github.event.inputs.pdf_target }}"
 
-      - name: print start date
+      - name: Print start date
         run: date +%Y-%m-%d_%H:%M
 
-      - name: checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -43,10 +43,10 @@ jobs:
       - name: ls chapters
         run: ls -l chapters/
 
-      - name: python set up
+      - name: Python set up
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
           # cache: "pip"
 
       - name: ls before
@@ -54,16 +54,16 @@ jobs:
           pwd
           ls -l
 
-      - name: check chapters for known issues
+      - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
 
-      - name: install PDF requirements
+      - name: Install PDF requirements
         run: |
           # not: to save time
-          # sudo apt update > /dev/null
+          # sudo apt-get update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null
 
-      - name: print versions
+      - name: Print versions
         run: |
           cat /etc/os-release
           xelatex -v
@@ -71,11 +71,11 @@ jobs:
           # pandoc -v
           python3 --version
 
-      - name: make PDF
+      - name: Make PDF
         run: |
           latexmk "${{ github.event.inputs.pdf_target }}" > /dev/null
 
-      - name: publish PDF to release
+      - name: Publish PDF to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
@@ -83,7 +83,7 @@ jobs:
           files: |
             ./hpmor*.pdf
 
-      - name: upload log as artifact
+      - name: Upload log as artifact
         uses: actions/upload-artifact@v4
         with:
           name: "${{ github.event.inputs.pdf_target }}.log"
@@ -93,5 +93,5 @@ jobs:
         run: |
           ls -l
 
-      - name: print end date
+      - name: Print end date
         run: date +%Y-%m-%d_%H:%M

@@ -22,7 +22,7 @@ if __name__ == "__main__":
         cont = fh_in.read()
 
     # \today
-    date_str = dt.datetime.now(dt.timezone.utc).date().strftime("%d.%m.%Y")
+    date_str = dt.datetime.now(dt.UTC).date().strftime("%d.%m.%Y")
     cont = cont.replace("\\today{}", date_str)
 
     # writtenNote env -> \writtenNoteA

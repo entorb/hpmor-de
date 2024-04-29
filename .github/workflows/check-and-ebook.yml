@@ -1,7 +1,6 @@
-# This workflow runs upon new commits (check and make) and PRs (check only)
-
 name: Check and Make eBook
 
+# This workflow runs upon new commits (check and make) and PRs (check only)
 on:
   workflow_dispatch:
   push:
@@ -22,13 +21,13 @@ jobs:
       cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
     steps:
-      - name: checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: calculate hash on chapters/*.tex
+      - name: Calculate hash on chapters/*.tex
         id: calculate-hash
         run: |
           current_date=$(date -u '+%Y-%m-%d')
@@ -36,29 +35,29 @@ jobs:
           echo "hash=${current_date}-${hashed}" >> $GITHUB_OUTPUT
           echo "${current_date}-${hashed}" > hash-chapters.txt
 
-      - name: cache lookup
+      - name: Cache lookup
         id: cache-lookup
         uses: actions/cache@v4
         with:
           path: hash-chapters.txt
           key: chapter-hash-for-ebook-${{ steps.calculate-hash.outputs.hash }}
 
-      - name: python set up
+      - name: Python set up
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
           # cache: "pip"
 
-      - name: python cache set up
+      - name: Python cache set up
         uses: actions/cache@v4
         with:
           path: ${{ env.pythonLocation }}
           key: python-${{ env.pythonLocation }}
 
-      - name: check chapters for known issues
+      - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
 
-      - name: check pre-commit hooks
+      - name: Check pre-commit hooks
         uses: pre-commit/action@v3.0.1
 
   #
@@ -72,16 +71,16 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: python set up
+      - name: Python set up
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
           # cache: "pip"
 
       #  - name: setup environment to DE lang
@@ -95,14 +94,14 @@ jobs:
           ls -l
           echo ${{ needs.check.outputs.cache-hit }}
 
-      - name: install apt packages using cache
+      - name: Install apt packages using cache
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
           version: 1.0
           # execute_install_scripts: true
 
-      - name: print versions
+      - name: Print versions
         run: |
           cat /etc/os-release
           # xelatex -v
@@ -111,7 +110,7 @@ jobs:
           pandoc --version
           python3 --version
 
-      - name: make eBooks
+      - name: Make eBooks
         run: |
           wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
@@ -121,7 +120,7 @@ jobs:
           pwd
           ls -l
 
-      - name: publish eBooks to release
+      - name: Publish eBooks to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress

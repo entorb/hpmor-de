@@ -11,13 +11,13 @@ jobs:
       matrix:
         part: [hpmor-1, hpmor-2, hpmor-3, hpmor-4, hpmor-5, hpmor-6]
     steps:
-      - name: checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: cache LaTeX files
+      - name: Cache LaTeX files
         uses: actions/cache@v4
         with:
           path: |
@@ -31,23 +31,23 @@ jobs:
             hpmor*.xdv
           key: latex-build-files
 
-      - name: install PDF requirements
+      - name: Install PDF requirements
         run: |
           # not: to save time
-          # sudo apt update > /dev/null
+          # sudo apt-get update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null
 
-      - name: make PDF
+      - name: Make PDF
         run: latexmk ${{ matrix.part }} > /dev/null
 
-      - name: publish PDF to release
+      - name: Publish PDF to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
           files: ${{ matrix.part }}.pdf
 
-      - name: upload log as artifact
+      - name: Upload log as artifact
         uses: actions/upload-artifact@v4
         with:
           name: "${{ matrix.part }}.log"
