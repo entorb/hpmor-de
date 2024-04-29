@@ -20,11 +20,6 @@ from pathlib import Path
 
 from check_chapters_settings import settings
 
-if __debug__:
-    # skipped if python is started with -O option
-    import pytest
-
-
 # ensure we are in hpmor root dir
 chdir(Path(__file__).parents[1])
 assert Path("./chapters").is_dir()
@@ -156,7 +151,8 @@ def fix_line(s: str) -> str:
     s = fix_quotations(s)
     s = fix_emph(s)
     s = fix_hyphens(s)
-    s = fix_linebreaks_speach(s)
+    if settings["lang"] == "DE":
+        s = fix_linebreaks_speach(s)
 
     # add spell macro
     if settings["lang"] == "DE":
@@ -187,21 +183,6 @@ assert fix_spaces("tabs\tto\t\tspace") == "tabs to space"
 assert fix_spaces("trailing spaces  ") == "trailing spaces"
 assert fix_spaces("  ") == ""
 assert fix_spaces("multiple  spaces") == "multiple spaces"
-# rewrite using pytest
-
-if __debug__:
-
-    @pytest.mark.parametrize(
-        ("text", "expected_output"),
-        [
-            ("tabs\tto\t\tspace", "tabs to space"),
-            ("trailing spaces  ", "trailing spaces"),
-            ("  ", ""),
-            ("multiple  spaces", "multiple spaces"),
-        ],
-    )
-    def test_fix_spaces(text: str, expected_output: str) -> None:
-        assert fix_spaces(s=text) == expected_output, fix_spaces(s=text)
 
 
 def fix_punctuation(s: str) -> str:
@@ -448,7 +429,7 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
         s = re.sub("”", "“", s)
         # s = re.sub("’", "’", s)
 
-    # # check for uneven quotations
+    # TODO: check for uneven quotations
     # if settings["lang"] == "DE":
     #     s = re.sub(r"(„[^“]+„)", r"<FIXME: quotations \1>", s)
     #     s = re.sub(r"(`)", r"<FIXME: quotations: \1>", s)
@@ -691,14 +672,22 @@ if settings["lang"] == "DE":
 def fix_linebreaks_speach(s: str) -> str:
     """
     Add linebreaks before speach marks.
+
+    not in use in EN
     """
-    s = re.sub(r" „([A-Z])", r"\n„\1", s)
+    if settings["lang"] == "EN":
+        pass
+
+    if settings["lang"] == "DE":
+        s = re.sub(r" „([A-Z])", r"\n„\1", s)
+
     return s
 
 
-assert fix_linebreaks_speach(" „Hello") == "\n„Hello"
-assert fix_linebreaks_speach(" „hello") == " „hello"
-assert fix_linebreaks_speach("„hello") == "„hello"
+if settings["lang"] == "DE":
+    assert fix_linebreaks_speach(" „Hello") == "\n„Hello"
+    assert fix_linebreaks_speach(" „hello") == " „hello"
+    assert fix_linebreaks_speach("„hello") == "„hello"
 
 if __name__ == "__main__":
     # cleanup first
