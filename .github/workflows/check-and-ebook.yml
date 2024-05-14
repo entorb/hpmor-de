@@ -16,7 +16,7 @@ jobs:
   # check source code
   #
   check:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
@@ -62,7 +62,7 @@ jobs:
     # do not run make for pull_requests and not for unchanged tex files
     if: github.event_name != 'pull_request' && needs.check.outputs.cache-hit != 'true'
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Check out repository
