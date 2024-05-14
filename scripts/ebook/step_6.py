@@ -62,7 +62,7 @@ if __name__ == "__main__":
         count=1,
     )
 
-    # now done via pandoc -V lang=de in 5.sh
+    # now done via pandoc -V lang=de in step_5.sh
     # # set language
     # cont = re.sub(
     #     r'(<html [^>]*) lang="" xml:lang=""',
@@ -93,13 +93,13 @@ if __name__ == "__main__":
 
     # remove ids from chapters since umlaute cause problem
     cont = re.sub(
-        r'(<h\d) id="[^"]+"',
+        r'(<h\d)\s+id="[^"]+"',
         r"\1",
         cont,
         flags=re.DOTALL | re.IGNORECASE,
     )
     cont = re.sub(
-        r'(<h\d class="unnumbered") id="[^"]+"',
+        r'(<h\d\s+class="unnumbered")\s+id="[^"]+"',
         r"\1",
         cont,
         flags=re.DOTALL | re.IGNORECASE,
