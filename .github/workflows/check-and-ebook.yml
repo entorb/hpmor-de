@@ -1,6 +1,9 @@
 name: Check and Make eBook
 
-# This workflow runs upon new commits (check and make) and PRs (check only)
+# This workflow runs upon
+# - push to main (check, make, publish)
+# - create new PR (check, make)
+
 on:
   workflow_dispatch:
   push:
@@ -27,6 +30,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
+      - name: Touch requirements.txt for pip caching
+        run: touch requirements.txt
+
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
         run: |
@@ -46,7 +52,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          # cache: "pip"
+          cache: "pip"
 
       - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
@@ -59,8 +65,8 @@ jobs:
   #
   make:
     needs: check
-    # do not run make for pull_requests and not for unchanged tex files
-    if: github.event_name != 'pull_request' && needs.check.outputs.cache-hit != 'true'
+    # do not run for unchanged tex files
+    if: needs.check.outputs.cache-hit != 'true'
 
     runs-on: ubuntu-24.04
 
@@ -75,6 +81,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          # no package needed, so no caching
           # cache: "pip"
 
       #  - name: setup environment to DE lang
@@ -94,6 +101,11 @@ jobs:
           packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
           version: 1.0
           # execute_install_scripts: true
+
+      - name: Install ImageMagick to fix caching issue
+        # since cache does not properly work / "convert" not found
+        run: |
+          sudo apt-get install imagemagick
 
       - name: Print versions
         run: |
@@ -115,6 +127,8 @@ jobs:
           ls -l
 
       - name: Publish eBooks to release
+        # run only for push into main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
