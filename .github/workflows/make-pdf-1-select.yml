@@ -43,23 +43,11 @@ jobs:
           ls -l chapters/
           ls -l
 
-      # - name: Install PDF requirements
-      #   run: |
-      #     # not: to save time
-      #     # sudo apt-get update > /dev/null
-      #     sh scripts/install_requirements_pdf.sh > /dev/null
-
-      - name: Install PDF requirements using cache
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-xetex texlive-lang-greek texlive-lang-german latexmk
-          version: 1.0
-          execute_install_scripts: true
-
-      - name: Manual install latexmk to fix caching issue
-        # since cache does not properly work / "convert" not found
+      - name: Install PDF requirements
         run: |
-          sudo apt-get install latexmk
+          # not: to save time
+          # sudo apt-get update > /dev/null
+          sh scripts/install_requirements_pdf.sh > /dev/null
 
       - name: Print versions
         run: |
