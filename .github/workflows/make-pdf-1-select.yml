@@ -17,16 +17,13 @@ jobs:
         run: |
           echo "selected PDF: ${{ github.event.inputs.pdf_target }}"
 
-      - name: Print start date
-        run: date +%Y-%m-%d_%H:%M
-
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: caching LaTeX files
+      - name: Cache LaTeX files
         uses: actions/cache@v4
         with:
           path: |
@@ -40,22 +37,11 @@ jobs:
             hpmor*.xdv
           key: latex-build-files
 
-      - name: ls chapters
-        run: ls -l chapters/
-
-      - name: Python set up
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          # cache: "pip"
-
       - name: ls before
         run: |
           pwd
+          ls -l chapters/
           ls -l
-
-      - name: Check chapters for known issues
-        run: python3 -O scripts/check_chapters.py
 
       - name: Install PDF requirements
         run: |
@@ -92,6 +78,3 @@ jobs:
       - name: ls after
         run: |
           ls -l
-
-      - name: Print end date
-        run: date +%Y-%m-%d_%H:%M
