@@ -1,14 +1,14 @@
-name: Build PDF all serial
+name: Make PDF all serial
 # includes apt update
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  make:
     runs-on: ubuntu-24.04
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -42,14 +42,16 @@ jobs:
           python3 --version
 
       - name: Make PDFs
-        run: latexmk hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 hpmor > /dev/null
+        run: |
+          latexmk hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6 hpmor > /dev/null
 
       - name: Publish PDF to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
           prerelease: true
-          files: hpmor*.pdf
+          files: |
+            hpmor*.pdf
 
       - name: Upload logs as artifact
         uses: actions/upload-artifact@v4

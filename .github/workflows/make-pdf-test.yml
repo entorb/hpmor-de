@@ -1,4 +1,4 @@
-name: Build PDF layout test
+name: Make PDF layout test
 
 on:
   workflow_dispatch:

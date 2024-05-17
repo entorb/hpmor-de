@@ -1,4 +1,4 @@
-name: Build PDF 1 selected
+name: Make PDF 1 selected
 # no apt update included
 
 on:
@@ -10,14 +10,14 @@ on:
         default: "hpmor"
 
 jobs:
-  build:
+  make:
     runs-on: ubuntu-24.04
     steps:
       - name: Print selection
         run: |
           echo "selected PDF: ${{ github.event.inputs.pdf_target }}"
 
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false

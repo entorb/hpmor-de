@@ -1,17 +1,17 @@
-name: Build PDF all parallel
+name: Make PDF 6 parallel
 # no apt update included
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-and-release:
+  make:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
         part: [hpmor-1, hpmor-2, hpmor-3, hpmor-4, hpmor-5, hpmor-6]
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false

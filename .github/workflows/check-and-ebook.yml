@@ -24,7 +24,7 @@ jobs:
       cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -81,7 +81,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          # no package needed, so no caching
+          # no package installed, so no caching
           # cache: "pip"
 
       #  - name: setup environment to DE lang
