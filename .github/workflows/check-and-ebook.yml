@@ -33,10 +33,7 @@ jobs:
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
         run: |
-          # current_date=$(date -u '+%Y-%m-%d')
-          branch=${{ github.ref_name }}
-          hashed=${{ hashFiles('chapters/*.tex') }}
-          echo "hash=${branch}-${hashed}" >> $GITHUB_OUTPUT
+          echo "hash=${{ hashFiles('chapters/*.tex') }}" >> $GITHUB_OUTPUT
           touch hash-chapters.txt
 
       - name: Cache lookup
@@ -44,16 +41,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: hash-chapters.txt
-          key: chapter-hash-for-ebook-${{ steps.calculate-hash.outputs.hash }}
+          key: chapter-hash-for-ebook-${{ github.ref_name }}-${{ steps.calculate-hash.outputs.hash }}
 
       - name: Python set up
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          # no packages installed, so no caching
+          # no packages besides pytest installed, so no caching needed
           # cache: "pip"
 
-      - name: Install and run pytest
+      - name: Run pytest unittests
         run: |
           pip install pytest
           pytest
