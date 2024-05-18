@@ -1,23 +1,33 @@
-"""Unit Tests."""  # noqa: INP001
-# ruff: noqa: S101
+# ruff: noqa: INP001 S101
+# cspell:disable
 
+"""Unit Tests."""
+
+import pytest
 from step_4 import convert_parsel
 
-assert convert_parsel("foo") == "foo"
-# s
-assert convert_parsel("house") == "housse"
-assert convert_parsel("Special") == "Sspecial"
-# ss and ß
-assert convert_parsel("Professor") == "Professsor"
-assert convert_parsel("muß") == "musss"
-# z
-assert convert_parsel("zero") == "zzero"
-assert convert_parsel("Zero") == "Zzero"
-# zz
-assert convert_parsel("puzzled") == "puzzzled"
-# x -> xs
-assert convert_parsel("Bellatrix") == "Bellatrixs"
 
-# combined
-assert convert_parsel("expression") == "exspresssion"
-assert convert_parsel("Salazar") == "Ssalazzar"
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("foo", "foo"),
+        # s
+        ("house", "housse"),
+        ("Special", "Sspecial"),
+        # ss and ß
+        ("Professor", "Professsor"),
+        ("muß", "musss"),
+        # z
+        ("zero", "zzero"),
+        ("Zero", "Zzero"),
+        # zz
+        ("puzzled", "puzzzled"),
+        # x -> xs
+        ("Bellatrix", "Bellatrixs"),
+        # combined
+        ("expression", "exspresssion"),
+        ("Salazar", "Ssalazzar"),
+    ],
+)
+def test_convert_parsel(text: str, expected: str) -> None:  # noqa: D103
+    assert convert_parsel(text) == expected
