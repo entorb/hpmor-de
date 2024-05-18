@@ -33,10 +33,11 @@ jobs:
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
         run: |
-          current_date=$(date -u '+%Y-%m-%d')
+          # current_date=$(date -u '+%Y-%m-%d')
+          branch=${{ github.ref_name }}
           hashed=${{ hashFiles('chapters/*.tex') }}
-          echo "hash=${current_date}-${hashed}" >> $GITHUB_OUTPUT
-          echo "${current_date}-${hashed}" > hash-chapters.txt
+          echo "hash=${branch}-${hashed}" >> $GITHUB_OUTPUT
+          touch hash-chapters.txt
 
       - name: Cache lookup
         id: cache-lookup
@@ -51,6 +52,11 @@ jobs:
           python-version: "3.12"
           # no packages installed, so no caching
           # cache: "pip"
+
+      - name: Install and run pytest
+        run: |
+          pip install pytest
+          pytest
 
       - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
@@ -91,7 +97,6 @@ jobs:
         run: |
           pwd
           ls -l
-          echo ${{ needs.check.outputs.cache-hit }}
 
       - name: Install apt packages using cache
         uses: awalsh128/cache-apt-pkgs-action@latest
@@ -124,9 +129,35 @@ jobs:
           pwd
           ls -l
 
-      - name: Publish eBooks to release
-        # run only for push into main
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Upload eBooks as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ebooks
+          path: |
+            ./hpmor.docx
+            ./hpmor.html
+            ./hpmor.epub
+            ./hpmor.mobi
+            ./hpmor.fb2
+          retention-days: 7
+
+  #
+  # make upload to release WorkInProgress
+  #
+  upload:
+    needs: make
+    # only for push into main branch
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Download eBooks artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ebooks
+
+      - name: Publish eBooks to release WorkInProgress
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
