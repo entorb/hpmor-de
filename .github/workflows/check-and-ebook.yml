@@ -53,7 +53,7 @@ jobs:
           # no packages installed, so no caching
           # cache: "pip"
 
-      - name: Install and run pytest
+      - name: Run pytest unittests
         run: |
           pip install pytest
           pytest
