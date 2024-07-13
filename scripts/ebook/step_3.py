@@ -37,10 +37,7 @@ if __name__ == "__main__":
     # not used in DE version
 
     # some cleanup
-    # TODO: removed when switching to Ubuntu >= 23.04,
-    #   since it let to a problem
-    #  in line 31 of tmp/hpmor-epub-3-flatten-mod.tex
-    # cont = cont.replace("\\hplettrineextrapara", "")
+    cont = cont.replace("\\hplettrineextrapara\n", "")
 
     # additional linebreaks in verses of chapter 64
     cont = cont.replace("\\\\\n\n", "\n\n")
