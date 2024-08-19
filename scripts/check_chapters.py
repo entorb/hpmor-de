@@ -52,7 +52,7 @@ def get_list_of_chapter_files() -> list[Path]:
     """
     list_of_files: list[Path] = []
     with Path("hpmor.tex").open(encoding="utf-8") as fh:
-        for line in fh.readlines():
+        for line in fh:
             my_match = re.search(r"^.*include\{(chapters/.+?)\}.*$", line)
             if my_match:
                 include_path = my_match.group(1)
