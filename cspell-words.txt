@@ -382,6 +382,7 @@ Elrond
 Emeralden
 Emmeline
 Emmelines
+emph
 energetisieren
 entgegenzischte
 entlangeilen
@@ -1239,6 +1240,7 @@ Rowdie
 Rowdiemädchen
 Rowling
 Rowlings
+rrthomas
 rübergehen
 rüberhole
 rüberkommen

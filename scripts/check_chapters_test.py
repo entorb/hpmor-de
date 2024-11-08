@@ -11,7 +11,7 @@ from check_chapters import (
     fix_hyphens,
     fix_latex,
     fix_line,
-    fix_linebreaks_speach,
+    fix_linebreaks_speech,
     fix_MrMrs,
     fix_numbers,
     fix_punctuation,
@@ -127,14 +127,14 @@ def test_fix_latex(lang: str) -> None:
 
 
 @pytest.mark.parametrize("lang", ["DE"])
-def test_fix_linebreaks_speach(lang: str) -> None:
+def test_fix_linebreaks_speech(lang: str) -> None:
     settings["lang"] = lang
     pairs = [
         (" „Hello", "\n„Hello"),
         (" „hello", " „hello"),
         ("„hello", "„hello"),
     ]
-    checkit(fix_linebreaks_speach, pairs)
+    checkit(fix_linebreaks_speech, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
