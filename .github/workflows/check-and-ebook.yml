@@ -116,10 +116,21 @@ jobs:
           pandoc --version
           python3 --version
 
+      - name: Download previous hpmor.html
+        run: |
+          wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
+
       - name: Make eBooks
         run: |
           wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
+          cp hpmor-prev.html hpmor.html
+          echo "Test" >> hpmor.html
+
+      - name: Compare to previous hpmor.html
+        run: |
+          diff -u hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
+          rm hpmor-prev.html
 
       - name: ls after
         run: |
@@ -133,10 +144,11 @@ jobs:
           path: |
             ./hpmor.docx
             ./hpmor.html
+            ./hpmor-html-diff.log
             ./hpmor.epub
             ./hpmor.mobi
             ./hpmor.fb2
-          retention-days: 7
+          retention-days: 14
 
   #
   # make upload to release WorkInProgress
@@ -162,6 +174,7 @@ jobs:
           files: |
             ./hpmor.docx
             ./hpmor.html
+            ./hpmor-html-diff.log
             ./hpmor.epub
             ./hpmor.mobi
             ./hpmor.fb2
