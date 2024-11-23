@@ -15,6 +15,7 @@ from check_chapters import (
     fix_MrMrs,
     fix_numbers,
     fix_punctuation,
+    fix_quotations,
     fix_spaces,
     fix_spell,
 )
@@ -50,13 +51,34 @@ def test_fix_common_typos(lang: str) -> None:
 @pytest.mark.parametrize("lang", ["EN", "DE"])
 def test_fix_ellipsis(lang: str) -> None:
     settings["lang"] = lang
-    pairs = [
-        ("foo…bar", "foo…bar"),
-        ("foo … bar", "foo…bar"),
-        ("foo… bar", "foo…bar"),
-        ("foo …bar", "foo…bar"),
-        ("foo, …", "foo, …"),
-    ]
+    pairs = []
+    if lang != "DE":
+        pairs.extend(
+            [
+                ("foo...bar", "foo…bar"),
+                ("foo…bar", "foo…bar"),
+                ("foo … bar", "foo…bar"),
+                ("foo… bar", "foo…bar"),
+                ("foo …bar", "foo…bar"),
+                ("foo, …", "foo, …"),
+                ("foo …! bar", "foo…! bar"),
+            ]
+        )
+    if lang == "DE":
+        pairs.extend(
+            [
+                ("foo...bar", "foo … bar"),
+                ("foo…bar", "foo … bar"),
+                ("foo … bar", "foo … bar"),
+                ("foo… bar", "foo … bar"),
+                ("foo …bar", "foo … bar"),
+                ("foo, …“", "foo, …“"),
+                ("foo,…“", "foo, …“"),
+                ("foo …! bar", "foo …! bar"),
+                ("\\emph{…ihm", "\\emph{… ihm"),
+            ]
+        )
+
     checkit(fix_ellipsis, pairs)
 
 
@@ -66,20 +88,20 @@ def test_fix_emph(lang: str) -> None:
     pairs = [
         (r"That’s not \emph{true!}", r"That’s not \emph{true}!"),
         (r"she got \emph{magic,} can you", r"she got \emph{magic}, can you"),
-        ("asdf", "asdf"),
+        ("foo", "foo"),
     ]
     if lang == "EN":
         pairs.extend(
             [
                 (r"briefly. \emph{Hopeless.} Both", r"briefly. \emph{Hopeless.} Both"),
-                ("asdf", "asdf"),
+                ("foo", "foo"),
             ]
         )
     elif lang == "DE":
         pairs.extend(
             [
                 (r"briefly. \emph{Hopeless.} Both", r"briefly. \emph{Hopeless}. Both"),
-                ("asdf", "asdf"),
+                ("foo", "foo"),
             ]
         )
     checkit(fix_emph, pairs)
@@ -90,26 +112,45 @@ def test_fix_hyphens(lang: str) -> None:
     settings["lang"] = lang
     pairs = [
         ("2-3-4", "2–3–4"),
-        (" —,", "—,"),
-        (" —.", "—."),
-        (" —!", "—!"),
-        (" —?", "—?"),
-        ("— asdf", "—asdf"),
-        ("- asdf", "—asdf"),
-        ("-asdf", "—asdf"),
     ]
+    if lang != "DE":
+        pairs.extend(
+            (
+                (" —,", "—,"),
+                (" —.", "—."),
+                (" —!", "—!"),
+                (" —?", "—?"),
+                ("— foo", "—foo"),
+                ("- foo", "—foo"),
+                ("-foo", "—foo"),
+            )
+        )
     if lang == "DE":
         pairs.extend(
-            [
-                ("Text —", "Text—"),
-                ("Text—„", "Text— „"),
-                ("Text —„", "Text— „"),
-                ("Text „ —Quote", "Text „—Quote"),
-                ("Text „ — Quote", "Text „—Quote"),
-                ("Text—„— Quote", "Text— „—Quote"),
-                ("Text -“asdf", "Text—“ asdf"),
-                ("Text —“", "Text—“"),
-            ]
+            (
+                ("foo - bar", "foo — bar"),
+                ("foo -- bar", "foo — bar"),
+                ("foo --- bar", "foo — bar"),
+                ("foo—bar", "foo — bar"),
+                ("foo — bar", "foo — bar"),
+                ("foo – bar", "foo — bar"),  # mid dash
+                # quote start
+                ("foo—„", "foo — „"),
+                ("foo—‚", "foo — ‚"),
+                ("foo —„", "foo — „"),
+                ("foo „ —quote", "foo „— quote"),
+                ("foo „ — quote", "foo „— quote"),
+                ("foo—„— quote", "foo — „— quote"),
+                # quote end
+                ("quote —“foo", "quote —“ foo"),
+                ("foo —“", "foo —“"),
+                # emph
+                ("\\emph{foo—}", "\\emph{foo —}"),
+                ("\\emph{foo —}", "\\emph{foo —}"),
+                ("\\emph{foo—} bar", "\\emph{foo —} bar"),
+                ("foo—\\emph{bar}", "foo — \\emph{bar}"),
+                ("\\emph{—ihm", "\\emph{— ihm"),
+            )
         )
     checkit(fix_hyphens, pairs)
 
@@ -120,7 +161,7 @@ def test_fix_latex(lang: str) -> None:
     pairs = [
         ("begin at new line\\begin{em}", "begin at new line\n\\begin{em}"),
         ("end at new line\\end{em}", "end at new line\n\\end{em}"),
-        ("new line after \\\\ asdf", "new line after \\\\\nasdf"),
+        ("new line after \\\\ foo", "new line after \\\\\nfoo"),
         ("no new line after \\\\", "no new line after \\\\"),
     ]
     checkit(fix_latex, pairs)
@@ -164,22 +205,8 @@ def test_fix_numbers(lang: str) -> None:
     settings["lang"] = lang
     pairs = [
         ("Es ist 12:23 Uhr.", "Es ist 12:23~Uhr."),
-        ("asdf", "asdf"),
     ]
     checkit(fix_numbers, pairs)
-
-
-@pytest.mark.parametrize("lang", ["EN", "DE"])
-def test_fix_punctuation(lang: str) -> None:
-    settings["lang"] = lang
-    pairs = [
-        ("!!", "!"),
-        ("??", "?"),
-        ("! !", "!"),
-        ("..", "."),
-        (",,", ","),
-    ]
-    checkit(fix_punctuation, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -195,16 +222,71 @@ def test_fix_spaces(lang: str) -> None:
     checkit(fix_spaces, pairs)
 
 
+@pytest.mark.parametrize("lang", ["EN", "DE"])
+def test_fix_punctuation(lang: str) -> None:
+    settings["lang"] = lang
+    pairs = [
+        ("foo,, bar", "foo, bar"),
+        ("foo.. bar", "foo. bar"),
+        ("foo!! bar", "foo! bar"),
+        ("foo?? bar", "foo? bar"),
+        ("foo:: bar", "foo: bar"),
+        ("foo;; bar", "foo; bar"),
+    ]
+    checkit(fix_punctuation, pairs)
+
+
+@pytest.mark.parametrize("lang", ["EN", "DE"])
+def test_fix_quotations(lang: str) -> None:
+    settings["lang"] = lang
+    if settings["lang"] == "EN":
+        pairs = [
+            ('"foo"', "“foo”"),
+            ("'foo'", "‘foo’"),
+            (' "foo bar"', " “foo bar”"),
+            # space at opening "
+            ("“ foo ”", "“foo”"),
+            ("\\emph{foo} ” bar", "\\emph{foo}” bar"),
+            ("\\heading{“foo ”} bar", "\\heading{“foo”} bar"),
+            ("\\emph{“foo”} bar", "“\\emph{foo}” bar"),
+            ("\\emph{“ foo ”} bar", "“\\emph{foo}” bar"),
+            ("\\emph{foo ”} bar", "\\emph{foo}” bar"),
+            ("‘\\emph{foo}’", "‘foo’"),
+        ]
+    if settings["lang"] == "DE":
+        pairs = [
+            ('"foo"', "„foo“"),
+            ("“foo”", "„foo“"),
+            ("»foo«", "„foo“"),
+            ("'foo'", "‚foo‘"),
+            ("’foo‘", "‚foo‘"),
+            (' "foo bar"', " „foo bar“"),
+            ("…„", "… „"),
+            ("„ foo “", "„foo“"),
+            ("\\heading{„foo “} bar", "\\heading{„foo“} bar"),
+            ("\\emph{„foo“} bar", "„\\emph{foo}“ bar"),
+            ("\\emph{„ foo “} bar", "„\\emph{foo}“ bar"),
+            ("\\emph{foo “} bar", "\\emph{foo}“ bar"),
+            ("foo,“ bar", "foo“, bar"),
+            ("‚\\emph{foo}‘", "‚foo‘"),
+            ("„foo,“", "„foo“,"),
+            ("„foo“bar", "„foo“ bar"),
+            # EN closing
+            ("„foo”", "„foo“"),
+        ]
+    checkit(fix_quotations, pairs)
+
+
 @pytest.mark.parametrize("lang", ["DE"])
 def test_fix_spell(lang: str) -> None:
     settings["lang"] = lang
     pairs = [
-        (r"‚Lumos‘", r"\spell{Lumos}"),
-        (r"„Lumos“", r"\spell{Lumos}"),
-        (r"„\emph{Lumos}“", r"\spell{Lumos}"),
-        (r"\emph{„Lumos“}", r"\spell{Lumos}"),
-        (r"\emph{Lumos!}", r"\spell{Lumos}"),
-        (r"„\spell{Lumos}“", r"\spell{Lumos}"),
+        ("‚Lumos‘", "\\spell{Lumos}"),
+        ("„Lumos“", "\\spell{Lumos}"),
+        ("„\\emph{Lumos}“", "\\spell{Lumos}"),
+        ("\\emph{„Lumos“}", "\\spell{Lumos}"),
+        ("\\emph{Lumos!}", "\\spell{Lumos}"),
+        ("„\\spell{Lumos}“", "\\spell{Lumos}"),
     ]
     checkit(fix_spell, pairs)
 
@@ -212,9 +294,11 @@ def test_fix_spell(lang: str) -> None:
 def checkit(fct: Callable, pairs: list[tuple[str, str]]) -> None:
     for text, expected_output in pairs:
         # test of isolated function
-        assert fct(text) == expected_output, f"'{fct(text)}' != '{expected_output}'"
+        assert (
+            fct(text) == expected_output
+        ), f"'{text}' -> '{fct(text)}' != '{expected_output}'"
 
         # test in complete fix_line context
         assert (
             fix_line(text) == expected_output
-        ), f"'{fix_line(text)}' != '{expected_output}'"
+        ), f"'{text}' -> '{fix_line(text)}' != '{expected_output}' (fix_line)"
