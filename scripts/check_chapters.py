@@ -184,8 +184,21 @@ def fix_ellipsis(s: str) -> str:
     # remove all spaces around ellipsis
     s = re.sub(r" *… *", r"…", s)
 
-    # after punctuation: add space
-    s = re.sub(r"(?<=[\.\?!:,;])…", r" …", s)
+    if settings["lang"] != "DE":
+        # after punctuation: add space
+        s = re.sub(r"(?<=[\.\?!:,;])…", " …", s)
+
+    # new rule for German (SYNC with fix_hyphens)
+    if settings["lang"] == "DE":
+        # before: add space if not at start of line or quote
+        s = re.sub(r"(?<=[^ „‚\(\{\n^])…", " …", s)
+
+        # after: add space if not followed by punctuation
+        s = re.sub(r"…(?=[^ \.\?\)\}!:,;“‘\n$])", "… ", s)
+
+        # after: …“Text -> …“ Text
+        s = re.sub(r"…“(?=[^\s])", r"…“ ", s)
+
     return s
 
 
@@ -300,12 +313,6 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     if settings["lang"] == "DE":
         s = re.sub(r'(^|\s)"((\\|\w).*?)"', r"\1„\2“", s)
 
-    # add space between … and “
-    # if settings["lang"] == "EN":
-    #     s = re.sub(r"…“", r"… “", s)
-    if settings["lang"] == "DE":
-        s = re.sub(r"…„", r"… „", s)
-
     # space at opening "
     if settings["lang"] == "EN":
         s = re.sub(r"“ +", r"“", s)
@@ -320,9 +327,10 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
 
     # space between "…" and "“"
     # if settings["lang"] == "EN":
-    #     s = re.sub(r"…„", r"… “", s)     # rrthomas voted againt it
+    #     s = re.sub(r"…„", r"… “", s)
+    #     # rrthomas voted againt it
     if settings["lang"] == "DE":
-        s = re.sub(r"…„", r"… „", s)
+        s = re.sub("…„", "… „", s)
 
     # ” } -> ”}
     if settings["lang"] == "EN":
@@ -355,7 +363,7 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     if settings["lang"] == "DE":
         # not, this is wrong, it is correct to have „...“,
         # s = re.sub(r"(?<![\.,!\?;])(?<![\.,!\?;]\})“,", r",“", s)
-        s = re.sub(r"(?<![\.,!\?;]),“", r"“,", s)
+        s = re.sub(r"(?<![\.,!\?;]),“", "“,", s)
 
     # nested single quote + emph
     if settings["lang"] == "EN":
@@ -426,13 +434,15 @@ def fix_emph(s: str) -> str:
 
 
 def fix_hyphens(s: str) -> str:
+    # fix simple dash to em dash
     # --- -> em dash —
     s = s.replace("---", "—")
+    # -- -> em dash —
     s = s.replace("--", "—")
     # hyphens: (space-hyphen-space) should be "—" (em dash).
     # trim space around em-dash
     s = s.replace(" — ", "—")
-    # shorter dash as well
+    # mid dash as well
     s = s.replace(" – ", "—")
     # NOT for '— ' as in ', no— “I'
     # s = re.sub(r"— ", r"—", s)
@@ -441,39 +451,42 @@ def fix_hyphens(s: str) -> str:
     # remove space before — followed by punctuation
     s = re.sub(r" —([,\.!\?;])", r"—\1", s)
 
-    # - at start of line
-    s = re.sub(r"^[\-—] *", r"—", s)
-    # if settings["lang"] == "EN":
-    #     s = re.sub(r" [\-—]$", r"—", s) # rrthomas voted againt it
-    if settings["lang"] == "DE":
-        # end of line
-        s = re.sub(r" [\-—]$", r"—", s)
-    # - at end of emph
-    s = re.sub(r"(\s*)\-\}", r"—}\1", s)
-    # at start of quote
-    # if settings["lang"] == "EN":
-    #     s = re.sub(r"—“", r"— “", s) # rrthomas voted againt it
-    if settings["lang"] == "DE":
-        s = re.sub(r"\s*—„", r"— „", s)
-        s = re.sub(r"„\s*—\s*", r"„—", s)
-
-    # at end of quote
-    if settings["lang"] == "EN":
-        s = re.sub(r"(\s*)\-”", r"—”\1", s)
-    if settings["lang"] == "DE":
-        s = re.sub(r"(\s*)\-“", r"—“\1", s)
-
-    # space-hyphen-quotation end
-    if settings["lang"] == "EN":
-        s = re.sub(r"\s+(—”)", r"\1", s)
-    if settings["lang"] == "DE":
-        s = re.sub(r"\s+(—“)", r"\1", s)
-
-    # there is a shorter dash as well:
+    # mid dash is used between numbers:
     # 2-4 -> 2–4 using mid length hyphen
     s = re.sub(r"(\d)\-(?=\d)", r"\1–", s)
-    # NOT: mid-length dash ->  em dash (caution: false positives!)
-    # s = s.replace("–", "—")
+
+    # fix spaces around —
+    if settings["lang"] == "EN":
+        # - at start of line
+        s = re.sub(r"^[\-—] *", r"—", s)
+        # if settings["lang"] == "EN":
+        #     s = re.sub(r" [\-—]$", r"—", s) # rrthomas voted againt it
+        # - at end of emph
+        s = re.sub(r"(\s*)\-\}", r"—}\1", s)
+        # at start of quote
+        # if settings["lang"] == "EN":
+        #     s = re.sub(r"—“", r"— “", s) # rrthomas voted againt it
+
+        # at end of quote
+        s = re.sub(r"(\s*)\-”", r"—”\1", s)
+
+        # space-hyphen-quotation end
+        s = re.sub(r"\s+(—”)", r"\1", s)
+
+    # new rule for German (SYNC with fix_ellipsis)
+    if settings["lang"] == "DE":
+        # remove all spaces around hyphens
+        s = re.sub(r" *— *", "—", s)
+
+        # before: add space if not at start of line or quote
+        s = re.sub(r"(?<=[^ „‚\(\{\n^])—", " —", s)
+
+        # after: add space if not followed by punctuation
+        s = re.sub(r"—(?=[^ \.\?\)\}!:,;“‘\n$])", "— ", s)
+
+        # after: —“Text -> —“ Text
+        s = re.sub(r"—“(?=[^\s])", r"—“ ", s)
+
     return s
 
 
@@ -589,6 +602,9 @@ if __name__ == "__main__":
         file_out.unlink()
 
     list_of_chapter_files = get_list_of_chapter_files()
+
+    # reduce to debugging just one file
+    # list_of_chapter_files = (Path("chapters/hpmor-chapter-021.tex"),)
 
     # V2: using multiprocessing
     # prepare
