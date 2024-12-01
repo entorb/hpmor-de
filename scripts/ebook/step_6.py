@@ -6,11 +6,14 @@
 HTML modifications.
 """
 
-import os
 import re
+import sys
 from pathlib import Path
 
-os.chdir(Path(__file__).parent.parent.parent)
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from check_chapters_settings import settings
+
+LANG = settings["lang"]
 
 source_file = Path("tmp/hpmor-epub-5-html-unmod.html")
 target_file = Path("hpmor.html")
@@ -20,6 +23,11 @@ def fix_ellipsis(s: str) -> str:
     """
     Fix ellipsis spacing for ebooks.
     """
+    if LANG == "DE":
+        # this was redundant to the new DE rules in check_chapters.py
+        # before opening DE-quotes: add space
+        # s = re.sub(r"…(?=[„])", "… ", s)
+        return s
     # 1. remove all spaces around ellipsis
     s = re.sub(r" *… *", "…", s)
     # 2. recreate some spaces
@@ -33,8 +41,6 @@ def fix_ellipsis(s: str) -> str:
     s = re.sub(r"…(?=<em>)", "… ", s)
     # before opening EN-quotes: add space
     # s = re.sub(r"…(?=[“])", "… ", s)
-    # before opening DE-quotes: add space
-    s = re.sub(r"…(?=[„])", "… ", s)
     return s
 
 
