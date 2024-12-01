@@ -609,9 +609,9 @@ if __name__ == "__main__":
     # V2: using multiprocessing
     # prepare
     num_processes = min(cpu_count(), len(list_of_chapter_files))
-    pool = Pool(processes=num_processes)
-    # run
-    results = pool.map(process_file, list_of_chapter_files)
+    with Pool(processes=num_processes) as pool:
+        # run
+        results = pool.map(process_file, list_of_chapter_files)
     any_issue_found = True in results
 
     # V1: single processing

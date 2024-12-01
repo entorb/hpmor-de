@@ -23,7 +23,7 @@ def fix_ellipsis(s: str) -> str:
     # 1. remove all spaces around ellipsis
     s = re.sub(r" *… *", "…", s)
     # 2. recreate some spaces
-    # before punctuation : no space, so governed by 1.
+    # before punctuation : no space, so covered by 1.
     # between words
     s = re.sub(r"(?<=[\w])…(?=[\w])", "… ", s)
     # after punctuation: add space

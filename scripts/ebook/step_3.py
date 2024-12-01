@@ -86,7 +86,7 @@ if __name__ == "__main__":
     # not used in DE version
 
     # \censor
-    cont = re.sub(r"\\censor\{.*?\}", r"xxxxxx", cont)
+    cont = re.sub(r"\\censor\{[^}]*\}", r"xxxxxx", cont)
 
     # # remove Deathly_Hallows_Sign.pdf and other pdf images
     # # \includegraphics[scale=0.125]{images/Deathly_Hallows_Sign.pdf}
