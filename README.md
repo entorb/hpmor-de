@@ -82,7 +82,7 @@ Only proceed **after** reading/listening to the story, as these contain spoilers
 * [Beautiful 10min video summary/fan tribute](https://youtube.com/watch?v=aT_q646lJVo)
 * Epiloque: [A Crack Slash Epilogue by Alexander Wales](https://www.fanfiction.net/s/11293489/1/A-Crack-Slash-Epilogue)
 * Alternative end: [Following the Phoenix by hezzel, spinning off at chapter 81](https://m.fanfiction.net/s/10636246/1/Following-the-Phoenix)
-* Sequel: [Significant Digits by Alexander Davis](http://www.anarchyishyperbole.com/p/significant-digits.html)
+* Sequel: [Significant Digits by Alexander Davis](https://www.anarchyishyperbole.com/p/significant-digits.html)
 
 ## Compile via Docker
 
@@ -126,7 +126,7 @@ docker rmi hpmor
 <https://github.com/rrthomas/hpmor>
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
-A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
+A LaTeX version of [the popular didactic fan-fiction](https://www.hpmor.com)
 by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
 and six PDF volumes that can be printed and bound. There are also dust
 jackets for the printable volumes.
