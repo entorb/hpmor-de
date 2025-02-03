@@ -294,11 +294,11 @@ def test_fix_spell(lang: str) -> None:
 def checkit(fct: Callable, pairs: list[tuple[str, str]]) -> None:
     for text, expected_output in pairs:
         # test of isolated function
-        assert (
-            fct(text) == expected_output
-        ), f"'{text}' -> '{fct(text)}' != '{expected_output}'"
+        assert fct(text) == expected_output, (
+            f"'{text}' -> '{fct(text)}' != '{expected_output}'"
+        )
 
         # test in complete fix_line context
-        assert (
-            fix_line(text) == expected_output
-        ), f"'{text}' -> '{fix_line(text)}' != '{expected_output}' (fix_line)"
+        assert fix_line(text) == expected_output, (
+            f"'{text}' -> '{fix_line(text)}' != '{expected_output}' (fix_line)"
+        )
