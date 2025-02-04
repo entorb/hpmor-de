@@ -59,6 +59,15 @@ if __name__ == "__main__":
         count=1,
     )
 
+    # stray </div> leftover
+    cont = re.sub(
+        r"(github.com/rrthomas/hpmor/</a></span><br />\s+</p>)\s+</div>",
+        r"\1",
+        cont,
+        flags=re.DOTALL | re.IGNORECASE,
+        count=1,
+    )
+
     # remove duplication of author name
     cont = re.sub(
         r"""<p>Fanfiction.*?<p>Basierend auf der Harry Potter Reihe von J. K. Rowling.*?</p>""",  # noqa: E501
