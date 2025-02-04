@@ -43,17 +43,20 @@ jobs:
           path: hash-chapters.txt
           key: chapter-hash-for-ebook-${{ github.ref_name }}-${{ steps.calculate-hash.outputs.hash }}
 
+      - name: Preparations
+        run: ln -s python-requirements.txt requirements.txt
+
       - name: Python set up
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          # no packages besides pytest installed, so no caching needed
-          # cache: "pip"
+          cache: "pip"
+
+      - name: Python packages
+        run: pip install -r python-requirements.txt
 
       - name: Run pytest unittests
-        run: |
-          pip install pytest
-          pytest
+        run: pytest
 
       - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
@@ -78,12 +81,17 @@ jobs:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
+      - name: Preparations
+        run: ln -s python-requirements.txt requirements.txt
+
       - name: Python set up
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          # no packages installed, so no caching
-          # cache: "pip"
+          cache: "pip"
+
+      - name: Install Python packages
+        run: pip install -r python-requirements.txt
 
       #  - name: setup environment to DE lang
       #    run: |
