@@ -1,23 +1,26 @@
+# This workflow performs
+# check: Quality checks on chapter text and code upon new commits and PRs.
+# make: Makes eBooks if .tex files have changed.
+# upload: Uploads the artifacts to release WorkInProgress, but only for push into main branch.
+
 name: Check and Make eBook
 
 # This workflow runs upon
-# - push to main (check, make, publish)
+# - manual triggering
 # - create new PR (check, make)
+# - push to main (check, make, upload)
 
 on:
   workflow_dispatch:
-  push:
-    branches: ["main"]
   pull_request:
+    branches: ["main"]
+  push:
     branches: ["main"]
 
 # permissions:
 #   contents: read
 
 jobs:
-  #
-  # check source code
-  #
   check:
     runs-on: ubuntu-24.04
     outputs:
@@ -61,12 +64,9 @@ jobs:
       - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
 
-      - name: Check pre-commit hooks
+      - name: Check pre-commit tests
         uses: pre-commit/action@v3.0.1
 
-  #
-  # make eBook
-  #
   make:
     needs: check
     # do not run for unchanged tex files
@@ -122,15 +122,16 @@ jobs:
           # latexmk -v
           calibre --version
           pandoc --version
+          ebook-convert --version
           python3 --version
 
       - name: Download previous hpmor.html
         run: |
-          wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
+          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
 
       - name: Make eBooks
         run: |
-          wget --quiet https://github.com/entorb/hpmor-de/releases/download/WorkInProgress/hpmor.pdf -O hpmor.pdf
+          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.pdf -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
 
       - name: Compare to previous hpmor.html
@@ -141,23 +142,23 @@ jobs:
       - name: ls after
         run: |
           pwd
-          ls -l
+          ls -al
 
       - name: Upload eBooks as artifact
         uses: actions/upload-artifact@v4
         with:
           name: ebooks
           path: |
-            ./hpmor.docx
-            ./hpmor.html
             ./hpmor-html-diff.log
+            ./hpmor.docx
             ./hpmor.epub
-            ./hpmor.mobi
             ./hpmor.fb2
+            ./hpmor.html
+            ./hpmor.mobi
           retention-days: 14
 
   #
-  # make upload to release WorkInProgress
+  # upload to release WorkInProgress
   #
   upload:
     needs: make
@@ -178,9 +179,9 @@ jobs:
           tag_name: WorkInProgress
           prerelease: true
           files: |
-            ./hpmor.docx
-            ./hpmor.html
             ./hpmor-html-diff.log
+            ./hpmor.docx
             ./hpmor.epub
-            ./hpmor.mobi
             ./hpmor.fb2
+            ./hpmor.html
+            ./hpmor.mobi
