@@ -17,9 +17,6 @@ on:
   push:
     branches: ["main"]
 
-# permissions:
-#   contents: read
-
 jobs:
   check:
     runs-on: ubuntu-24.04
@@ -125,19 +122,15 @@ jobs:
           ebook-convert --version
           python3 --version
 
-      - name: Download previous hpmor.html
-        run: |
-          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
-
       - name: Make eBooks
         run: |
+          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
           wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.pdf -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
 
       - name: Compare to previous hpmor.html
         run: |
-          diff -u -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
-          rm hpmor-prev.html
+          diff -U 0 -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
 
       - name: ls after
         run: |
