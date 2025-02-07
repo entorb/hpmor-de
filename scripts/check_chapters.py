@@ -223,7 +223,7 @@ def fix_linebreaks_speech(s: str) -> str:
         return s
 
     if settings["lang"] == "DE":
-        s = re.sub(r" „([A-Z])", r"\n„\1", s)
+        s = re.sub(r" „(\\emph|[A-Z])", r"\n„\1", s)
 
     return s
 
@@ -260,6 +260,9 @@ def fix_common_typos(s: str) -> str:
         s = s.replace("Wizengamot", "Zaubergamot")
         s = s.replace("S.P.H.E.W.", r"\SPHEW")
         s = s.replace("ut mir Leid", "ut mir leid")
+        s = s.replace("Godric’s", "Godrics")
+        s = s.replace("Godric's", "Godrics")
+        s = re.sub("Mungo(|’|')s", "Mungo", s)  #  Mungo’s -> Mungo
         # s = s.replace("das einzige", "das Einzige")
     # Apostroph
     # "word's"

@@ -26,7 +26,7 @@ from check_chapters_settings import settings
 def test_fix_common_typos(lang: str) -> None:
     settings["lang"] = lang
     pairs = [
-        ("Test Mungo's King's Cross", "Test Mungo’s King’s Cross"),
+        ("Test King's Cross", "Test King’s Cross"),
         ("Test", "Test"),
     ]
     if lang == "EN":
