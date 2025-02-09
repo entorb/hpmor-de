@@ -130,7 +130,7 @@ jobs:
 
       - name: Compare to previous hpmor.html
         run: |
-          diff -U 0 -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
+          diff -U 0 -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || true
 
       - name: ls after
         run: |
@@ -155,12 +155,27 @@ jobs:
   #
   upload:
     needs: make
-    # only for push or workflow_dispatch into main branch
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+    # only for main branch and actions push or manual run
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+
+    permissions:
+      contents: write
 
     runs-on: ubuntu-24.04
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get tags
+        run: git fetch --tags origin
+
+      - name: Update tag WorkInProgress
+        run: |
+          git tag -d WorkInProgress || true
+          git tag WorkInProgress
+          git push origin -f WorkInProgress
+
       - name: Download eBooks artifact
         uses: actions/download-artifact@v4
         with:
