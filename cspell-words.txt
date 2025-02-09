@@ -130,7 +130,6 @@ Baconschen
 Baffelschnaffler
 Bagshots
 Bahrys
-Bakeffekt
 Balrog
 Balrogs
 Barrierezauber
@@ -162,7 +161,6 @@ Belkas
 Bellas
 Bellatrix
 Belohnungsaufschub
-bemantelte
 bemoosten
 benickte
 Beschützerverhalten
@@ -189,7 +187,6 @@ blassblaue
 blassblauen
 blassblaues
 blassgesichtige
-blassweiße
 blätterverkleisterten
 bleichäugige
 Blendlicht
@@ -1363,7 +1360,6 @@ Scrimgeour
 se
 Seamus
 sechshunderttausend
-seh’n
 Seheraugen
 sehn
 selbsterfüllende
@@ -1786,16 +1782,13 @@ zauberresistenter
 Zauberschnippschnapp
 Zauberstabarm
 Zauberstabbewegung
-zauberstabfreie
 Zauberstabgefuchtel
 Zauberstabgesetz
 Zauberstabgewalt
 Zauberstabhaltung
 Zauberstabhand
 Zauberstabherstellung
-zauberstablosen
 Zauberstablosen
-zauberstabloser
 Zauberstabmacher
 Zaubertrankbrauerei
 Zaubertrankbrillen
