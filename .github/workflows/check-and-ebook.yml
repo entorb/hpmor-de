@@ -124,8 +124,8 @@ jobs:
 
       - name: Make eBooks
         run: |
-          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
-          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.pdf -O hpmor.pdf
+          wget --quiet https://github.com/${{ github.repository }}/releases/latest/download/hpmor.html -O hpmor-prev.html
+          wget --quiet https://github.com/${{ github.repository }}/releases/latest/download/hpmor.pdf -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
 
       - name: Compare to previous hpmor.html
@@ -155,8 +155,8 @@ jobs:
   #
   upload:
     needs: make
-    # only for push into main branch
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # only for push or workflow_dispatch into main branch
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
 
     runs-on: ubuntu-24.04
 
