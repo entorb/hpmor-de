@@ -100,6 +100,9 @@ jobs:
           pwd
           ls -l
 
+      - name: Speed up apt-get steps
+        uses: abbbi/github-actions-tune@v1
+
       - name: Install apt packages using cache
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:

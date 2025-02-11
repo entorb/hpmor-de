@@ -43,6 +43,9 @@ jobs:
           ls -l chapters/
           ls -l
 
+      - name: Speed up apt-get steps
+        uses: abbbi/github-actions-tune@v1
+
       - name: Install PDF requirements
         run: |
           # not: to save time

@@ -29,6 +29,9 @@ jobs:
           pwd
           ls -al
 
+      - name: Speed up apt-get steps
+        uses: abbbi/github-actions-tune@v1
+
       - name: Install requirements
         run: |
           sudo apt-get update > /dev/null
