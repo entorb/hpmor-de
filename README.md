@@ -72,7 +72,7 @@ Hier gibt es [das Resultat als druckbares Hochglanz-PDFs und eBook](https://gith
 
 * [EN LaTeX/PDF Repo von rrthomas (Übernommen von rjl20)](https://github.com/rrthomas/hpmor) origin dieses Forks
 * [EN LaTeX/PDF Repo von xenohedron](https://github.com/xenohedron/hpmor-xetex) Fork von rrthomas' Repo, u.a. mit Kapitel 1-4 in der "Daystar" Version
-* [FR LaTeX/PDF Repo von yeKcim](https://github.com/yeKcim/hpmor) mit vielen guten Layout Ideen
+* [FR LaTeX/PDF Repo von kamaradclimber](https://github.com/kamaradclimber/hpmor) mit vielen guten Layout Ideen, based on [this one](https://github.com/yeKcim/hpmor)
 * [DE LaTeX/PDF Repo von elkablo](https://github.com/elkablo/hpmor) für Kapitel 1-21, basierend auf der Übersetzung von [Jost](https://www.fanfiktion.de/s/4cb8beb50000203e067007d0/)
 
 ### Follow-up stuff
