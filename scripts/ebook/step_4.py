@@ -17,7 +17,7 @@ target_file = Path("tmp/hpmor-epub-4-flatten-parsel.tex")
 
 def convert_parsel(s: str) -> str:
     """Convert text to Parsel."""
-    # TODO: for spellcheck doc version we should return here
+    # for spellcheck of .doc version we should return here
     # return s
     # small ss -> ß -> sss ; s->ss
     s = s.replace("ss", "ß").replace("s", "ss").replace("ß", "sss")

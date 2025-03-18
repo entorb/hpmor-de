@@ -785,6 +785,6 @@ for key, value in sorted(
 ):
     print(f"{value}\t{key}")
 
-assert (
-    len(d_tex_commands_unhandled) == 0
-), "Error: unhandled LaTeX commands found, see above"
+assert len(d_tex_commands_unhandled) == 0, (
+    "Error: unhandled LaTeX commands found, see above"
+)
