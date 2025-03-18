@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     # remove all images
     cont = re.sub(
-        r"\\includegraphics\[.*?\]\{.*?\}",
+        r"\\includegraphics\[[^\]]*\]\{[^\}]*\}",
         "",
         cont,
         flags=re.DOTALL,
