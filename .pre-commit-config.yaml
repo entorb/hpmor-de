@@ -9,7 +9,7 @@
 
 exclude: |
   (?x)^(
-    scripts/ebook/v1.*|
+    scripts/ebook/v1/.*|chapters/translations/.*|scripts/compare-translations.py
   )$
 
 repos:
@@ -57,7 +57,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.9.4"
+    rev: "v0.11.2"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
