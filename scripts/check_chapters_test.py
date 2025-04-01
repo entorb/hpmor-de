@@ -12,7 +12,7 @@ from check_chapters import (
     fix_latex,
     fix_line,
     fix_linebreaks_speech,
-    fix_MrMrs,
+    fix_mr_mrs,
     fix_numbers,
     fix_punctuation,
     fix_quotations,
@@ -37,6 +37,7 @@ def test_fix_common_typos(lang: str) -> None:
             ]
         )
     elif lang == "DE":
+        # cspell:disable
         pairs.extend(
             [
                 ("Junge-der-überlebt-hat", "Junge-der-überlebte"),
@@ -44,8 +45,9 @@ def test_fix_common_typos(lang: str) -> None:
                 ("Fritz'schen Gesetz", "Fritz’schen Gesetz"),
                 ("Fritz'scher Gesetz", "Fritz’scher Gesetz"),
             ]
+            # cspell:enable
         )
-    checkit(fix_common_typos, pairs)
+    check_it(fix_common_typos, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -53,6 +55,7 @@ def test_fix_ellipsis(lang: str) -> None:
     settings["lang"] = lang
     pairs = []
     if lang != "DE":
+        # cspell:disable
         pairs.extend(
             [
                 ("foo...bar", "foo…bar"),
@@ -64,6 +67,7 @@ def test_fix_ellipsis(lang: str) -> None:
                 ("foo …! bar", "foo…! bar"),
             ]
         )
+        # cspell:enable
     if lang == "DE":
         pairs.extend(
             [
@@ -79,7 +83,7 @@ def test_fix_ellipsis(lang: str) -> None:
             ]
         )
 
-    checkit(fix_ellipsis, pairs)
+    check_it(fix_ellipsis, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -104,7 +108,7 @@ def test_fix_emph(lang: str) -> None:
                 ("foo", "foo"),
             ]
         )
-    checkit(fix_emph, pairs)
+    check_it(fix_emph, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -152,7 +156,7 @@ def test_fix_hyphens(lang: str) -> None:
                 ("\\emph{—ihm", "\\emph{— ihm"),
             )
         )
-    checkit(fix_hyphens, pairs)
+    check_it(fix_hyphens, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -164,7 +168,7 @@ def test_fix_latex(lang: str) -> None:
         ("new line after \\\\ foo", "new line after \\\\\nfoo"),
         ("no new line after \\\\", "no new line after \\\\"),
     ]
-    checkit(fix_latex, pairs)
+    check_it(fix_latex, pairs)
 
 
 @pytest.mark.parametrize("lang", ["DE"])
@@ -175,11 +179,11 @@ def test_fix_linebreaks_speech(lang: str) -> None:
         (" „hello", " „hello"),
         ("„hello", "„hello"),
     ]
-    checkit(fix_linebreaks_speech, pairs)
+    check_it(fix_linebreaks_speech, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
-def test_fix_MrMrs(lang: str) -> None:  # noqa: N802
+def test_fix_mr_mrs(lang: str) -> None:
     settings["lang"] = lang
     pairs = [
         ("Mr. H. Potter", "Mr~H.~Potter"),
@@ -197,7 +201,7 @@ def test_fix_MrMrs(lang: str) -> None:  # noqa: N802
                 ("Mr. and Mrs. Davis", "Mr~and Mrs~Davis"),
             ]
         )
-    checkit(fix_MrMrs, pairs)
+    check_it(fix_mr_mrs, pairs)
 
 
 @pytest.mark.parametrize("lang", ["DE"])
@@ -206,7 +210,7 @@ def test_fix_numbers(lang: str) -> None:
     pairs = [
         ("Es ist 12:23 Uhr.", "Es ist 12:23~Uhr."),
     ]
-    checkit(fix_numbers, pairs)
+    check_it(fix_numbers, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -219,7 +223,7 @@ def test_fix_spaces(lang: str) -> None:
         ("  ", ""),
         ("multiple  spaces", "multiple spaces"),
     ]
-    checkit(fix_spaces, pairs)
+    check_it(fix_spaces, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -233,7 +237,7 @@ def test_fix_punctuation(lang: str) -> None:
         ("foo:: bar", "foo: bar"),
         ("foo;; bar", "foo; bar"),
     ]
-    checkit(fix_punctuation, pairs)
+    check_it(fix_punctuation, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -274,7 +278,7 @@ def test_fix_quotations(lang: str) -> None:
             # EN closing
             ("„foo”", "„foo“"),
         ]
-    checkit(fix_quotations, pairs)
+    check_it(fix_quotations, pairs)
 
 
 @pytest.mark.parametrize("lang", ["DE"])
@@ -288,10 +292,10 @@ def test_fix_spell(lang: str) -> None:
         ("\\emph{Lumos!}", "\\spell{Lumos}"),
         ("„\\spell{Lumos}“", "\\spell{Lumos}"),
     ]
-    checkit(fix_spell, pairs)
+    check_it(fix_spell, pairs)
 
 
-def checkit(fct: Callable, pairs: list[tuple[str, str]]) -> None:
+def check_it(fct: Callable, pairs: list[tuple[str, str]]) -> None:
     for text, expected_output in pairs:
         # test of isolated function
         assert fct(text) == expected_output, (

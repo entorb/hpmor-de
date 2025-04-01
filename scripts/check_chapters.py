@@ -34,7 +34,6 @@ assert Path("./chapters").is_dir()
 # in DE the quotations are „...“ and ‚...‘ (for quotations in quotations)
 # Apostroph: ’
 
-
 # TODO: \latersection must be at newline
 
 # chars manually find and replace
@@ -139,7 +138,7 @@ def fix_line(s: str) -> str:
     s = fix_common_typos(s)
     s = fix_ellipsis(s)
     s = fix_latex(s)
-    s = fix_MrMrs(s)
+    s = fix_mr_mrs(s)
     s = fix_numbers(s)
     s = fix_punctuation(s)
     s = fix_spaces(s)
@@ -228,7 +227,7 @@ def fix_linebreaks_speech(s: str) -> str:
     return s
 
 
-def fix_MrMrs(s: str) -> str:  # noqa: N802
+def fix_mr_mrs(s: str) -> str:
     # Mr / Mrs
     s = s.replace("Mr. H. Potter", "Mr~H.~Potter")
     # s = s.replace("Mr. Potter", "Mr~Potter")
@@ -247,6 +246,7 @@ def fix_numbers(s: str) -> str:
 
 def fix_common_typos(s: str) -> str:
     if settings["lang"] == "DE":
+        # cspell:disable
         s = s.replace("Adoleszenz", "Pubertät")
         s = s.replace("Avadakedavra", "Avada Kedavra")
         s = s.replace("Diagon Alley", "Winkelgasse")
@@ -264,10 +264,12 @@ def fix_common_typos(s: str) -> str:
         s = s.replace("Godric's", "Godrics")
         s = re.sub("Mungo(|’|')s", "Mungo", s)  #  Mungo’s -> Mungo
         # s = s.replace("das einzige", "das Einzige")
+        # cspell:enable
     # Apostroph
     # "word's"
     s = re.sub(r"(\w)'(s)\b", r"\1’\2", s)
     if settings["lang"] == "DE":
+        # cspell:disable-next-line
         s = re.sub(r"(\w)'(sche|scher|schen)\b", r"\1’\2", s)
     if settings["lang"] == "EN":
         # "wouldn't"
@@ -290,6 +292,7 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
         s = re.sub(r'"([^"]+)"', r"„\1“", s)
 
     # '...' -> ‘...’
+    # cspell:disable-next-line
     if "nglui mglw" not in s:
         if settings["lang"] == "EN":
             s = re.sub(r"'([^']+)'", r"‘\1’", s)
@@ -312,9 +315,9 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
 
     # fixing ' "Word..."' and ' "\command..."'
     if settings["lang"] == "EN":
-        s = re.sub(r'(^|\s)"((\\|\w).*?)"', r"\1“\2”", s)
+        s = re.sub(r'(^|\s)"([\\\w].*?)"', r"\1“\2”", s)
     if settings["lang"] == "DE":
-        s = re.sub(r'(^|\s)"((\\|\w).*?)"', r"\1„\2“", s)
+        s = re.sub(r'(^|\s)"([\\\w].*?)"', r"\1„\2“", s)
 
     # space at opening "
     if settings["lang"] == "EN":
@@ -333,7 +336,7 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     #     s = re.sub(r"…„", r"… “", s)
     #     # rrthomas voted againt it
     if settings["lang"] == "DE":
-        s = re.sub("…„", "… „", s)
+        s = s.replace("…„", "… „")
 
     # ” } -> ”}
     if settings["lang"] == "EN":
@@ -392,8 +395,8 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
 
     # EN closing quotations
     if settings["lang"] == "DE":
-        s = re.sub("”", "“", s)
-        # s = re.sub("’", "’", s)
+        s = s.replace("”", "“")
+        # s = s.replace("’", "’")
 
     # TODO: check for uneven quotations
     # if settings["lang"] == "DE":
@@ -407,9 +410,6 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     #             s = "<FIXME: quotation ‚/‘ mismatch> " + s
 
     return s
-
-
-# assert fix_quotations("\parsel{Ich sehe nichts}“,")== "\parsel{Ich sehe nichts},“"
 
 
 def fix_emph(s: str) -> str:
@@ -503,6 +503,7 @@ def fix_spell(s: str) -> str:
     if settings["lang"] == "EN":
         # no spell macro in EN yet
         return s
+    # cspell: disable
     spells = {
         "Accio",
         "Alohomora",
@@ -562,6 +563,7 @@ def fix_spell(s: str) -> str:
         "Ventus",
         "Wingardium Leviosa",
     }
+    # cspell: enable
     spells_str = "(" + "|".join(spells) + ")"
 
     if settings["lang"] == "EN":
@@ -627,4 +629,4 @@ if __name__ == "__main__":
 
     if settings["raise_error"] and any_issue_found:
         msg = "Issues found, please fix!"
-        raise Exception(msg)  # noqa: TRY002
+        raise RuntimeError(msg)
