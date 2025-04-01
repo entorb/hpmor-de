@@ -24,7 +24,13 @@ RUN apt-get update && apt-get dist-upgrade -y && \
     texlive-lang-german \
     texlive-lang-greek \
     texlive-xetex && \
-    apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
+    apt-get clean autoclean && \
+    apt-get autoremove --yes && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
+    useradd -m -s /bin/bash app
+
+# switch to non-root user
+USER app
 
 # set working directory
 WORKDIR /app
