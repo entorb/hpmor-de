@@ -21,7 +21,7 @@ jobs:
       - name: Python set up
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version-file: ".python-version"
           # cache: "pip"
 
       - name: Test ls before
