@@ -1,24 +1,41 @@
 {
   "language": "de-DE,en-US",
-  "ignorePaths": [".gitignore", "Dockerfile", "GNUmakefile"],
-  "ignoreWords": ["erstmal"],
+  "ignorePaths": [
+    ".gitignore",
+    "Dockerfile",
+    "GNUmakefile"
+  ],
+  "ignoreWords": [
+    "erstmal"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "hpmor",
       "path": "./cspell-words.txt"
     }
   ],
-  "dictionaries": ["hpmor"],
+  "dictionaries": [
+    "hpmor"
+  ],
   "languageSettings": [
     {
       "languageId": "latex",
-      "dictionaries": ["hpmor", "latex"],
-      "ignoreRegExpList": ["(^| )%.*"]
+      "dictionaries": [
+        "hpmor",
+        "latex"
+      ],
+      "ignoreRegExpList": [
+        "(^| )%.*"
+      ]
     },
     {
       "languageId": "python",
       "allowCompoundWords": true,
-      "dictionaries": ["python", "wordsEn", "wordsEnUS"]
+      "dictionaries": [
+        "python",
+        "wordsEn",
+        "wordsEnUS"
+      ]
     }
   ]
 }
