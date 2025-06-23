@@ -1,4 +1,4 @@
-# ruff: noqa: INP001 D103 RUF001 S101
+# ruff: noqa: INP001, D103, RUF001
 """Tests for check_chapters.py."""
 
 from collections.abc import Callable

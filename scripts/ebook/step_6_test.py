@@ -1,8 +1,7 @@
-# ruff: noqa: INP001 S101 D103
+# ruff: noqa: INP001, D103
 # cspell:disable
 
 """Unit Tests."""
-# ruff: noqa: S101
 
 import sys
 from pathlib import Path
