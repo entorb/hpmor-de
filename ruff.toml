@@ -2,9 +2,13 @@ fix = true               # auto-fix findings
 line-length = 88         # same as Black
 target-version = "py313" # Python 3.13
 
+# extend-exclude = ["src/MyBadFile1.py"]
+
+
 [lint]
 # comment this out to use only default rules (["E4", "E7", "E9", "F"])
-select = ["ALL"] # activate all rules
+select = ["ALL"]  # activate all rules
+fixable = ["ALL"] # fix for all enabled rules
 
 # add some more rules to include
 # extend-select = ["B", "Q", "E", "W"]
@@ -13,6 +17,7 @@ select = ["ALL"] # activate all rules
 extend-ignore = [
     "COM812", # missing-trailing-comma,
     "D200",   # fits-on-one-line"
+    "D203",   # incorrect-blank-line-before-class
     "D211",   # blank-line-before-class
     "D212",   # multi-line-summary-second-line
     "ERA",    # commented-out code
@@ -24,6 +29,7 @@ extend-ignore = [
     "T201",   # print
     "TD002",  # missing-todo-author
     "TD003",  # missing-todo-link
+    "S101",   # use of asserts
 ]
 
 
