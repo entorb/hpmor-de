@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
 
-# ruff: noqa: S101 RUF001 RUF003 D103
+# ruff: noqa: RUF001, RUF003, D103
 
 """
 Check chapter .tex files for known issues and propose fixes.

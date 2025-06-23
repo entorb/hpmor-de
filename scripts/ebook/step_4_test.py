@@ -1,4 +1,4 @@
-# ruff: noqa: INP001 S101
+# ruff: noqa: INP001
 # cspell:disable
 
 """Unit Tests."""
