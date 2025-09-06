@@ -32,11 +32,11 @@ RUN apt-get update && apt-get dist-upgrade -y && \
 # switch to non-root user
 USER app
 
-# set working directory
-WORKDIR /app
-
 # mount host directory as volume
 VOLUME /app
+
+# set working directory
+WORKDIR /app
 
 # default command: build 1-vol pdf and all ebook formats
 # CMD latexmk hpmor ; ./scripts/make_ebooks.sh
