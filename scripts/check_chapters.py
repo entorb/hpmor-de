@@ -262,6 +262,7 @@ def fix_common_typos(s: str) -> str:
         s = s.replace("ut mir Leid", "ut mir leid")
         s = s.replace("Godric’s", "Godrics")
         s = s.replace("Godric's", "Godrics")
+        s = s.replace("Galeone", "Galleone")
         s = re.sub("Mungo(|’|')s", "Mungo", s)  #  Mungo’s -> Mungo
         # s = s.replace("das einzige", "das Einzige")
         # cspell:enable
