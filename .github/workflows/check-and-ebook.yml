@@ -100,20 +100,25 @@ jobs:
           pwd
           ls -l
 
-      - name: Speed up apt-get steps
-        uses: abbbi/github-actions-tune@v1
-
-      - name: Install apt packages using cache
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
-          version: 1.0
-          # execute_install_scripts: true
+      # # disabled at 29.09.2025, as pipeline failed
+      # - name: Speed up apt-get steps
+      #   uses: abbbi/github-actions-tune@v1
+      # - name: Install apt packages using cache
+      #   uses: awalsh128/cache-apt-pkgs-action@latest
+      #   with:
+      #     packages: texlive-extra-utils pandoc calibre imagemagick ghostscript
+      #     version: 1.0
+      #     # execute_install_scripts: true
+      # - name: Install ImageMagick to fix caching issue
+      #   # since cache does not properly work / "convert" not found
+      #   run: |
+      #     sudo apt-get install imagemagick
 
       - name: Install ImageMagick to fix caching issue
-        # since cache does not properly work / "convert" not found
         run: |
+          sudo apt-get update
           sudo apt-get install imagemagick
+          sudo apt-get install texlive-extra-utils pandoc calibre imagemagick ghostscript
 
       - name: Print versions
         run: |
