@@ -1,3 +1,4 @@
 .vscode/
 translation-*/
 *-autofix.tex
+*.ai.tex

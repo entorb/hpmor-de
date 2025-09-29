@@ -1,164 +1,156 @@
-done,EN,DE
-,doom,Unheil
-,first-aid kit,Erste-Hilfe-Tasche
-,healer’s kit,Heiler-Set
-,pop(s),Plop (Apperation)
-x,‘...’,‚...‘
-x,“...”,„...“
-x,aftermath,Nachwirkungen -> Nachspiel
-x,Ancient House,Altes Geschlecht
-x,betrayed,hintergangen (Kaptiel 100++)
-x,Boy-Who-Lived,Junge-der-überlebte
-x,broomstick team,Besenteam
-x,Chaos Legion,Chaos-Legion
-x,Chaos Legionnaires,Chaos-Legionäre
-x,Chief Warlock,Großmeister
-x,Cloak of Invisibility,Tarnumhang
-x,comed-tea,Comed-Tea
-x,curfew,Zapfenstreich
-x,dad,Dad (Papa)
-x,Daily Prophet,Tagesprophet
-x,Death Eater,Todesser
-x,Defence Professor,Verteidigungsprofessor
-x,Dragon General,Drachen-General
-x,England,Britannien
-x,Floo,Floh
-x,foolishness,Torheit
-x,Forbidden Forest,Verbotener Wald
-x,führnehmen,Edlen
-x,Girl-Who-Revived,Mädchen-das-wiederbelebt-wurde
-x,He-Who-Must-Not-Be-Named,Er-dessen-Name-nicht-genannt-werden-darf (Du-weißt-schon-wer)
-x,Headmaster,Schulleiter
-x,invisibility cloak,Tarnumhang
-x,life-eater,Lebensfresser
-x,Macmillian,Macmillan
-x,Mary’s Place,Marys Stube
-x,Most Ancient Hall,Ältestenhalle
-x,Most Ancient,Altehrwürdig
-x,mum, Mum(Mama/Mutter)
-x,N.E.W.T,U.T.Z.
-x,Noble and Most Ancient House,Altehrwürdiges Geschlecht
-x,NPC,Nicht-Spielercharakter
-x,O.W.L.,Z.A.G.
-x,Occlumens,Okklumentiker
-x,Parseltongue,Parsel
-x,Patronus Charm,Patronus-Zauber
-x,PC,Spielercharakter
-x,phœnix,Phönix
-x,phœnixes,Phönixe
-x,plaque,Plakette(NICHT Schallplatte)
-x,Potions Master,Meister der Zaubertränke
-x,Professor der Verteidigung,Verteidigungsprofessor
-x,Quibbler,Klitterer
-x,robe,Umhang / Zaubererumhang
-x,S.P.H.E.W.,\SPHEW
-x,sense of doom,Unheilsgefühl
-x,Silvery Slytherins,Silbernen Slytherins
-x,St. Mungo’s,St.~Mungo
-x,student,Schüler
-x,Sunshine General,Sonnenschein-General
-x,Supreme Mugwump of the International Confederation of Wizards,Oberster Mugwump der Internationalen Konföderation der Zauberer
-x,Thief’s Downfall,Untergang des Diebes
-x,Time-Turner,Zeitumkehrer
-x,Transfiguration,Verwandlung
-x,transfigured,verwandelt
-x,wand,Zauberstab
-x,wandless magic,stablose Magie
-x,You-Know-Who,Du-weißt-schon-wer
-,,
-done,DE-alt,DE-neu
-x,Junge-der-lebte,Junge-der-überlebte
-x,Jungen-der-lebte,Jungen-der-überlebte
-x,Mama/Mutter,Mum
-x,Oberste(r) Hexenmeister,Großmeister
-x,Papa,Dad
-x,Seltsaft,Comed-Tea
-x,Tagespropheten,Tagesprophet
-x,Uralte Haus,Uralte Geschlecht
-x,Uralte Häuser,Uralte Geschlechter
-x,Uralten Hauses,Uralten Geschlechtes
-x,Uraltes Haus,Uraltes Geschlecht
-x,Verschwörung von Bayes,Bayes’sche Verschwörung
-,,
-,Spells,Zauber
-,Charm of the Most Ancient Blade,Zauber der Alterwürdigen Klinge
-,Confundus Charm,Confundus-Zauber
-,Cruciatus Curse,Cruciatus-Fluch
-,Drill Hex,Schildbrecher/Schlagbohrfluch/Brechenden Bohrzauber
-,False Memory Charm,Falsche-Erinnerung-Zauber
-,Fiendfyre,Dämonenfeuer
-,Killing Curse,Todesfluch
-,Legilimency,Legilimentik
-,Memory Charm,Gedächtniszauber
-,Most Ancient Blade,Altehrwürdige Klinge
-,Obliviate,Obliviate
-,Obliviation/Obliviating,Vergessenszauber
-,Polyjuice,Vielsafttrank
-,Quieting Charm,Stillezauber
-,Severing Charm,Durchtrennungszauber
-,Shield Charm, Schildzauber
-,Stunning Hex,Betäubungszauber
-,Transfiguration,Verwandlung
-,Unbreakable Vow,Unbrechbaren Schwur
-,Veritaserum,
-s,Accio,
-s,Aguamenti,
-s,Alohomora,
-s,Avada Kedavra,
-s,Cluthe,
-s,Colloportus,
-s,Contego,
-s,Crystferrium,
-s,Deligitor prodeas,
-s,Diffindo,
-s,Dulak,
-s,Elmekia,
-s,Episkey,
-s,Expecto Patronum,
-s,Expelliarmus,
-s,Finite Incantatem,
-s,Finite,
-s,Flipendo,
-s,Frigideiro,
-s,Glisseo,
-s,Gom jabbar,
-s,Hyakuju montauk,
-s,Impedimenta,
-s,Imperius,
-s,Inflammare,
-s,Innervate,Rennervate
-s,Jellify,
-s,Lagann,
-s,Lucis Gladius,
-s,Luminos,
-s,Lumos,
-s,Mahasu,
-s,Oogely boogely,
-s,Polyfluis Reverso,
-s,Prismatis,
-s,Protego Maximus,
-s,Protego,
-s,Quietus,Geräuschdämpfer
-s,Ravum Calvaria,
-s,Scourgify,Ratzeputz
-s,Silencio,
-s,Somnium,
-s,Stupefy,Stupor
-s,Thermos,
-s,Tonare,
-s,Ventriliquo,
-s,Ventus,
-s,Wingardium Leviosa,
-x,Horcrux,Horkrux
-,,
-,Überbleibsel,
-,*,
-,{[},
-,Anm. d. Übers,
-,Anm.d. Übers.,
-,sss,
-,\emph{\emph,
-,,
-,Quote Chars,
-,“...” , „...“
-,‘...’ , ‚...‘
+EN,DE
+==,==
+doom,Unheil
+first-aid kit,Erste-Hilfe-Tasche
+healer’s kit,Heiler-Set
+pop(s),Plop (Apperation)
+‘...’,‚...‘
+“...”,„...“
+aftermath,Nachwirkungen -> Nachspiel
+Ancient House,Altes Geschlecht
+betrayed,hintergangen (Kapitel 100++)
+Boy-Who-Lived,Junge-der-überlebte
+broomstick team,Besenteam
+Chaos Legion,Chaos-Legion
+Chaos Legionnaires,Chaos-Legionäre
+Chief Warlock,Großmeister
+Cloak of Invisibility,Tarnumhang
+comed-tea,Comed-Tea
+curfew,Zapfenstreich
+dad,Dad (Papa)
+Daily Prophet,Tagesprophet
+Dark Lord, Dunkle Lord
+Death Eater,Todesser
+Defence Professor,Verteidigungsprofessor
+Dragon General,Drachen-General
+England,Britannien
+Floo,Floh
+foolishness,Torheit
+Forbidden Forest,Verbotener Wald
+führnehmen,Edlen
+Girl-Who-Revived,Mädchen-das-wiederbelebt-wurde
+He-Who-Must-Not-Be-Named,Er-dessen-Name-nicht-genannt-werden-darf
+Headmaster,Schulleiter
+invisibility cloak,Tarnumhang
+life-eater,Lebensfresser
+Macmillian,Macmillan
+Mary’s Place,Marys Stube
+Most Ancient Hall,Ältestenhalle
+Most Ancient,Altehrwürdig
+mum, Mum(Mama/Mutter)
+N.E.W.T,U.T.Z.
+Noble and Most Ancient House,Altehrwürdiges Geschlecht
+NPC,Nicht-Spielercharakter
+O.W.L.,Z.A.G.
+Occlumens,Okklumentiker
+Parseltongue,Parsel
+Patronus Charm,Patronus-Zauber
+PC,Spielercharakter
+phœnix,Phönix
+phœnixes,Phönixe
+plaque,Plakette(NICHT Schallplatte)
+Potions Master,Meister der Zaubertränke
+Professor der Verteidigung,Verteidigungsprofessor
+Quibbler,Klitterer
+robe,Umhang / Zaubererumhang
+S.P.H.E.W.,\SPHEW
+sense of doom,Unheilsgefühl
+Silvery Slytherins,Silbernen Slytherins
+St. Mungo’s,St.~Mungo
+student,Schüler
+Sunshine General,Sonnenschein-General
+Supreme Mugwump of the International Confederation of Wizards,Oberster Mugwump der Internationalen nföderation der Zauberer
+Thief’s Downfall,Untergang des Diebes
+Time-Turner,Zeitumkehrer
+Transfiguration,Verwandlung
+transfigured,verwandelt
+wand,Zauberstab
+wandless magic,stablose Magie
+You-Know-Who,Du-weißt-schon-wer
+,
+DE-bad,DE-good
+======,=======
+Junge-der-lebte,Junge-der-überlebte
+Jungen-der-lebte,Jungen-der-überlebte
+Mama/Mutter,Mum
+Oberste(r) Hexenmeister,Großmeister
+Papa,Dad
+Seltsaft,Comed-Tea
+Tagespropheten,Tagesprophet
+Uralte Haus,Uralte Geschlecht
+Uralte Häuser,Uralte Geschlechter
+Uralten Hauses,Uralten Geschlechtes
+Uraltes Haus,Uraltes Geschlecht
+Verschwörung von Bayes,Bayes’sche Verschwörung
+,
+Spells,Zauber
+======,======
+Charm of the Most Ancient Blade,Zauber der Alterwürdigen Klinge
+Confundus Charm,Confundus-Zauber
+Cruciatus Curse,Cruciatus-Fluch
+Drill Hex,Schildbrecher/Schlagbohrfluch/Brechenden Bohrzauber
+False Memory Charm,Falsche-Erinnerung-Zauber
+Fiendfyre,Dämonenfeuer
+Killing Curse,Todesfluch
+Legilimency,Legilimentik
+Memory Charm,Gedächtniszauber
+Most Ancient Blade,Altehrwürdige Klinge
+Obliviate,Obliviate
+Obliviation/Obliviating,Vergessenszauber
+Polyjuice,Vielsafttrank
+Quieting Charm,Stillezauber
+Severing Charm,Durchtrennungszauber
+Shield Charm, Schildzauber
+Stunning Hex,Betäubungszauber
+Transfiguration,Verwandlung
+Unbreakable Vow,Unbrechbaren Schwur
+Veritaserum,
+Accio,
+Aguamenti,
+Alohomora,
+Avada Kedavra,
+Cluthe,
+Colloportus,
+Contego,
+Crystferrium,
+Deligitor prodeas,
+Diffindo,
+Dulak,
+Elmekia,
+Episkey,
+Expecto Patronum,
+Expelliarmus,
+Finite Incantatem,
+Finite,
+Flipendo,
+Frigideiro,
+Glisseo,
+Gom jabbar,
+Hyakuju montauk,
+Impedimenta,
+Imperius,
+Inflammare,
+Innervate,Rennervate
+Jellify,
+Lagann,
+Lucis Gladius,
+Luminos,
+Lumos,
+Mahasu,
+Oogely boogely,
+Polyfluis Reverso,
+Prismatis,
+Protego Maximus,
+Protego,
+Quietus,Geräuschdämpfer
+Ravum Calvaria,
+Scourgify,Ratzeputz
+Silencio,
+Somnium,
+Stupefy,Stupor
+Thermos,
+Tonare,
+Ventriliquo,
+Ventus,
+Wingardium Leviosa,
+Horcrux,Horkrux
