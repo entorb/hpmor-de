@@ -4,6 +4,7 @@
 script_dir=$(dirname $0)
 cd $script_dir/..
 
+# parallel building of 6 volumes
 latexmk hpmor-1 &
 latexmk hpmor-2 &
 latexmk hpmor-3 &
