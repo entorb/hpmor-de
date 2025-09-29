@@ -305,6 +305,7 @@ disruptives
 Dobby
 Dominanzkampf
 Dominanzkämpfe
+dotenv
 Draco
 Dracos
 Dramiones
@@ -488,6 +489,8 @@ gegenwirkte
 gehext
 gelautet
 geleeartige
+gemini
+genai
 Gendlins
 Generalin
 Generalsbüro
@@ -996,6 +999,8 @@ Okklumentiker
 Okklumentikunterricht
 okklumentischen
 olds
+ollama
+Ollama
 Ollivander
 Ollivanders
 omake
@@ -1390,7 +1395,7 @@ silhouettierter
 Sinistra
 Sirupkuchen
 Siruptorte
-Sirus
+Sirius
 Situationsbewertung
 Sitzer
 Skeeter
