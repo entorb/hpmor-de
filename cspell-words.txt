@@ -1684,7 +1684,7 @@ vorlehnte
 Waals
 wachsversiegelte
 Wächterdrachen
-Wachzaubern
+Schutzzaubern
 Wahrnehmungszaubern
 Wahrsagebecken
 Wahrsageklasse
