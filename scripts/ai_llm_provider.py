@@ -1,5 +1,6 @@
 """Classes for different LLM providers."""  # noqa: INP001
 
+import logging
 import os
 import time
 
@@ -14,6 +15,7 @@ from openai import OpenAI  # pip install openai
 
 # load .env file
 load_dotenv()
+logger = logging.getLogger()  # get base logger
 
 
 def my_getenv(key: str) -> str:
@@ -49,7 +51,7 @@ class LLMProvider:
 
     def print_llm_and_model(self) -> None:
         """Print out the LLM and the model."""
-        print(f"LLM: {self.provider} {self.model}")
+        logger.info("LLM: %s %s", self.provider, self.model)
 
     def call(self, prompt: str) -> tuple[str, int]:
         """Call the LLM with prompt."""
@@ -80,7 +82,8 @@ class OllamaProvider(LLMProvider):  # noqa: D101
                 {"role": "user", "content": prompt},
             ],
         )
-        return str(response.message.content), 0
+        tokens = 0  # not returned by ollama
+        return str(response.message.content), tokens
 
 
 class OpenAIProvider(LLMProvider):  # noqa: D101
@@ -106,16 +109,16 @@ class OpenAIProvider(LLMProvider):  # noqa: D101
                 {"role": "user", "content": prompt},
             ],
         )
-        if response and response.usage:
-            print(
-                f"tokens: "
-                f"{response.usage.input_tokens} input + "
-                f"{response.usage.output_tokens} output = "
-                f"{response.usage.total_tokens} total"
+        if response and response.usage and response.usage.input_tokens:
+            logger.info(
+                "tokens: %d input + %d output = %d total",
+                response.usage.input_tokens,
+                response.usage.output_tokens,
+                response.usage.total_tokens,
             )
             tokens = response.usage.total_tokens
         else:
-            print("WARN: No token consumption retrieved.")
+            logger.warning("No token consumption retrieved.")
         return response.output_text, tokens
 
 
@@ -134,10 +137,10 @@ class GeminiProvider(LLMProvider):  # noqa: D101
         """Call the LLM."""
         client = genai.Client(api_key=my_getenv("GEMINI_API_KEY"))
 
-        retries = 2
         response = None
         tokens = 0
-        for attempt in range(retries + 1):
+        retries_max = 3
+        for attempt in range(retries_max):
             try:
                 response = client.models.generate_content(
                     model=self.model,
@@ -146,26 +149,49 @@ class GeminiProvider(LLMProvider):  # noqa: D101
                     ),
                     contents=prompt,
                 )
-                break  # Exit loop if successful
+                break  # Exit retry loop if successful
             except Exception as e:
-                if attempt < retries and "The model is overloaded" in str(e):
+                if attempt <= retries_max and "The model is overloaded" in str(e):
                     wait_time = 2**attempt
-                    print(f"Model overloaded, retrying in {wait_time} seconds...")
+                    logger.warning(
+                        "Model overloaded, retrying in %d seconds...", wait_time
+                    )
                     time.sleep(wait_time)
                 else:
                     raise
 
-        if response and response.usage_metadata:
-            print(
-                f"tokens: "
-                f"{response.usage_metadata.prompt_token_count} prompt + "
-                f"{response.usage_metadata.candidates_token_count} candidates = "
-                f"{response.usage_metadata.total_token_count}"
+        if (
+            response
+            and response.usage_metadata
+            and response.usage_metadata.total_token_count
+        ):
+            logger.info(
+                "tokens: %d prompt + %d candidates = %d",
+                response.usage_metadata.prompt_token_count,
+                response.usage_metadata.candidates_token_count,
+                response.usage_metadata.total_token_count,
             )
             tokens = response.usage_metadata.total_token_count
         else:
-            print("WARN: No token consumption retrieved.")
-        return str(response.text) if response else "", tokens
+            logger.warning("No token consumption retrieved.")
+        s = str(response.text) if response else ""
+        return s, tokens
+
+
+def create_llm_provider(
+    provider_name: str, model: str, instruction: str
+) -> LLMProvider:
+    """Create LLM provider, based on string name."""
+    if provider_name == "Ollama":
+        llm_provider = OllamaProvider(instruction=instruction, model=model)
+    elif provider_name == "OpenAI":
+        llm_provider = OpenAIProvider(instruction=instruction, model=model)
+    elif provider_name == "Gemini":
+        llm_provider = GeminiProvider(instruction=instruction, model=model)
+    else:
+        msg = f"Unknown LLM {provider_name}"
+        raise ValueError(msg)
+    return llm_provider
 
 
 # Example usage

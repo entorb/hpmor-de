@@ -37,9 +37,9 @@ Improve the German translation of this LaTeX code, based on the uncommented Engl
   - output shall include the same LaTeX comments as the input
   - do not create additional LaTeX comments
 - pronouns of address / dutzen
-  - since this is a book, the German pronouns of address (du, sie, dein, ihr, ihre...) are written in lowercase. Fix all deviations.
-  - If Harry Potter is addressed as "Mr. Potter" by a Professor, use "sie", not "du"
-  - Kinder siezen die Professoren
+  - Da es sich um ein Buch und nicht um einen Brief handelt, werden die Deutschen Personalpronomen (du, sie, dein, ihr, ihre...) klein geschrieben.
+  - Wenn Harry Potter von einem Professor mir "Mr. Potter" angesprochen wird, wird er gesietst, nicht gedutzt
+  - Kinder siezen die Professoren (mit kleinem "sie")
   - Harry Potter siezt Quirrell, Quirrell dutzt Harry
   - Harry Potter siezt Lucius Malfoy, Lucius dutzt Harry
   - Harry calls his parents Mum and Dad an, not Mutter and Vater
