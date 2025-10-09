@@ -13,5 +13,5 @@ settings = {
     "lang": "DE",
     "print_diff": True,
     "raise_error": True,
-    "inline_fixing": False,
+    "inline_fixing": True,
 }

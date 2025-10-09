@@ -23,7 +23,6 @@ extend-ignore = [
     "ERA",    # commented-out code
     "FIX002", # line-contains-todo
     "ISC001", # implicit-str-concat
-    "PD901",  # df name
     "PGH003", # blanket-type-ignore
     "RET504", # unnecessary-assign
     "T201",   # print
