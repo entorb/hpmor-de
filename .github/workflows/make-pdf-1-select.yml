@@ -48,8 +48,7 @@ jobs:
 
       - name: Install PDF requirements
         run: |
-          # not: to save time
-          # sudo apt-get update > /dev/null
+          sudo apt-get update > /dev/null
           sh scripts/install_requirements_pdf.sh > /dev/null
 
       - name: Print versions
@@ -68,7 +67,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
-          prerelease: true
+          prerelease: false
           files: |
             ./hpmor*.pdf
 

@@ -116,7 +116,7 @@ jobs:
 
       - name: Install ImageMagick to fix caching issue
         run: |
-          sudo apt-get update
+          sudo apt-get update > /dev/null
           sudo apt-get install imagemagick
           sudo apt-get install texlive-extra-utils pandoc calibre imagemagick ghostscript
 
@@ -193,7 +193,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: WorkInProgress
-          prerelease: true
+          prerelease: false
           files: |
             ./hpmor-html-diff.log
             ./hpmor.docx
