@@ -1,19 +1,19 @@
 /* start html.css */
 
 p {
-	text-align: justify;
+  text-align: justify;
 }
 
 em {
-	font-style: italic;
+  font-style: italic;
 }
 
 em em {
-	font-style: normal;
+  font-style: normal;
 }
 
 em em em {
-	font-style: italic;
+  font-style: italic;
 }
 
 /* V1: using custom fonts */
@@ -79,45 +79,41 @@ span.writtenNote {
 }
 */
 
-
 /* V2: no custom font to increase compatibility (modi seems not to support fonts, and char ß is missing in some of the fonts */
 
-
-
 span.lettrine {
-	font-size: 150%;
+  font-size: 150%;
 }
 
 span.parsel {
-	font-style: italic;
+  font-style: italic;
 }
 
 div.parsel {
-	font-style: italic;
+  font-style: italic;
 }
 
 div.writtenNote {
-	font-style: italic;
-	margin-left: 1em;
+  font-style: italic;
+  margin-left: 1em;
 }
 
 span.writtenNote {
-	font-style: italic;
-	margin-left: 1em;
+  font-style: italic;
+  margin-left: 1em;
 }
 
 div.McGonagallWhiteBoard p {
-	color: #cc3333;
-	text-align: center;
-	text-transform: uppercase;
-	text-decoration: underline;
-	text-decoration-color: #3333cc;
-	/* text-decoration-thickness: 1px; */
+  color: #cc3333;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: #3333cc;
+  /* text-decoration-thickness: 1px; */
 }
 
 span.headline {
-	font-variant: small-caps;
+  font-variant: small-caps;
 }
-
 
 /* end html.css */

@@ -5,90 +5,89 @@ no longer in use, since now using calibri instead, which uses html.css
  */
 
 em {
-	font-style: italic;
+  font-style: italic;
 }
 
 em em {
-	font-style: normal;
+  font-style: normal;
 }
 
 em em em {
-	font-style: italic;
+  font-style: italic;
 }
 
 /*
 pandoc copies the fonts to ../fonts/*.ttf inside the .epub file
 */
 @font-face {
-	font-family: "Automobile Contest";
-	font-weight: normal;
-	font-style: normal;
-	src: url("../fonts/Automobile Contest.ttf");
+  font-family: "Automobile Contest";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Automobile Contest.ttf");
 }
 
 span.McGonagallWhiteBoard {
-	font: 5em "Automobile Contest";
-	color: #cc3333;
-	text-decoration: underline;
-	text-decoration-color: #3333cc;
-	text-decoration-thickness: 1px;
+  font: 5em "Automobile Contest";
+  color: #cc3333;
+  text-decoration: underline;
+  text-decoration-color: #3333cc;
+  text-decoration-thickness: 1px;
 }
 
 @font-face {
-	font-family: "gabriele-bad";
-	font-weight: normal;
-	font-style: normal;
-	src: url("../fonts/gabriele-bad.ttf");
+  font-family: "gabriele-bad";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/gabriele-bad.ttf");
 }
 
 span.headline {
-	font: 1.2em "gabriele-bad";
-	color: #424242;
+  font: 1.2em "gabriele-bad";
+  color: #424242;
 }
 
-
 @font-face {
-	font-family: "Parseltongue";
-	font-weight: normal;
-	font-style: normal;
-	src: url("../fonts/Parseltongue.ttf");
+  font-family: "Parseltongue";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Parseltongue.ttf");
 }
 
 span.parsel {
-	font: 1.2em "Parseltongue";
-	/* color: #003300; */
+  font: 1.2em "Parseltongue";
+  /* color: #003300; */
 }
 
 div.parsel {
-	font: 1.2em "Parseltongue";
-	/* color: #003300; */
+  font: 1.2em "Parseltongue";
+  /* color: #003300; */
 }
 
 @font-face {
-	font-family: "Graphe_Alpha_alt";
-	font-weight: normal;
-	font-style: normal;
-	src: url("../fonts/Graphe_Alpha_alt.ttf");
+  font-family: "Graphe_Alpha_alt";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Graphe_Alpha_alt.ttf");
 }
 
 div.adjustwidth {
-	font: 1em "Graphe_Alpha_alt";
-	color: #3333cc;
+  font: 1em "Graphe_Alpha_alt";
+  color: #3333cc;
 }
 
 div.writtenNote {
-	font: 1em "Graphe_Alpha_alt";
-	/* color: #3333cc; */
+  font: 1em "Graphe_Alpha_alt";
+  /* color: #3333cc; */
 }
 
 span.writtenNote {
-	font: 1em "Graphe_Alpha_alt";
-	/* color: #3333cc; */
+  font: 1em "Graphe_Alpha_alt";
+  /* color: #3333cc; */
 }
 
 div.flushright {
-	margin-top: 6em;
-	text-align: right;
+  margin-top: 6em;
+  text-align: right;
 }
 
 /* end epub.css */

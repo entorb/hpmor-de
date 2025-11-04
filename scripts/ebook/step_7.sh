@@ -17,7 +17,8 @@ target_file="hpmor.epub"
 
 echo ==== 7.1b calibre: html -\> epub ====
 # calibre is a bit better in ebook generation than pandoc and the result can be converted to mobi and docx
-ebook-convert $source_file $target_file --language de-DE --no-default-epub-cover --cover "tmp/title.jpg" --book-producer "Torben Menke" --level1-toc "//h:h1" --level2-toc "//h:h2" --level3-toc "//h:h3"
+ebook-convert $source_file $target_file --language de-DE --no-default-epub-cover --cover "tmp/title.jpg" --book-producer "Torben Menke" --level1-toc "//h:h1" --level2-toc "//h:h2" --level3-toc "//h:h3" --filter-css "background-color"
+#  --filter-css "background-color" is needed to remove the ugly gray background color calibre adds by default.
 
 source_file="hpmor.epub"
 echo ==== 7.2 calibre: epub -\> mobi ====
