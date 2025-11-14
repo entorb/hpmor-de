@@ -314,6 +314,7 @@ draufhast
 dreieinhalbten
 dreihundertdreiundzwanzig
 Dreihundertundsechzig
+Dreisitzer
 Dreiundneunzigtausend
 Drescher
 Drexler
@@ -1393,9 +1394,9 @@ silbergewandete
 Silencio
 silhouettierter
 Sinistra
+Sirius
 Sirupkuchen
 Siruptorte
-Sirius
 Situationsbewertung
 Sitzer
 Skeeter
@@ -1684,7 +1685,6 @@ vorlehnte
 Waals
 wachsversiegelte
 Wächterdrachen
-Schutzzaubern
 Wahrnehmungszaubern
 Wahrsagebecken
 Wahrsageklasse
