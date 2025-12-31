@@ -16,7 +16,7 @@ Improve the German translation of this LaTeX code, based on the uncommented Engl
 - keep LaTeX commands unchanged
 - keep empty lines unchanged
 - keep LaTeX comment unchanged
-- Personalpronomen du, ihr, sie, etc. werden im Satz kleingeschrieben
+- Personalpronomen du, dein, etc.. werden im Satz kleingeschrieben
 
 ## Improved version
 
@@ -37,9 +37,9 @@ Improve the German translation of this LaTeX code, based on the uncommented Engl
   - output shall include the same LaTeX comments as the input
   - do not create additional LaTeX comments
 - pronouns of address / dutzen
-  - Da es sich um ein Buch und nicht um einen Brief handelt, werden die Deutschen Personalpronomen (du, sie, dein, ihr, ihre...) klein geschrieben.
+  - Da es sich um ein Buch und nicht um einen Brief handelt, werden die Deutschen Personalpronomen (du, dein...) klein geschrieben.
   - Wenn Harry Potter von einem Professor mir "Mr. Potter" angesprochen wird, wird er gesietst, nicht gedutzt
-  - Kinder siezen die Professoren (mit kleinem "sie")
+  - Kinder siezen die Professoren
   - Harry Potter siezt Quirrell, Quirrell dutzt Harry
   - Harry Potter siezt Lucius Malfoy, Lucius dutzt Harry
   - Harry calls his parents Mum and Dad an, not Mutter and Vater

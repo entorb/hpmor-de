@@ -263,6 +263,9 @@ def fix_common_typos(s: str) -> str:
         s = s.replace("Godric’s", "Godrics")
         s = s.replace("Godric's", "Godrics")
         s = s.replace("Galeone", "Galleone")
+        s = s.replace(
+            "stellvertretende Schulleiterin", "Stellvertretende Schulleiterin"
+        )
         s = re.sub("Mungo(|’|')s", "Mungo", s)  #  Mungo’s -> Mungo
         # s = s.replace("das einzige", "das Einzige")
         # cspell:enable
@@ -389,6 +392,7 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     if settings["lang"] == "DE":
         s = s.replace(",}”", "}”,")
         s = s.replace(",”", "”,")
+        s = s.replace("“ ,", "“,")
 
     # space after closing “
     if settings["lang"] == "DE":

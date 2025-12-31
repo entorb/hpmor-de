@@ -2,16 +2,21 @@
 
 import logging
 import os
+import random
 import time
 
+from azure.identity import (
+    DefaultAzureCredential,
+    get_bearer_token_provider,
+)
 from dotenv import load_dotenv  # pip install dotenv
-from google import genai
+from google import genai  # pip install google-genai
 from google.genai import types as genai_types
 from ollama import ChatResponse, chat  # pip install ollama
-from openai import OpenAI  # pip install openai
-
-# pip install google-genai
-
+from openai import (
+    AzureOpenAI,
+    OpenAI,  # pip install openai
+)
 
 # load .env file
 load_dotenv()
@@ -33,12 +38,10 @@ def my_getenv(key: str) -> str:
 class LLMProvider:
     """Class for different LLM providers."""
 
-    def __init__(self, instruction: str, model: str) -> None:
+    def __init__(self, provider: str, models: list[str]) -> None:
         """Init the LLM with model and context instruction."""
-        self.provider = "NONE"
-        self.instruction = instruction
-        self.models = {"NONE"}
-        self.model = model
+        self.provider = provider
+        self.models = models
 
     def check_model_valid(self, model: str) -> None:
         """Raise ValueError if model is not valid."""
@@ -49,36 +52,55 @@ class LLMProvider:
             )
             raise ValueError(msg)
 
-    def print_llm_and_model(self) -> None:
-        """Print out the LLM and the model."""
-        logger.info("LLM: %s %s", self.provider, self.model)
+    def get_models(self) -> list[str]:
+        """Return list of available models."""
+        return self.models
 
-    def call(self, prompt: str) -> tuple[str, int]:
-        """Call the LLM with prompt."""
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
+        """
+        Call the LLM model with instruction and prompt.
+
+        Returns a tuple containing the response text and the number of tokens consumed.
+        """
         raise NotImplementedError
 
 
-class OllamaProvider(LLMProvider):  # noqa: D101
-    def __init__(self, instruction: str, model: str) -> None:  # noqa: D107
-        super().__init__(instruction, model)
-        self.provider = "Ollama"
-        self.models = {
-            "llama3.2:1b",
-            "llama3.2:3b",
-            "deepseek-r1:1.5b",
-            "deepseek-r1:8b",
-            "deepseek-r1:7b",
-        }
-        self.check_model_valid(model)
+class MockProvider(LLMProvider):
+    """Mocking LLM provider for local dev and tests."""
 
-    def call(self, prompt: str) -> tuple[str, int]:
+    def __init__(self) -> None:  # noqa: D107
+        super().__init__(provider="Mocked", models=["random"])
+        self.check_model_valid("random")
+
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:  # noqa: ARG002
         """Call the LLM."""
+        tokens = random.randint(50, 200)  # noqa: S311
+        response = f"Mocked {prompt} response"
+        return response, tokens
+
+
+class OllamaProvider(LLMProvider):  # noqa: D101
+    def __init__(self) -> None:  # noqa: D107
+        super().__init__(
+            provider="Ollama",
+            models=[
+                "llama3.2:1b",
+                "llama3.2:3b",
+                "deepseek-r1:1.5b",
+                "deepseek-r1:8b",
+                "deepseek-r1:7b",
+            ],
+        )
+
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
+        """Call the LLM."""
+        self.check_model_valid(model)
         response: ChatResponse = chat(
-            model=self.model,
+            model=model,
             stream=False,
             # think=True,
             messages=[
-                {"role": "system", "content": self.instruction},
+                {"role": "system", "content": instruction},
                 {"role": "user", "content": prompt},
             ],
         )
@@ -87,25 +109,26 @@ class OllamaProvider(LLMProvider):  # noqa: D101
 
 
 class OpenAIProvider(LLMProvider):  # noqa: D101
-    def __init__(self, instruction: str, model: str) -> None:  # noqa: D107
-        super().__init__(instruction, model)
-        self.provider = "OpenAI"
-        self.models = {
-            "gpt-5-nano",
-            "gpt-5-mini",
-            "gpt-5",
-            "gpt-4o-mini",
-        }
-        self.check_model_valid(model)
+    def __init__(self) -> None:  # noqa: D107
+        super().__init__(
+            provider="OpenAI",
+            models=[
+                "gpt-5-nano",
+                "gpt-5-mini",
+                "gpt-5",
+                "gpt-4o-mini",
+            ],
+        )
 
-    def call(self, prompt: str) -> tuple[str, int]:
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
         """Call the LLM."""
+        self.check_model_valid(model)
         client = OpenAI(api_key=my_getenv("OPENAI_API_KEY"))
         tokens = 0
         response = client.responses.create(
-            model=self.model,
+            model=model,
             input=[
-                {"role": "developer", "content": self.instruction},
+                {"role": "developer", "content": instruction},
                 {"role": "user", "content": prompt},
             ],
         )
@@ -123,18 +146,19 @@ class OpenAIProvider(LLMProvider):  # noqa: D101
 
 
 class GeminiProvider(LLMProvider):  # noqa: D101
-    def __init__(self, instruction: str, model: str) -> None:  # noqa: D107
-        super().__init__(instruction, model)
-        self.provider = "Gemini"
-        self.models = {
-            "gemini-2.5-flash-lite",
-            "gemini-2.5-flash",
-            "gemini-2.5-pro",
-        }
-        self.check_model_valid(model)
+    def __init__(self) -> None:  # noqa: D107
+        super().__init__(
+            provider="Gemini",
+            models=[
+                "gemini-2.5-flash-lite",
+                "gemini-2.5-flash",
+                "gemini-2.5-pro",
+            ],
+        )
 
-    def call(self, prompt: str) -> tuple[str, int]:
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
         """Call the LLM."""
+        self.check_model_valid(model)
         client = genai.Client(api_key=my_getenv("GEMINI_API_KEY"))
 
         response = None
@@ -143,15 +167,15 @@ class GeminiProvider(LLMProvider):  # noqa: D101
         for attempt in range(retries_max):
             try:
                 response = client.models.generate_content(
-                    model=self.model,
+                    model=model,
                     config=genai_types.GenerateContentConfig(
-                        system_instruction=self.instruction
+                        system_instruction=instruction
                     ),
                     contents=prompt,
                 )
                 break  # Exit retry loop if successful
             except Exception as e:
-                if attempt <= retries_max and "The model is overloaded" in str(e):
+                if attempt < retries_max and "The model is overloaded" in str(e):
                     wait_time = 2**attempt
                     logger.warning(
                         "Model overloaded, retrying in %d seconds...", wait_time
@@ -178,26 +202,61 @@ class GeminiProvider(LLMProvider):  # noqa: D101
         return s, tokens
 
 
-def create_llm_provider(
-    provider_name: str, model: str, instruction: str
-) -> LLMProvider:
+class AzureOpenAIProvider(LLMProvider):
+    """Azure OpenAI LLM provider."""
+
+    def __init__(self) -> None:  # noqa: D107
+        super().__init__(
+            provider="AzureOpenAI", models=["gpt-5-nano", "gpt-5-mini", "gpt-5"]
+        )
+
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
+        """Call the LLM with retry logic."""
+        self.check_model_valid(model)
+        client = AzureOpenAI(
+            api_version=my_getenv("AZURE_API_VERSION"),
+            azure_endpoint=my_getenv("AZURE_API_URL"),
+            azure_ad_token_provider=get_bearer_token_provider(
+                DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+            ),
+        )
+        messages = [
+            {"role": "system", "content": instruction},
+            {"role": "user", "content": prompt},
+        ]
+
+        response = client.chat.completions.create(
+            model=model,
+            messages=messages,  # type: ignore
+        )
+
+        s = (
+            response.choices[0].message.content
+            if response.choices[0].message.content
+            else ""
+        )
+        tokens = (
+            response.usage.total_tokens
+            if hasattr(response, "usage") and response.usage
+            else 0
+        )
+        return s, tokens
+
+
+def create_llm_provider(provider_name: str) -> LLMProvider:
     """Create LLM provider, based on string name."""
+    if provider_name == "Mock":
+        return MockProvider()
     if provider_name == "Ollama":
-        llm_provider = OllamaProvider(instruction=instruction, model=model)
-    elif provider_name == "OpenAI":
-        llm_provider = OpenAIProvider(instruction=instruction, model=model)
-    elif provider_name == "Gemini":
-        llm_provider = GeminiProvider(instruction=instruction, model=model)
-    else:
-        msg = f"Unknown LLM {provider_name}"
-        raise ValueError(msg)
-    return llm_provider
-
-
-# Example usage
-def llm_call(provider: LLMProvider, prompt: str) -> tuple[str, int]:
-    """Send prompt to LLM."""
-    return provider.call(prompt)
+        return OllamaProvider()
+    if provider_name == "OpenAI":
+        return OpenAIProvider()
+    if provider_name == "Gemini":
+        return GeminiProvider()
+    if provider_name == "AzureOpenAI":
+        return AzureOpenAIProvider()
+    msg = f"Unknown LLM {provider_name}"
+    raise ValueError(msg)
 
 
 if __name__ == "__main__":
@@ -205,7 +264,11 @@ if __name__ == "__main__":
     prompt = "What is the capital of Germany?"
 
     # switch here
-    llm_provider = OllamaProvider(instruction=instruction, model="llama3.2:1b")
-    # llm_provider = OpenAIProvider(instruction=instruction, model="gpt-5-nano")
-    # llm_provider = GeminiProvider(instruction=instruction, model="gemini-2.5-pro")
-    print(llm_call(llm_provider, prompt))
+    llm_provider = OllamaProvider()
+    # llm_provider = OpenAIProvider()
+    # llm_provider = GeminiProvider()
+    # llm_provider = AzureOpenAIProvider()
+
+    print(
+        llm_provider.call(model="llama3.2:1b", instruction=instruction, prompt=prompt)
+    )

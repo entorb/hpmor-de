@@ -4,12 +4,7 @@ import logging
 import time
 from pathlib import Path
 
-from ai_llm_provider import (
-    create_llm_provider,
-    llm_call,
-)
-
-CHAPTER = 95
+from ai_llm_provider import create_llm_provider
 
 # Logging format: log level names to single letters
 logging.addLevelName(logging.DEBUG, "D:")
@@ -17,13 +12,19 @@ logging.addLevelName(logging.INFO, "  ")
 logging.addLevelName(logging.WARNING, "W:")
 logging.addLevelName(logging.ERROR, "E:")
 logging.addLevelName(logging.CRITICAL, "C:")
-logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")  #  %(name)s
+logging.getLogger("azure").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger()  # base logger without name
+logger.setLevel(logging.INFO)
 
 # LLM_PROVIDER, MODEL = ("Ollama", "llama3.2:1b")
 # LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-flash-lite")
 LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-flash")
 # LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-pro")
+# LLM_PROVIDER, MODEL = ("AzureOpenAI", "gpt-5-nano")
+# LLM_PROVIDER, MODEL = ("AzureOpenAI", "gpt-5-mini")
+# LLM_PROVIDER, MODEL = ("AzureOpenAI", "gpt-5")
 
 MAX_LINES_PER_LLM_CALL = 200
 GLOSSARY = Path("chapters/0woerterbuch.csv").read_text(encoding="utf-8")
@@ -104,14 +105,12 @@ def review_chapter(chapter_no: int) -> None:
             )
             # recreate llm for each chunk speeds-up processing
             #  by dropping the old contents
-            llm_provider = create_llm_provider(
-                provider_name=LLM_PROVIDER, model=MODEL, instruction=INSTRUCTION
-            )
+            llm_provider = create_llm_provider(provider_name=LLM_PROVIDER)
 
             time_start_chunk = time.time()
 
             # here the AI magic happens
-            chunk_out, tokens_used = llm_call(llm_provider, chunk_in)
+            chunk_out, tokens_used = llm_provider.call(MODEL, INSTRUCTION, chunk_in)
             tokens_used_total += tokens_used
 
             logger.info("in %ds", (time.time() - time_start_chunk))
@@ -129,19 +128,24 @@ def review_chapter(chapter_no: int) -> None:
     p.with_suffix(".ai.tex").write_text(("\n".join(chunks_out)), encoding="utf-8")
     time_total = round(time.time() - time_start)
     logger.info(
-        "%d lines reviewed in %ds, %d char/s, %.1f token/char",
+        "%d lines reviewed in %ds, %d tokens, %d char/s, %.1f token/char.",
         count_lines_total,
         time_total,
+        tokens_used_total,
         (count_chars_total / time_total),
         (count_chars_total / tokens_used_total),
     )
 
 
 if __name__ == "__main__":
-    logger.info("%s %s", LLM_PROVIDER, MODEL)
-    # review_chapter(CHAPTER)
+    logger.info("LLM: %s, Model: %s", LLM_PROVIDER, MODEL)
 
-    for i in range(95, 7, -1):
+    # single chapter
+    # review_chapter(0)
+    # exit()
+
+    # multiple chapters
+    for i in range(33, 122, +1):
         p = (Path("chapters") / f"hpmor-chapter-{i:03}.tex").with_suffix(".ai.tex")
         if p.is_file():
             logger.info("skipping %s", p.name)
@@ -150,8 +154,9 @@ if __name__ == "__main__":
         logger.info("")
         try:
             review_chapter(i)
-            logger.info("Sleeping for 5min")
-            time.sleep(300)
+            if LLM_PROVIDER == "Gemini":
+                logger.info("Sleeping for 5min")
+                time.sleep(300)
         except Exception as e:
             logger.exception("Exception caught")
             # Gemini quota exceeded
