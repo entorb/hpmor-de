@@ -281,6 +281,7 @@ Dementorenheilmittel
 Dementors
 Denkarium
 Densaugeo
+Desensibilisierungstherapie
 Desillusionierungs
 Desillusionierungszauber
 Desillusionierungszaubern
@@ -324,11 +325,13 @@ drittvollkommenste
 drogengedämpfte
 Dschinni
 dsummerstay
+Duellchampion
 Duellformulierungen
 Duellherausforderung
 Duellier
 Duellierclub
 Duellierholster
+Duelliermeister
 Duellierübungen
 Duellierzirkus
 Duellkämpfer
@@ -358,6 +361,7 @@ eichener
 einberechnet
 eingeätzt
 Einhands
+Einhundertacht
 einhundertdrei
 Einhunderteinundachtzigtausendvierhundertundneunundzwanzig
 einhundertneunzig
@@ -555,11 +559,11 @@ grüngekleideten
 gruseligste
 gruseligsten
 Gryffindor
+Gryffindor-Tisch
 gryffindormäßige
 Gryffindormäßiges
 gryffindormäßigste
 Gryffindors
-Gryffindortisch
 gutaussehendste
 hach
 Hach
@@ -960,6 +964,7 @@ Negentropie
 nehmer
 Nekromantie
 Nesov
+Neugierlosigkeit
 Neunhundertsechzig
 neuntausendmal
 Neverwinter
