@@ -2,7 +2,6 @@
 
 import logging
 import os
-import random
 import time
 
 from azure.identity import (
@@ -74,7 +73,7 @@ class MockProvider(LLMProvider):
 
     def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:  # noqa: ARG002
         """Call the LLM."""
-        tokens = random.randint(50, 200)  # noqa: S311
+        tokens = 51  # random number, chosen by fair dice roll
         response = f"Mocked {prompt} response"
         return response, tokens
 
