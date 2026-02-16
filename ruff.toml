@@ -25,10 +25,10 @@ extend-ignore = [
     "ISC001", # implicit-str-concat
     "PGH003", # blanket-type-ignore
     "RET504", # unnecessary-assign
+    "S101",   # use of asserts
     "T201",   # print
     "TD002",  # missing-todo-author
     "TD003",  # missing-todo-link
-    "S101",   # use of asserts
 ]
 
 
