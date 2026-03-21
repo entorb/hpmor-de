@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: N806, PTH103, PTH120, PTH123, PTH207
 
 """
 Clean text.
@@ -23,11 +23,11 @@ translations = helper.translations
 translators = translations.keys()
 
 # make output dirs
-for translator in translations.keys():
+for translator in translations:
     os.makedirs(f"3-clean/{translator}/", exist_ok=True)
 
 
-def html_modify():
+def html_modify() -> None:
     """Modify the HTML."""
     html_start = """<!DOCTYPE html>
 <html lang="de">
@@ -43,7 +43,7 @@ def html_modify():
         print("===" + translator + "===")
 
         for fileIn in sorted(glob.glob(f"2-extract/{translator}/*.html")):
-            (filePath, fileName) = os.path.split(fileIn)
+            (_filePath, fileName) = os.path.split(fileIn)
             fileOut = f"3-clean/{translator}/{fileName}"
             with open(fileIn, encoding="utf-8", newline="\n") as fh:
                 cont = fh.read()

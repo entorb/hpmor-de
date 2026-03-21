@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: N806, PTH103, PTH120, PTH207, S603, S607
 
 """
 Convert HTML to LaTeX.
@@ -22,11 +22,11 @@ translations = helper.translations
 translators = translations.keys()
 
 # make output dirs
-for translator in translations.keys():
+for translator in translations:
     os.makedirs(f"4-latex/{translator}/", exist_ok=True)
 
 
-def html2latex():
+def html2latex() -> None:
     """
     Convert LaTeX code to HTML.
     """

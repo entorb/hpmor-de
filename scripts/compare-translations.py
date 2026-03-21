@@ -2,7 +2,7 @@
 # by Torben Menke https://entorb.net
 
 # TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: E501, D103, N806, N816, PLW2901, ANN001, PTH103, PTH110, PTH120, PTH123, UP031
 
 """
 Compare chapters between translations.
@@ -59,12 +59,12 @@ translations = {
 }
 
 
-def download_file(url: str, filepath: str):
+def download_file(url: str, filepath: str) -> None:
     """
     Download file from url to filepath.
     """
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",  # noqa: E501
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",
     }
     cont = requests.get(url, headers=headers, verify=True, timeout=3).content
     # verify=False -> skip SSL cert verification: CERTIFICATE_VERIFY_FAILED
@@ -73,8 +73,8 @@ def download_file(url: str, filepath: str):
 
 
 # TODO: FR uses master as branch name
-def download_all_chapters():
-    baseurl = "https://raw.githubusercontent.com/<<repo>>/main/chapters/hpmor-chapter-<<chapter-no>>.tex"  # noqa: E501
+def download_all_chapters() -> None:
+    baseurl = "https://raw.githubusercontent.com/<<repo>>/main/chapters/hpmor-chapter-<<chapter-no>>.tex"
 
     # for lang in translations.keys():
     lang = other_lang
@@ -83,7 +83,7 @@ def download_all_chapters():
     os.makedirs(dirout, exist_ok=True)
 
     repo = translations[lang]["repo"]
-    for i in range(0, 122 + 1):
+    for i in range(122 + 1):
         ch_no = "%03d" % i
         url = baseurl.replace("<<repo>>", repo).replace("<<chapter-no>>", ch_no)
         filepath = f"{dirout}/hpmor-chapter-{ch_no}.tex"
@@ -115,7 +115,7 @@ def get_list_of_my_chapter_files_v2() -> list:
     Return list of chapter files (0..122).
     """
     list_of_chapter_files = []
-    for i in range(0, 122 + 1):
+    for i in range(122 + 1):
         ch_no = "%03d" % i
         f = f"hpmor-chapter-{ch_no}.tex"
         list_of_chapter_files.append(f)
@@ -149,7 +149,7 @@ def count_latex_commands(cont: str) -> dict:
     return res
 
 
-def compare_to_lang(my_files: list, lang="en"):
+def compare_to_lang(my_files: list, lang="en") -> None:
     for myFile in my_files:
         ch_no = myFile[14:17]
         # in DE I added a prefix to the files, so this would not work for lang == "de"

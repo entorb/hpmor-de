@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: D103, N802, N806, PLW2901, ANN001, C901, PLR0912, RUF001, RUF003, PTH103, PTH120, PTH123, PTH207, ANN201
 
 """
 Cleanup LaTeX Code.
@@ -24,11 +24,11 @@ translators = translations.keys()
 settings = {"lang": "DE"}
 
 # make output dirs
-for translator in translations.keys():
+for translator in translations:
     os.makedirs(f"5-latex-clean/{translator}/", exist_ok=True)
 
 
-def loop_files_for_cleanup():
+def loop_files_for_cleanup() -> None:
     """
     Loop over all files.
 

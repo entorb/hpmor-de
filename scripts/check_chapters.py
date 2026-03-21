@@ -18,7 +18,7 @@ from multiprocessing import Pool, cpu_count
 from os import chdir
 from pathlib import Path
 
-from check_chapters_settings import settings
+from .check_chapters_settings import settings
 
 # ensure we are in hpmor root dir
 chdir(Path(__file__).parents[1])
@@ -270,6 +270,9 @@ def fix_common_typos(s: str) -> str:
         s = s.replace("ut mir Leid", "ut mir leid")
         s = s.replace("Godric’s", "Godrics")
         s = s.replace("Godric's", "Godrics")
+        s = s.replace("Bumpf", "Wumm")
+        s = s.replace("Alptraum", "Albtraum")
+        s = s.replace("Alpträume", "Albträume")
         s = re.sub(r"Galeone(n?)", r"Galleone\1", s)
         s = s.replace(
             "stellvertretende Schulleiterin", "Stellvertretende Schulleiterin"

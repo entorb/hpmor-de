@@ -1,4 +1,4 @@
-"""Classes for different LLM providers."""  # noqa: INP001
+"""Classes for different LLM providers."""
 
 import logging
 import os
@@ -229,11 +229,7 @@ class AzureOpenAIProvider(LLMProvider):
             messages=messages,  # type: ignore
         )
 
-        s = (
-            response.choices[0].message.content
-            if response.choices[0].message.content
-            else ""
-        )
+        s = response.choices[0].message.content or ""
         tokens = (
             response.usage.total_tokens
             if hasattr(response, "usage") and response.usage

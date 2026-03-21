@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: N806, PTH103, PTH120, PTH123, PTH207
 
 """
 Extract text from downloaded HTML files.
@@ -23,11 +23,11 @@ translations = helper.translations
 translators = translations.keys()
 
 # make output dirs
-for translator in translations.keys():
+for translator in translations:
     os.makedirs(f"2-extract/{translator}/", exist_ok=True)
 
 
-def extract_chapter_text():
+def extract_chapter_text() -> None:
     """
     Extract chapter text from html and writes result into 2-extracted/ .
 
@@ -36,7 +36,7 @@ def extract_chapter_text():
     for translator in translators:
         print("===" + translator + "===")
         for fileIn in sorted(glob.glob(f"1-download/{translator}/*.html")):
-            (filePath, fileName) = os.path.split(fileIn)
+            (_filePath, fileName) = os.path.split(fileIn)
             fileOut = f"2-extract/{translator}/{fileName}"
             with open(fileIn, encoding="utf-8", newline="\n") as fh:
                 cont = fh.read()

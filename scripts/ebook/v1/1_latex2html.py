@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # by Torben Menke https://entorb.net
-# ruff: noqa
+# ruff: noqa: E501, D103, N806, N816, C901, PLR0915, RUF001, RUF003, PTH103, PTH122, PTH123, PTH207, DTZ011, E741, PERF401, PLW0603
 """
 Converter script.
 

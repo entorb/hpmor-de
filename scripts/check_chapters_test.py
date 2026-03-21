@@ -1,10 +1,12 @@
-# ruff: noqa: INP001, D103, RUF001
+# ruff: noqa: D103, RUF001
 """Tests for check_chapters.py."""
 
 from collections.abc import Callable
+from pathlib import Path
 
 import pytest
-from check_chapters import (
+
+from .check_chapters import (
     fix_common_typos,
     fix_ellipsis,
     fix_emph,
@@ -22,7 +24,7 @@ from check_chapters import (
     multiline_check,
     process_file,
 )
-from check_chapters_settings import settings
+from .check_chapters_settings import settings
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])

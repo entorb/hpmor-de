@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # TODO: fix ruff findings
-# ruff: noqa
+# ruff: noqa: E501, N806, PTH103, PTH110, PTH120, PTH123, UP031
 
 """
 Download chapter files from the web.
@@ -20,16 +20,16 @@ os.chdir(os.path.dirname(sys.argv[0]))
 translations = helper.translations
 
 # make output dirs
-for translator in translations.keys():
+for translator in translations:
     os.makedirs(f"1-download/{translator}/", exist_ok=True)
 
 
-def download_file(url: str, filepath: str):
+def download_file(url: str, filepath: str) -> None:
     """
     Download file from url to filepath.
     """
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",  # noqa: E501
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ",
     }
     cont = requests.get(url, headers=headers, verify=True, timeout=3).content
     # verify=False -> skip SSL cert verification: CERTIFICATE_VERIFY_FAILED
