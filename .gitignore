@@ -51,3 +51,4 @@ hpmor*.html
 hpmor*.mobi
 hpmor*.zip
 test*.pdf
+.coverage

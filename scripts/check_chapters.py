@@ -189,11 +189,19 @@ def fix_ellipsis(s: str) -> str:
 
     # new rule for German (SYNC with fix_hyphens)
     if settings["lang"] == "DE":
+        # AI Review of the rules:
+        # German typographic rules distinguish two cases:
+        # 1. Ellipsis replacing omitted letters within a word: no spaces.
+        # E.g. Sch… or ver…:
+        #  the ellipsis is glued to the word fragment.
+        # 2. Ellipsis replacing one or more omitted words: spaces on both sides.
+        # E.g. Er ging … und kam zurück.
         # before: add space if not at start of line or quote
-        s = re.sub(r"(?<=[^ „‚\(\{\n^])…", " …", s)
+        # for simplification I decided to harmonize to 2.
+        s = re.sub(r"(?<=[^ „‚\(\{\n])…", " …", s)
 
         # after: add space if not followed by punctuation
-        s = re.sub(r"…(?=[^ \.\?\)\}!:,;“‘\n$])", "… ", s)
+        s = re.sub(r"…(?=[^ \.\?\)\}!:,;“‘\n])", "… ", s)
 
         # after: …“Text -> …“ Text
         s = re.sub(r"…“(?=[^\s])", r"…“ ", s)
@@ -222,7 +230,7 @@ def fix_linebreaks_speech(s: str) -> str:
         return s
 
     if settings["lang"] == "DE":
-        s = re.sub(r" „(\\emph|[A-Z])", r"\n„\1", s)
+        s = re.sub(r" „(\\(?:emph|shout|spell|scream|prophesy)|[A-Z])", r"\n„\1", s)
 
     return s
 
@@ -262,7 +270,7 @@ def fix_common_typos(s: str) -> str:
         s = s.replace("ut mir Leid", "ut mir leid")
         s = s.replace("Godric’s", "Godrics")
         s = s.replace("Godric's", "Godrics")
-        s = s.replace("Galeone", "Galleone")
+        s = re.sub(r"Galeone(n?)", r"Galleone\1", s)
         s = s.replace(
             "stellvertretende Schulleiterin", "Stellvertretende Schulleiterin"
         )
@@ -419,7 +427,7 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
 
 def fix_emph(s: str) -> str:
     # space at start of emph -> move before emph
-    s = re.sub(r"(\\emph{) +", " \1", s)
+    s = re.sub(r"(\\emph{) +", r" \1", s)
 
     # move punctuation out of lowercase 1-word-emph
     # ... \emph{WORD.} -> \emph{WORD}.
@@ -450,8 +458,9 @@ def fix_hyphens(s: str) -> str:
     # hyphens: (space-hyphen-space) should be "—" (em dash).
     # trim space around em-dash
     s = s.replace(" — ", "—")
-    # mid dash as well
-    s = s.replace(" – ", "—")
+    # mid dash as well (but not between numbers: 2 – 4 -> 2–4)
+    s = re.sub(r"(?<!\d) – (?!\d)", "—", s)
+    s = re.sub(r"(\d) – (?=\d)", r"\1–", s)
     # NOT for '— ' as in ', no— “I'
     # s = re.sub(r"— ", r"—", s)
     # " - " -> "—"
@@ -483,14 +492,18 @@ def fix_hyphens(s: str) -> str:
 
     # new rule for German (SYNC with fix_ellipsis)
     if settings["lang"] == "DE":
+        # AI Review: For em dash (—): The rules are correct.
+        # German typographic convention (Duden) calls for spaces on both sides of an em
+        # dash (Gedankenstrich), e.g. Wort — Wort.
+        # This differs from English, which uses no spaces.
         # remove all spaces around hyphens
         s = re.sub(r" *— *", "—", s)
 
         # before: add space if not at start of line or quote
-        s = re.sub(r"(?<=[^ „‚\(\{\n^])—", " —", s)
+        s = re.sub(r"(?<=[^ „‚\(\{\n])—", " —", s)
 
         # after: add space if not followed by punctuation
-        s = re.sub(r"—(?=[^ \.\?\)\}!:,;“‘\n$])", "— ", s)
+        s = re.sub(r"—(?=[^ \.\?\)\}!:,;“‘\n])", "— ", s)
 
         # after: —“Text -> —“ Text
         s = re.sub(r"—“(?=[^\s])", r"—“ ", s)
@@ -569,7 +582,7 @@ def fix_spell(s: str) -> str:
         "Wingardium Leviosa",
     }
     # cspell: enable
-    spells_str = "(" + "|".join(spells) + ")"
+    spells_str = "(" + "|".join(sorted(spells, key=len, reverse=True)) + ")"
 
     if settings["lang"] == "EN":
         for spell in spells:
