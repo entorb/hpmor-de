@@ -867,6 +867,7 @@ MacDougal
 Macnair
 Mädchenweiterhin
 Magica
+Magieanwender
 Magieausbruch
 Magiefluss
 Magien
@@ -965,8 +966,10 @@ nehmer
 Nekromantie
 Nesov
 Neugierlosigkeit
+neunhundertsechzig
 Neunhundertsechzig
 neuntausendmal
+neununddreißigtausend
 Neverwinter
 Nevilles
 Nevy
@@ -1311,6 +1314,7 @@ Schamesröte
 scharfzähnigen
 Schattenreplikationstechnik
 Schauergedichte
+Scherzzauber
 schiefgelaufenen
 schiefgelaufener
 Schildzaubern
@@ -1736,6 +1740,7 @@ wolfsähnlichen
 Wolfswurz
 wolkenbefleckten
 Wulfric
+Wumm
 wunscherfüllende
 Wurstpastetchen
 wuselig
