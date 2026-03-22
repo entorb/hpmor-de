@@ -4,21 +4,7 @@ import logging
 import os
 import time
 
-from azure.identity import (  # pip install azure-identity
-    DefaultAzureCredential,
-    get_bearer_token_provider,
-)
 from dotenv import load_dotenv  # pip install dotenv
-
-if 1 == 2:  # noqa: PLR0133
-    from google import genai  # pip install google-genai
-    from google.genai import types as genai_types
-    from ollama import ChatResponse, chat  # pip install ollama
-
-from openai import (
-    AzureOpenAI,
-    OpenAI,  # pip install openai
-)
 
 # load .env file
 load_dotenv()
@@ -96,6 +82,8 @@ class OllamaProvider(LLMProvider):  # noqa: D101
 
     def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
         """Call the LLM."""
+        from ollama import ChatResponse, chat  # pip install ollama  # noqa: PLC0415
+
         self.check_model_valid(model)
         response: ChatResponse = chat(
             model=model,
@@ -108,6 +96,48 @@ class OllamaProvider(LLMProvider):  # noqa: D101
         )
         tokens = 0  # not returned by ollama
         return str(response.message.content), tokens
+
+
+class MistralProvider(LLMProvider):  # noqa: D101
+    def __init__(self) -> None:  # noqa: D107
+        super().__init__(
+            provider="Mistral",
+            models=[
+                "mistral-medium-latest",
+                "mistral-large-latest",
+            ],
+        )
+
+    def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
+        """Call the LLM."""
+        from mistralai.client import Mistral  # pip install mistralai  # noqa: PLC0415
+
+        self.check_model_valid(model)
+        client = Mistral(api_key=my_getenv("MISTRAL_API_KEY"))
+        response = client.chat.complete(
+            model=model,
+            messages=[
+                {"role": "system", "content": instruction},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        tokens = 0
+        if response and response.usage:
+            logger.info(
+                "tokens: %d input + %d output = %d total",
+                response.usage.prompt_tokens,
+                response.usage.completion_tokens,
+                response.usage.total_tokens,
+            )
+            tokens = response.usage.total_tokens
+        else:
+            logger.warning("No token consumption retrieved.")
+        s = (
+            response.choices[0].message.content or ""
+            if response and response.choices
+            else ""
+        )
+        return s, tokens
 
 
 class OpenAIProvider(LLMProvider):  # noqa: D101
@@ -124,6 +154,10 @@ class OpenAIProvider(LLMProvider):  # noqa: D101
 
     def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
         """Call the LLM."""
+        from openai import (  # noqa: PLC0415
+            OpenAI,  # pip install openai
+        )
+
         self.check_model_valid(model)
         client = OpenAI(api_key=my_getenv("OPENAI_API_KEY"))
         tokens = 0
@@ -160,6 +194,9 @@ class GeminiProvider(LLMProvider):  # noqa: D101
 
     def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
         """Call the LLM."""
+        from google import genai  # pip install google-genai  # noqa: PLC0415
+        from google.genai import types as genai_types  # noqa: PLC0415
+
         self.check_model_valid(model)
         client = genai.Client(api_key=my_getenv("GEMINI_API_KEY"))
 
@@ -214,6 +251,14 @@ class AzureOpenAIProvider(LLMProvider):
 
     def call(self, model: str, instruction: str, prompt: str) -> tuple[str, int]:
         """Call the LLM with retry logic."""
+        from azure.identity import (  # pip install azure-identity  # noqa: PLC0415
+            DefaultAzureCredential,
+            get_bearer_token_provider,
+        )
+        from openai import (  # noqa: PLC0415
+            AzureOpenAI,  # pip install openai
+        )
+
         self.check_model_valid(model)
         client = AzureOpenAI(
             api_version=my_getenv("AZURE_API_VERSION"),
@@ -248,6 +293,8 @@ def create_llm_provider(provider_name: str) -> LLMProvider:
         return MockProvider()
     if provider_name == "Ollama":
         return OllamaProvider()
+    if provider_name == "Mistral":
+        return MistralProvider()
     if provider_name == "OpenAI":
         return OpenAIProvider()
     if provider_name == "Gemini":
@@ -263,11 +310,13 @@ if __name__ == "__main__":
     prompt = "What is the capital of Germany?"
 
     # switch here
-    llm_provider = OllamaProvider()
+    # llm_provider, model = OllamaProvider(), "llama3.2:1b"
     # llm_provider = OpenAIProvider()
     # llm_provider = GeminiProvider()
     # llm_provider = AzureOpenAIProvider()
+    llm_provider, model = MistralProvider(), "mistral-large-latest"
+    print(llm_provider, model)
 
-    print(
-        llm_provider.call(model="llama3.2:1b", instruction=instruction, prompt=prompt)
-    )
+    print(llm_provider.call(model=model, instruction=instruction, prompt=prompt))
+
+# cspell: ignore: mistralai

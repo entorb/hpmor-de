@@ -20,8 +20,10 @@ logger = logging.getLogger()  # base logger without name
 logger.setLevel(logging.INFO)
 
 # LLM_PROVIDER, MODEL = ("Ollama", "llama3.2:1b")
+LLM_PROVIDER, MODEL = ("Mistral", "mistral-large-latest")
+# LLM_PROVIDER, MODEL = ("Mistral", "mistral-medium-latest")
 # LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-flash-lite")
-LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-flash")
+# LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-flash")
 # LLM_PROVIDER, MODEL = ("Gemini", "gemini-2.5-pro")
 # LLM_PROVIDER, MODEL = ("AzureOpenAI", "gpt-5-nano")
 # LLM_PROVIDER, MODEL = ("AzureOpenAI", "gpt-5-mini")
@@ -243,12 +245,12 @@ def review_chapter(chapter_no: int) -> None:
 if __name__ == "__main__":
     logger.info("LLM: %s, Model: %s", LLM_PROVIDER, MODEL)
 
-    # single chapter
-    # review_chapter(24)
+    # # single chapter
+    # review_chapter(27)
     # exit()
 
     # multiple chapters
-    for i in range(23, 122):
+    for i in range(40, 50):
         p = (Path("chapters") / f"hpmor-chapter-{i:03}.tex").with_suffix(".ai.tex")
         if p.is_file():
             logger.info("skipping %s", p.name)
