@@ -18,7 +18,7 @@ from multiprocessing import Pool, cpu_count
 from os import chdir
 from pathlib import Path
 
-from .check_chapters_settings import settings
+from check_chapters_settings import settings
 
 # ensure we are in hpmor root dir
 chdir(Path(__file__).parents[1])
@@ -147,6 +147,7 @@ def fix_line(s: str) -> str:
     s = fix_emph(s)
     s = fix_hyphens(s)
     s = fix_quotations(s)
+    s = fix_comma_speech(s)
 
     # force linebreaks before speech marks
     if settings["lang"] == "DE":
@@ -235,6 +236,19 @@ def fix_linebreaks_speech(s: str) -> str:
     return s
 
 
+def fix_comma_speech(s: str) -> str:
+    """Close quote followed by speech verb requires comma."""
+    # „Ich“ sagte Draco. -> „Ich“, sagte Draco.
+    # but NOT: „Ich!“ or „Ich?“
+    if settings["lang"] == "DE":
+        de_verbs = r"(sagte|fragte|rief|flüsterte|schrie|murmelte|antwortete|erwiderte|meinte|dachte|zischte|seufzte|stöhnte|brüllte|knurrte|hauchte|jammerte|schluchzte|kreischte|wimmerte)"  # noqa: E501
+        # add ","
+        s = re.sub(r"(?<![!?])“(?!,)\s+" + de_verbs, r"“, \1", s)
+        # remove ","
+        s = re.sub(r"(?<=[!?])“,\s+" + de_verbs, r"“ \1", s)
+    return s
+
+
 def fix_mr_mrs(s: str) -> str:
     # Mr / Mrs
     s = s.replace("Mr. H. Potter", "Mr~H.~Potter")
@@ -256,6 +270,7 @@ def fix_common_typos(s: str) -> str:
     if settings["lang"] == "DE":
         # cspell:disable
         s = s.replace("Adoleszenz", "Pubertät")
+        s = s.replace("Azkaban", "Askaban")
         s = s.replace("Avadakedavra", "Avada Kedavra")
         s = s.replace("Diagon Alley", "Winkelgasse")
         s = s.replace("Hermione", "Hermine")

@@ -1,12 +1,12 @@
-# ruff: noqa: D103, RUF001
+# ruff: noqa: D103, RUF001, INP001
 """Tests for check_chapters.py."""
 
 from collections.abc import Callable
 from pathlib import Path
 
 import pytest
-
-from .check_chapters import (
+from check_chapters import (
+    fix_comma_speech,
     fix_common_typos,
     fix_ellipsis,
     fix_emph,
@@ -24,7 +24,7 @@ from .check_chapters import (
     multiline_check,
     process_file,
 )
-from .check_chapters_settings import settings
+from check_chapters_settings import settings
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
@@ -226,6 +226,18 @@ def test_fix_linebreaks_speech(lang: str) -> None:
         assert fix_linebreaks_speech(text) == expected, (
             f"'{text}' -> '{fix_linebreaks_speech(text)}' != '{expected}'"
         )
+
+
+@pytest.mark.parametrize("lang", ["DE"])
+def test_fix_comma_speech(lang: str) -> None:
+    settings["lang"] = lang
+    pairs = [
+        ("„Ich“ sagte Draco.", "„Ich“, sagte Draco."),
+        ("„Ich.“ sagte Draco.", "„Ich.“, sagte Draco."),
+        ("„Ich!“ sagte Draco.", "„Ich!“ sagte Draco."),
+        ("„Ich?“ sagte Draco.", "„Ich?“ sagte Draco."),
+    ]
+    check_it(fix_comma_speech, pairs)
 
 
 @pytest.mark.parametrize("lang", ["EN", "DE"])
