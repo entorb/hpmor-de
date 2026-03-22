@@ -44,7 +44,7 @@ jobs:
 
       - name: Cache lookup
         id: cache-lookup
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: hash-chapters.txt
           key: chapter-hash-for-ebook-${{ github.ref_name }}-${{ steps.calculate-hash.outputs.hash }}
