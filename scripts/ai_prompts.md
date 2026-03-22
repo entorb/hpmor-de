@@ -12,11 +12,30 @@ Improve the German translation of this LaTeX code, based on the uncommented Engl
 - Input: LaTeX code
 - Output: LaTeX code (including unchanged comments), no Markdown
 - Task: fix grammar and spelling issues in German text
-- do change the structure or linebreaks
+- do NOT change the structure or linebreaks
 - keep LaTeX commands unchanged
+- keep %@@REF comments unchanged!
 - keep empty lines unchanged
 - keep LaTeX comment unchanged
 - Personalpronomen du, dein, etc.. werden im Satz kleingeschrieben
+
+## Punctuation only
+
+- You are a reviewer for an OpenSource Harry Potter FanFiction
+- Input: LaTeX code
+- Output: LaTeX code (including unchanged comments), no Markdown
+- Task:
+  - fix punctuation, grammar and spelling issues in German text
+  Constraints:
+  - do NOT change the structure or linebreaks
+  - keep LaTeX commands unchanged
+  - do not modify LaTeX comments (starting with '%')
+  - keep empty lines unchanged
+  - IMPORTANT: lines matching `%@@REF:<number>@@` are reference placeholders. You MUST keep every single one of them exactly as-is, in the same position. Never remove, rewrite, or reorder them.
+- info:
+  - direct speech uses „...“ ; for highlighting a title ‚...‘ is used.
+  - em dash character is —
+  - direct speech (starting with „) shall start in a new line
 
 ## Improved version
 
@@ -24,13 +43,16 @@ Improve the German translation of this LaTeX code, based on the uncommented Engl
 - Input: LaTeX code
 - Output: LaTeX code (including unchanged comments), no Markdown
 - Task:
-  - improve the German translation of this LaTeX code, based on the uncommented English original text above each paragraph
-  - focus on translation accuracy, consistency, tone, and naturalness. Suggest improvements; do not retranslate the entire file
-  - only fix major problems
+  - fix errors in the German translation of this LaTeX code, based on the uncommented English original text above each paragraph
+  - only fix: grammar errors, spelling errors, punctuation errors, and clear mistranslations (wrong meaning compared to the English original)
+  - do NOT rephrase, reword, or improve style. If a sentence is grammatically correct and conveys the correct meaning, leave it unchanged, even if you would translate it differently
+  - do NOT retranslate the entire file
 - Constraints:
-  - do change the structure or linebreaks
-  - keep LaTeX commands unchanged
+  - do NOT change the structure or linebreaks
+  - keep LaTeX commands unchanged, including custom commands like \spell{}, \translatorsnote{}, \latersection{}, \lettrine{}
+  - keep non-breaking spaces (~ in e.g. Mr~Malfoy) unchanged
   - keep empty lines unchanged
+  - ensure all LaTeX braces {} are properly matched and correctly placed
 - LaTeX comment handling:
   - keep comment lines unchanged (starting with '%')
   - keep in-line comments unchanged (starting with '%')
@@ -38,16 +60,19 @@ Improve the German translation of this LaTeX code, based on the uncommented Engl
   - do not create additional LaTeX comments
 - pronouns of address / dutzen
   - Da es sich um ein Buch und nicht um einen Brief handelt, werden die Deutschen Personalpronomen (du, dein...) klein geschrieben.
-  - Wenn Harry Potter von einem Professor mir "Mr. Potter" angesprochen wird, wird er gesietst, nicht gedutzt
+  - Wenn Harry Potter von einem Professor mit "Mr. Potter" angesprochen wird, wird er gesiezt, nicht geduzt
   - Kinder siezen die Professoren
-  - Harry Potter siezt Quirrell, Quirrell dutzt Harry
-  - Harry Potter siezt Lucius Malfoy, Lucius dutzt Harry
-  - Harry calls his parents Mum and Dad an, not Mutter and Vater
+  - Harry Potter siezt Quirrell, Quirrell duzt Harry
+  - Harry Potter siezt Lucius Malfoy, Lucius duzt Harry
+  - Harry calls his parents Mum and Dad, not Mutter and Vater
   - If Hermine addresses Harry as "Mr Potter" in English, use "Mr Potter" in German, but address him with "du" (not "sie").
 - info:
   - direct speech uses „...“ ; for highlighting a title ‚...‘ is used.
   - em dash character is —
   - direct speech (starting with „) shall start in a new line
   - retain LaTeX `\emph{}` formatting from the English where applicable
+  - keep custom LaTeX commands like \spell{}, \translatorsnote{}, \latersection{}, \lettrine{} unchanged
+  - keep non-breaking spaces (~ in e.g. Mr~Malfoy) unchanged
+  - ensure all LaTeX braces {} are properly matched and correctly placed
 - translations
   - robe : Umhang

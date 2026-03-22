@@ -1,17 +1,20 @@
-"""Classes for different LLM providers."""
+"""Classes for different LLM providers."""  # noqa: INP001
 
 import logging
 import os
 import time
 
-from azure.identity import (
+from azure.identity import (  # pip install azure-identity
     DefaultAzureCredential,
     get_bearer_token_provider,
 )
 from dotenv import load_dotenv  # pip install dotenv
-from google import genai  # pip install google-genai
-from google.genai import types as genai_types
-from ollama import ChatResponse, chat  # pip install ollama
+
+if 1 == 2:  # noqa: PLR0133
+    from google import genai  # pip install google-genai
+    from google.genai import types as genai_types
+    from ollama import ChatResponse, chat  # pip install ollama
+
 from openai import (
     AzureOpenAI,
     OpenAI,  # pip install openai
@@ -227,6 +230,7 @@ class AzureOpenAIProvider(LLMProvider):
         response = client.chat.completions.create(
             model=model,
             messages=messages,  # type: ignore
+            reasoning_effort="low",
         )
 
         s = response.choices[0].message.content or ""
