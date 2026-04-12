@@ -17,8 +17,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1 # latest only
 
-      - name: Python set up
-        uses: actions/setup-python@v6
+      - uses: actions/setup-python@v6
         with:
           python-version-file: ".python-version"
           # cache: "pip"
