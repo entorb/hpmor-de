@@ -46,8 +46,24 @@ if __name__ == "__main__":
     # fix chapterOpeningAuthorNote
     # not used in DE version
 
+    # remove \newline from chapterOpeningQuote/AuthorNote end definitions
+    # newer pandoc converts these \newline to <br>, older pandoc dropped them
+    cont = re.sub(
+        r"\\newline(\\rule\[1ex\]\{\\textwidth\}\{\.1pt\})\\newline",
+        r"\1",
+        cont,
+    )
+
     # some cleanup
     cont = cont.replace("\\hplettrineextrapara\n", "")
+
+    # remove \linebreak commands (unwanted <br> in pandoc HTML)
+    # handles \linebreak, \linebreak[N], \protect\linebreak, \protect\linebreak[N]
+    cont = re.sub(
+        r"\\(?:protect\\)?linebreak(?:\[\d\])?\\?\s?",
+        " ",
+        cont,
+    )
 
     # additional linebreaks in verses of chapter 64
     cont = cont.replace("\\\\\n\n", "\n\n")

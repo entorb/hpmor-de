@@ -8,7 +8,7 @@
 #  pre-commit autoupdate
 
 default_language_version:
-  python: python3.13
+  python: python3.14
 
 exclude: |
   (?x)^(
@@ -79,7 +79,7 @@ repos:
 
   # markdown
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.47.0
+    rev: v0.49.0
     hooks:
       - id: markdownlint
         args: ["--disable", "MD013"]
