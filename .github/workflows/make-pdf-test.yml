@@ -12,7 +12,7 @@ jobs:
       - name: Print start date
         run: date +%Y-%m-%d_%H:%M
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # latest only

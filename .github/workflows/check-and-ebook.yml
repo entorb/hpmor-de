@@ -31,7 +31,7 @@ jobs:
       cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # latest only
@@ -44,7 +44,7 @@ jobs:
 
       - name: Cache lookup
         id: cache-lookup
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: hash-chapters.txt
           key: chapter-hash-for-ebook-${{ github.ref_name }}-${{ steps.calculate-hash.outputs.hash }}
@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # latest only
@@ -175,7 +175,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Get tags
         run: git fetch --tags origin

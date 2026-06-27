@@ -11,13 +11,13 @@ jobs:
       matrix:
         part: [hpmor-1, hpmor-2, hpmor-3, hpmor-4, hpmor-5, hpmor-6]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # latest only
 
       - name: Cache LaTeX files
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             chapters/*.aux
