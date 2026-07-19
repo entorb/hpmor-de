@@ -32,6 +32,8 @@ LLM_PROVIDER, MODEL = ("Mistral", "mistral-large-latest")
 MAX_LINES_PER_LLM_CALL = 200
 SKIP_COMMENTS = False
 
+CHAPTER_RANGE = range(40, 45)
+
 
 def _format_glossary(csv_text: str) -> str:
     """Parse glossary CSV and format it clearly for the LLM."""
@@ -250,7 +252,7 @@ if __name__ == "__main__":
     # exit()
 
     # multiple chapters
-    for i in range(40, 50):
+    for i in CHAPTER_RANGE:
         p = (Path("chapters") / f"hpmor-chapter-{i:03}.tex").with_suffix(".ai.tex")
         if p.is_file():
             logger.info("skipping %s", p.name)
