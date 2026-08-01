@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 1 # latest only
 
       - name: Run prek pre-commit
-        uses: j178/prek-action@v2
+        uses: j178/prek-action@v3.0.0
 
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
