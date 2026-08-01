@@ -1,3 +1,4 @@
+---
 # This workflow performs
 # check: Quality checks on chapter text and code upon new commits and PRs.
 # make: Makes eBooks if .tex files have changed.
@@ -21,8 +22,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   check:
@@ -32,13 +32,14 @@ jobs:
       cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
     steps:
-      - uses: actions/checkout@v7
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # latest only
+          fetch-depth: 1  # latest only
 
       - name: Run prek pre-commit
-        uses: j178/prek-action@v2
+        uses: j178/prek-action@4e14d07f9231acabce116ccfca13b13dd9755ece  # v3.0.0
 
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
@@ -78,10 +79,11 @@ jobs:
     runs-on: ubuntu-26.04
 
     steps:
-      - uses: actions/checkout@v7
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # latest only
+          fetch-depth: 1  # latest only
 
       - name: Preparations
         run: ln -s python-requirements.txt requirements.txt
@@ -176,7 +178,8 @@ jobs:
     runs-on: ubuntu-26.04
 
     steps:
-      - uses: actions/checkout@v7
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
       - name: Get tags
         run: git fetch --tags origin

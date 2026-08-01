@@ -1,3 +1,4 @@
+---
 version: 2
 updates:
   # GitHub Actions
@@ -5,6 +6,8 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 14
     commit-message:
       prefix: ⬆
     labels:

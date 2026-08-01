@@ -1,3 +1,4 @@
+---
 name: Make PDF layout test
 
 on:
@@ -12,10 +13,10 @@ jobs:
       - name: Print start date
         run: date +%Y-%m-%d_%H:%M
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # latest only
+          fetch-depth: 1  # latest only
 
       - uses: actions/setup-python@v6
         with:

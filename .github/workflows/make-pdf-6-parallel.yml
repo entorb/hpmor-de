@@ -1,3 +1,4 @@
+---
 name: Make PDF 6 parallel
 # no apt update included
 
@@ -11,10 +12,11 @@ jobs:
       matrix:
         part: [hpmor-1, hpmor-2, hpmor-3, hpmor-4, hpmor-5, hpmor-6]
     steps:
-      - uses: actions/checkout@v7
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # latest only
+          fetch-depth: 1  # latest only
 
       - name: Cache LaTeX files
         uses: actions/cache@v6
