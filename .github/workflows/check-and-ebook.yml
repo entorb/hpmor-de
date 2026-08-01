@@ -37,6 +37,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 1 # latest only
 
+      - name: Run prek pre-commit
+        uses: j178/prek-action@v2
+
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
         run: |
@@ -66,9 +69,6 @@ jobs:
 
       - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
-
-      - name: Check pre-commit tests
-        uses: pre-commit/action@v3.0.1
 
   make:
     needs: check
