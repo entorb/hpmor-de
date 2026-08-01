@@ -278,9 +278,11 @@ That creates the large initial letter.
 If the first paragraph of the chapter is all italics, though, it looks like
 this:
 
+```latex
     \begin{em}\lettrine{T}{he} red jet of fire took Hannah full in the
     [...]
     blazing green spirals brought down their foe’s Shield Charm.\par\end{em}
+```
 
 ### Sections
 

@@ -1,0 +1,9 @@
+ignores:
+  - "**/.venv/**"
+  - "**/node_modules/**"
+  - "fonts/**"
+
+config:
+  MD013: false # line-length
+  MD025: false # single-title/single-h1
+  MD029: false # ol-prefix
