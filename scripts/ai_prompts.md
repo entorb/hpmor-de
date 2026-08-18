@@ -1,6 +1,6 @@
 # AI prompts for translation reviews
 
-Note: the last section (##) of this document is used in [ai_review_main.py](scripts/ai_review_main.py)
+Note: the last section (##) of this document is used in [ai_review.py](ai_review.py)
 
 ## 000: used at free <https://chatgpt.com>
 

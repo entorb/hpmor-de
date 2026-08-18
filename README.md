@@ -1,9 +1,3 @@
-<!--
-
-skip-checks:true
-in commit body prevents autobuilding! (=2 empty lines)
--->
-
 # Deutsche Übersetzung / German Translation of “Harry Potter and the Methods of Rationality” (HPMOR)
 
 Dies ist ein OpenSource Projekt, gestartet von [Torben Menke](https://entorb.net/hpmor/contact.php?origin=HPMOR), zum Zusammenfügen und Überarbeiten der deutschen Fan-Übersetzungen der großartigen Fanfiction "[Harry Potter and the Methods of Rationality](https://www.hpmor.com/)" von Eliezer Yudkowsky, basierend auf der Harry Potter Reihe von J. K. Rowling.
@@ -57,7 +51,7 @@ Hier gibt es [das Resultat als druckbares Hochglanz-PDFs und eBook](https://gith
 
 * [EN Audiobook/Podcast by Eneasz Brodski](https://hpmorpodcast.com/) - [at Apple](https://podcasts.apple.com/de/podcast/podcast-the-methods-of-rationality-podcast/id431784580?i=1000473946812) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5mZWVkYnVybmVyLmNvbS9IYXJyeVBvdHRlckFuZFRoZU1ldGhvZHNPZlJhdGlvbmFsaXR5VGhlUG9kY2FzdA/episode/aHR0cHM6Ly9ocG1vcnBvZGNhc3QuY29tLz9wPTYw?sa=X&ved=0CAUQkfYCahcKEwjA44jfuO34AhUAAAAAHQAAAAAQAQ) - [at Spotify](https://open.spotify.com/episode/3up7VkwoJUTNMwaM6j6qvs?si=Gx3LsHH9SY-v5TOYJHrUxw&dl_branch=1) (complete)
 * [EN Audiobook by Jack Voraces](https://voraces.podbean.com/) - [at Apple](https://podcasts.apple.com/gb/podcast/harry-potter-and-the-methods-of-rationality-audiobook/id1465181848) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkLnBvZGJlYW4uY29tL3ZvcmFjZXMvZmVlZC54bWw) - [at Spotify](https://open.spotify.com/show/4MCs8UYpoBlNp4aRfzB3a5) - [at Audible](https://www.amazon.com/Harry-Potter-Methods-Rationality/dp/B08JJSF4B3) (in progress)
-* [DE Audiobook/Podcast by Tilmann Glücks](https://hpmoraudio.de) - [at Apple](https://podcasts.apple.com/us/podcast/harry-potter-und-die-methoden-des-rationalismus-der-podcast/id1630675041) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9ocG1vcmF1ZGlvLmRlLz9mZWVkPXBvZGNhc3Q) - [at Spotify](https://open.spotify.com/show/4XmiF2dq0DMVxLyVwQJOam)  (in progress)
+* [DE Audiobook/Podcast by Tilmann Glücks](https://hpmoraudio.de) - [at Apple](https://podcasts.apple.com/us/podcast/harry-potter-und-die-methoden-des-rationalismus-der-podcast/id1630675041) - [at Google](https://podcasts.google.com/feed/aHR0cHM6Ly9ocG1vcmF1ZGlvLmRlLz9mZWVkPXBvZGNhc3Q) - [at Spotify](https://open.spotify.com/show/4XmiF2dq0DMVxLyVwQJOam) (in progress)
 * [DE Audiobook by Tralex HPMOR - at YouTube](https://www.youtube.com/watch?v=h32Ht-HUbL0&list=PLfgJSXz3-j3aYhWyR3Q5JzcI3h_eibPls) (in progress)
 
 ### DE Übersetzungen

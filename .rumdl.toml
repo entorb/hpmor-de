@@ -1,0 +1,7 @@
+[global]
+disable = [
+    "MD013", # line-length
+    "MD025", # only 1 top level
+]
+
+exclude = ["fonts/**"]
