@@ -1390,6 +1390,7 @@ Seufz
 Severus
 Shacklebolt
 Shermer
+shfmt
 Shoppingtour
 Sicherheitszaubern
 Sickel

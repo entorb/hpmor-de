@@ -9,6 +9,6 @@ prek run --all-files >"$out" 2>&1
 status=$?
 
 if [ $status -ne 0 ]; then
-    head -n 100 "$out"
+  head -n 100 "$out"
 fi
 exit $status
