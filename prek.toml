@@ -57,7 +57,7 @@ hooks = [{ id = "rumdl" }, { id = "rumdl-fmt" }]
 [[repos]]
 repo = "https://github.com/owenlamont/ryl-pre-commit"
 rev = "v0.21.0"
-hooks = [{ id = "ryl" }]
+hooks = [{ id = "ryl", args = ["--fix"] }]
 
 [[repos]]
 repo = "https://github.com/scop/pre-commit-shfmt"
