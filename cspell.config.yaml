@@ -10,13 +10,13 @@ dictionaries:
   - hpmor
 language: de-DE,en-US
 ignorePaths:
-  - '/.vscode/'
-  - 'cspell-words.txt'
-  - 'cspell.config.yaml'
-  - '/LICENSE'
-  - '.gitignore'
-  - 'Dockerfile'
-  - 'GNUmakefile'
+  - /.vscode/
+  - cspell-words.txt
+  - cspell.config.yaml
+  - /LICENSE
+  - .gitignore
+  - Dockerfile
+  - GNUmakefile
 ignoreWords:
   - erstmal
 languageSettings:
@@ -25,7 +25,7 @@ languageSettings:
       - hpmor
       - latex
     ignoreRegExpList:
-      - '(^| )%.*'
+      - (^| )%.*
   - languageId: python
     allowCompoundWords: true
     dictionaries:
