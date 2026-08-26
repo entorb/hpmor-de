@@ -1,3 +1,4 @@
+---
 # install prek package (instead of python pre-commit)
 #  brew install prek
 # register as git commit-hook to run automatically
