@@ -47,17 +47,18 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: v0.2.60
+    rev: v0.2.74
     hooks:
       - id: rumdl
-      # args: ["--fix"]
+        # "--fix"
+        args: ["--disable", "MD013"]  # line-length
       - id: rumdl-fmt
 
   - repo: https://github.com/owenlamont/ryl-pre-commit
-    rev: v0.21.0
+    rev: v0.22.0
     hooks:
       - id: ryl
-        args: ["--fix"]
+        args: ["--fix", "-d", "{extends: default, rules: {line-length: disable}}"]
 
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.13.1-1
