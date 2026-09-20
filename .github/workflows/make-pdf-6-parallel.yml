@@ -7,6 +7,8 @@ on:
 
 jobs:
   make:
+    permissions:
+      contents: write
     runs-on: ubuntu-26.04
     strategy:
       matrix:
@@ -19,7 +21,7 @@ jobs:
           fetch-depth: 1  # latest only
 
       - name: Cache LaTeX files
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         with:
           path: |
             chapters/*.aux
@@ -33,7 +35,7 @@ jobs:
           key: latex-build-files
 
       - name: Speed up apt-get steps
-        uses: abbbi/github-actions-tune@v1
+        uses: abbbi/github-actions-tune@81fb919e588c20b7ab52b2cac097d2efd765c714  # v1
 
       - name: Install PDF requirements
         run: |
@@ -44,14 +46,14 @@ jobs:
         run: latexmk ${{ matrix.part }} > /dev/null
 
       - name: Publish PDF to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
         with:
           tag_name: WorkInProgress
           prerelease: false
           files: ${{ matrix.part }}.pdf
 
       - name: Upload log as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
           name: "${{ matrix.part }}.log"
           path: "${{ matrix.part }}.log"

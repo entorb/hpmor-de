@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: read
     runs-on: ubuntu-26.04
     steps:
       - name: Print start date
@@ -18,18 +20,13 @@ jobs:
           persist-credentials: false
           fetch-depth: 1  # latest only
 
-      - uses: actions/setup-python@v6
-        with:
-          python-version-file: ".python-version"
-          # cache: "pip"
-
       - name: Test ls before
         run: |
           pwd
           ls -al
 
       - name: Speed up apt-get steps
-        uses: abbbi/github-actions-tune@v1
+        uses: abbbi/github-actions-tune@81fb919e588c20b7ab52b2cac097d2efd765c714  # v1
 
       - name: Install requirements
         run: |
@@ -57,7 +54,7 @@ jobs:
         run: latexmk layout/test -f
 
       # - name: Publish log to release
-      #   uses: softprops/action-gh-release@v2
+      #   uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
       #   with:
       #     tag_name: WorkInProgress
       #     prerelease: false
