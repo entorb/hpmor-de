@@ -10,6 +10,7 @@ ENV TZ=Europe/Berlin
 ENV DEBIAN_FRONTEND=noninteractive
 
 # install packages and cleanup afterwards
+# keep the package list in sync with scripts/install_requirements_*.sh (those use sudo, so not reusable here)
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y \
     calibre \
@@ -20,20 +21,19 @@ RUN apt-get update && apt-get dist-upgrade -y && \
     pandoc \
     python3 \
     python3-lxml \
+    python3-pytest \
     texlive-extra-utils \
     texlive-lang-german \
     texlive-lang-greek \
     texlive-xetex && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
-    useradd -m -s /bin/bash app
+    rm -rf /var/lib/apt/lists/* && \
+    (userdel -r ubuntu || true) && \
+    useradd -m -u 1000 -s /bin/bash app
 
-# switch to non-root user
+# switch to non-root user (uid 1000 = typical host uid, so bind-mounted files stay writable on Linux)
 USER app
-
-# mount host directory as volume
-VOLUME /app
 
 # set working directory
 WORKDIR /app
