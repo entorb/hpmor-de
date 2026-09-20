@@ -84,7 +84,7 @@ Only proceed **after** reading/listening to the story, as these contain spoilers
 1.1 build/update image from [Dockerfile](Dockerfile)
 
 ```sh
-docker build -t hpmor
+docker build -t hpmor .
 ```
 
 1.2 create container that mounts current working dir to /app
