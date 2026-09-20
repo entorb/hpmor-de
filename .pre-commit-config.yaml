@@ -61,7 +61,7 @@ repos:
         args: ["--fix", "-d", "{extends: default, rules: {line-length: disable}}"]
 
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.13.1-1
+    rev: v3.14.1-1
     hooks:
       - id: shfmt
         args: ["-w", "-i", "2", "-ci"]
