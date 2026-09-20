@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # based on work by yeKcim
 # https://github.com/yeKcim/hpmor/tree/master/ebook
@@ -6,8 +7,8 @@
 echo === 1. extract cover from PDF to image===
 
 # ensure we are in the hpmor root dir
-script_dir=$(dirname $0)
-cd $script_dir/../..
+script_dir=$(dirname "$0")
+cd "$script_dir/../.." || exit 1
 
 mkdir -p tmp/
 

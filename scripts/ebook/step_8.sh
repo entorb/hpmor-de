@@ -2,8 +2,8 @@
 
 echo === 8. HTML comparison with latest release ===
 
-script_dir=$(dirname $0)
-cd $script_dir/../..
+script_dir=$(dirname "$0")
+cd "$script_dir/../.." || exit 1
 
 source_file="hpmor.html"
 target_file="hpmor-html-diff.log"

@@ -1,12 +1,13 @@
 #!/bin/sh
+set -e
 
 # based on work by yeKcim
 # https://github.com/yeKcim/hpmor/tree/master/ebook
 
 echo === 7. HTML -\> epub,mobi, doc ===
 
-script_dir=$(dirname $0)
-cd $script_dir/../..
+script_dir=$(dirname "$0")
+cd "$script_dir/../.." || exit 1
 
 source_file="hpmor.html"
 target_file="hpmor.epub"
