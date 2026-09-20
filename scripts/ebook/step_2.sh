@@ -3,7 +3,7 @@
 # based on work by yeKcim
 # https://github.com/yeKcim/hpmor/tree/master/ebook
 
-echo === 2. flatten .tex files ===
+echo "=== 2. flatten .tex files ==="
 
 # ensure we are in the hpmor root dir
 script_dir=$(dirname "$0")

@@ -3,7 +3,7 @@
 # based on work by yeKcim
 # https://github.com/yeKcim/hpmor/tree/master/ebook
 
-echo === 5. LaTeX -\> HTML via pandoc ===
+echo "=== 5. LaTeX -> HTML via pandoc ==="
 
 # ensure we are in the hpmor root dir
 script_dir=$(dirname "$0")

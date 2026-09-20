@@ -5,8 +5,8 @@ script_dir=$(cd "$(dirname "$0")" && pwd)
 cd "$script_dir/.." || exit 1
 
 latexmk -C
-rm -rf *.log
-rm -rf *.pdf
+rm -rf ./*.log
+rm -rf ./*.pdf
 rm -rf chapters/*-autofix.tex
 rm -rf chapters/*.aux
 rm -rf hpmor-prev.html

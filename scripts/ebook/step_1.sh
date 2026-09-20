@@ -4,7 +4,7 @@ set -e
 # based on work by yeKcim
 # https://github.com/yeKcim/hpmor/tree/master/ebook
 
-echo === 1. extract cover from PDF to image===
+echo "=== 1. extract cover from PDF to image==="
 
 # ensure we are in the hpmor root dir
 script_dir=$(dirname "$0")
