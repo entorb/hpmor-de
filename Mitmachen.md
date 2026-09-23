@@ -17,14 +17,14 @@ Dies ist ein OpenSource Projekt, jeder ist herzlich willkommen an der Verbesseru
 
 0. bei GitHub.com anmelden
 1. Datei des Kapitels im Quelltextordner [chapters](https://github.com/entorb/hpmor-de/tree/main/chapters) öffnen (z.B. hpmor-chapter-006.tex)
-2. Über den Stift Button oben rechts den Bearbeite-Modus aktivieren <br/>
-![image](https://user-images.githubusercontent.com/59419684/167296952-09e113c1-6ffc-4525-b527-3c082b01ad0e.png)
+2. Über den Stift Button oben rechts den Bearbeite-Modus aktivieren
+   ![image](https://user-images.githubusercontent.com/59419684/167296952-09e113c1-6ffc-4525-b527-3c082b01ad0e.png)
 3. Textstelle suchen (STRG+F = Suche)
 4. Korrektur vornehmen
 5. Nach getaner Arbeit unten im Bereich "Commit changes" deinen Änderungsvorschlags absenden.
 6. Dabei gerne eine kurze Beschreibung der Änderung im unteren Textfeld hinterlassen, ist aber optional
-7. Mit dem Klick auf "Commit changes" wird Dein Änderungsvorschlag zunächst nur in Deiner Kopie des Projekts gespeichert<br/>
-(technisch wird nun ein "Branch" dieser Änderung in deiner Kopie des Repositories hpmor-de angelegt)
+7. Mit dem Klick auf "Commit changes" wird Dein Änderungsvorschlag zunächst nur in Deiner Kopie des Projekts gespeichert
+   (technisch wird nun ein "Branch" dieser Änderung in deiner Kopie des Repositories hpmor-de angelegt)
 8. Erst wenn Du auf der nächsten Seite "Create pull request" klickst, geht dieser Änderungsvorschlag zur Begutachtung an Quelle (das Repository [entorb/hpmor-de](https://github.com/entorb/hpmor-de))
 
 ## Links
