@@ -111,6 +111,41 @@ docker rm hpmor-de
 docker rmi hpmor
 ```
 
+## Build targets
+
+* `latexmk` or `latexmk hpmor`: build the one-volume PDF `hpmor.pdf`.
+* `make all`: build `hpmor.pdf` and then the e-books, i.e. the same as
+  `latexmk hpmor ; ./scripts/make_ebooks.sh` above.
+* `make pdf-all` or `sh scripts/make_pdf-all.sh`: build all seven PDFs, i.e.
+  `hpmor.pdf` plus the six individual volumes `hpmor-1.pdf` … `hpmor-6.pdf`.
+* `make volumes` or `sh scripts/make_pdf-6-vol.sh`: build only the six
+  individual volumes.
+* `make jackets`: build the six dust jackets as well. Each one reads its
+  volume's PDF to get the page count, so this builds the volumes first.
+* `latexmk hpmor-3`: build a single volume.
+* `latexmk -C`: remove everything that was built.
+
+The `make` targets are thin wrappers around `scripts/make_pdf-*.sh`, so both
+spellings do the same thing.
+
+Warning: never run two `latexmk` processes in this directory at the same
+time. All seven documents `\include` the same chapter files and write the
+same `chapters/*.aux`, so parallel runs silently corrupt each other's
+cross-references and page numbers. The scripts above and a single
+`latexmk a b c` invocation are safe, because they typeset one document
+after another. Do not use `make -j` here.
+
+In this repository the six volumes are normally built by GitHub Actions
+rather than locally: run the *Make PDF* workflow and pick what to build
+(`all`, `volumes`, a single document, or the layout test). A fork can build
+everything locally with `make pdf-all` instead.
+
+Releases are made by GitHub Actions only. There is one rolling release,
+`WorkInProgress`.
+
+Note: the readme of the EN source repo below describes that repo, not this
+one; some of its build instructions do not apply here.
+
 # Readme des EN Quell-Repos
 
 # Harry Potter and the Methods Of Rationality
