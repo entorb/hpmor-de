@@ -137,8 +137,9 @@ jobs:
 
       - name: Make eBooks
         run: |
-          wget --quiet https://github.com/${{ github.repository }}/releases/latest/download/hpmor.html -O hpmor-prev.html
-          wget --quiet https://github.com/${{ github.repository }}/releases/latest/download/hpmor.pdf -O hpmor.pdf
+          base=https://github.com/${{ github.repository }}/releases/download/WorkInProgress
+          wget --quiet $base/hpmor.html -O hpmor-prev.html
+          wget --quiet $base/hpmor.pdf -O hpmor.pdf
           sh scripts/make_ebooks.sh > /dev/null
 
       - name: Compare to previous hpmor.html
@@ -198,7 +199,10 @@ jobs:
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
         with:
           tag_name: WorkInProgress
+          # WorkInProgress is the rolling build and is what readers should
+          # download, so it stays the "Latest" release
           prerelease: false
+          make_latest: true
           files: |
             ./hpmor-html-diff.log
             ./hpmor.docx

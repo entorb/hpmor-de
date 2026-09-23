@@ -1,0 +1,153 @@
+---
+name: Make PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "What to build?"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all          # hpmor.pdf and the six volumes
+          - hpmor
+          - 6_volumes
+          - hpmor-1
+          - hpmor-2
+          - hpmor-3
+          - hpmor-4
+          - hpmor-5
+          - hpmor-6
+          - layout/test  # layout smoke test, never published
+      publish:
+        description: "Publish the PDFs to release WorkInProgress?"
+        default: true
+        type: boolean
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.target }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  # Turns the single choice into the list of documents to build, one runner
+  # each. Separate runners are also what makes this safe: all seven documents
+  # \include the same chapters and write the same chapters/*.aux, so they must
+  # never share a working directory.
+  prepare:
+    permissions: {}
+    runs-on: ubuntu-26.04
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
+    steps:
+      - name: Build matrix
+        id: set
+        env:
+          TARGET: ${{ inputs.target }}
+        run: |
+          case "$TARGET" in
+            all)         list='hpmor hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6'; args=''   ;;
+            6_volumes)   list='hpmor-1 hpmor-2 hpmor-3 hpmor-4 hpmor-5 hpmor-6';       args=''   ;;
+            layout/test) list='layout/test';                                           args='-f' ;;
+            *)           list="$TARGET";                                               args=''   ;;
+          esac
+          matrix=$(printf '%s\n' $list \
+            | jq -Rc --arg args "$args" '{name: sub("^layout/"; ""), target: ., args: $args}' \
+            | jq -sc .)
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          echo "$matrix"
+
+  make:
+    needs: prepare
+    permissions:
+      contents: read
+    runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        doc: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1  # latest only
+
+      # No PDF/XDV here: the PDF is the deliverable and must never be restored
+      # from an older run. The aux/toc/fdb files only let latexmk converge in
+      # fewer passes.
+      - name: Cache LaTeX files
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: |
+            chapters/*.aux
+            ${{ matrix.doc.name }}.aux
+            ${{ matrix.doc.name }}.fdb_latexmk
+            ${{ matrix.doc.name }}.fls
+            ${{ matrix.doc.name }}.out
+            ${{ matrix.doc.name }}.toc
+          key: latex-${{ matrix.doc.name }}-${{ hashFiles('chapters/*.tex', 'layout/*') }}
+          restore-keys: |
+            latex-${{ matrix.doc.name }}-
+
+      - name: Speed up apt-get steps
+        uses: abbbi/github-actions-tune@81fb919e588c20b7ab52b2cac097d2efd765c714  # v1
+
+      - name: Install PDF requirements
+        run: |
+          sudo apt-get update > /dev/null
+          sh scripts/install_requirements_pdf.sh > /dev/null
+
+      - name: Print versions
+        run: |
+          cat /etc/os-release
+          xelatex -v
+          latexmk -v
+
+      - name: Make PDF
+        env:
+          TARGET: ${{ matrix.doc.target }}
+          ARGS: ${{ matrix.doc.args }}
+        run: latexmk $ARGS "$TARGET" > /dev/null
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: "pdf-${{ matrix.doc.name }}"
+          path: "${{ matrix.doc.name }}.pdf"
+          retention-days: 1
+
+      - name: Upload log as artifact
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: "log-${{ matrix.doc.name }}"
+          path: "${{ matrix.doc.name }}.log"
+
+  # One publisher: several jobs writing the same release tag race in
+  # action-gh-release's get-or-create and fail intermittently.
+  publish:
+    needs: make
+    if: ${{ inputs.publish && inputs.target != 'layout/test' }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-26.04
+    steps:
+
+      - name: Download PDFs
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          pattern: pdf-hpmor*
+          merge-multiple: true
+
+      - name: Publish PDFs to release
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
+        with:
+          tag_name: WorkInProgress
+          # WorkInProgress is the rolling build and is what readers should
+          # download, so it stays the "Latest" release
+          prerelease: false
+          make_latest: true
+          files: hpmor*.pdf
