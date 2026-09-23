@@ -55,6 +55,6 @@ Dies ist ein OpenSource Projekt, jeder ist herzlich willkommen an der Verbesseru
 ### Nachträgliche Änderung Deines Änderungsvorschlags
 
 <!--
-1. Beim Anlegen Deines ersten Änderungsvorschlags wird das ganze hpmor-de "Repository" in Deinen Account gespiegelt 
+1. Beim Anlegen Deines ersten Änderungsvorschlags wird das ganze hpmor-de "Repository" in Deinen Account gespiegelt
 2. Dieser Spiegel gehört nun Dir und Du kannst dort tun, lassen und experimentieren soviel du möchtest.
 -->
