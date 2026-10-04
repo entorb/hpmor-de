@@ -1,8 +1,6 @@
 #!/bin/sh
-
-# ensure we are in the hpmor root dir
-script_dir=$(cd "$(dirname "$0")" && pwd)
-cd "$script_dir/.." || exit 1
+set -e
+cd "$(dirname "$0")/.."
 
 latexmk -C
 rm -rf ./*.log

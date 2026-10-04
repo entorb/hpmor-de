@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e
-
-# ensure we are in the hpmor root dir
-script_dir=$(dirname "$0")
-cd "$script_dir/.." || exit 1
+cd "$(dirname "$0")/.."
 
 # all seven PDFs: the one-volume hpmor.pdf plus hpmor-1.pdf .. hpmor-6.pdf
 #

@@ -1,12 +1,12 @@
 #!/bin/sh
+set -e
+cd "$(dirname "$0")/.."
 
-# ensure we are in the root dir
-cd "$(dirname "$0")/.." || exit 1
 out=$(mktemp)
 trap 'rm -f "$out"' EXIT INT TERM
 
-prek run --all-files >"$out" 2>&1
-status=$?
+status=0
+prek run --all-files >"$out" 2>&1 || status=$?
 
 if [ $status -ne 0 ]; then
   head -n 100 "$out"
