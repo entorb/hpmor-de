@@ -10,6 +10,7 @@ dictionaries:
   - hpmor
 language: de-DE,en-US
 ignorePaths:
+  - "/*.json"
   - /.vscode/
   - cspell-words.txt
   - cspell.config.yaml
