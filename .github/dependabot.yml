@@ -2,17 +2,17 @@
 version: 2
 updates:
   # GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "monthly"
+      interval: monthly
     cooldown:
       default-days: 14
     commit-message:
       prefix: ⬆
     labels:
-      - "dependencies"
+      - dependencies
     groups:
       github-actions:
         patterns:
-          - "*"
+          - '*'

@@ -1,6 +1,6 @@
 ---
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
-version: "0.2"
+version: '0.2'
 useCache: true
 useGitignore: true
 dictionaryDefinitions:
@@ -10,7 +10,7 @@ dictionaries:
   - hpmor
 language: de-DE,en-US
 ignorePaths:
-  - "/*.json"
+  - /*.json
   - /.vscode/
   - cspell-words.txt
   - cspell.config.yaml

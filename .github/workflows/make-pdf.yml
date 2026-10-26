@@ -5,12 +5,12 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: "What to build?"
+        description: What to build?
         required: true
-        default: "all"
+        default: all
         type: choice
         options:
-          - all          # hpmor.pdf and the six volumes
+          - all  # hpmor.pdf and the six volumes
           - hpmor
           - 6_volumes
           - hpmor-1
@@ -21,7 +21,7 @@ on:
           - hpmor-6
           - layout/test  # layout smoke test, never published
       publish:
-        description: "Publish the PDFs to release WorkInProgress?"
+        description: Publish the PDFs to release WorkInProgress?
         default: true
         type: boolean
 
@@ -115,16 +115,16 @@ jobs:
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
-          name: "pdf-${{ matrix.doc.name }}"
-          path: "${{ matrix.doc.name }}.pdf"
+          name: pdf-${{ matrix.doc.name }}
+          path: ${{ matrix.doc.name }}.pdf
           retention-days: 1
 
       - name: Upload log as artifact
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
-          name: "log-${{ matrix.doc.name }}"
-          path: "${{ matrix.doc.name }}.log"
+          name: log-${{ matrix.doc.name }}
+          path: ${{ matrix.doc.name }}.log
 
   # One publisher: several jobs writing the same release tag race in
   # action-gh-release's get-or-create and fail intermittently.
