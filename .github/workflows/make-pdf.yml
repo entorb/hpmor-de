@@ -145,6 +145,7 @@ jobs:
       - name: Publish PDFs to release
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}  # no checkout, so gh can't infer repo from .git
         run: |
           gh release view WorkInProgress || gh release create WorkInProgress --title WorkInProgress --notes "" --latest
           gh release upload WorkInProgress hpmor*.pdf --clobber
